@@ -1,0 +1,58 @@
+
+# theme = "iceberg-light"
+theme = "nord-night"
+
+[editor]
+
+default-yank-register = "+"
+
+scrolloff = 20
+
+color-modes = true
+
+line-number = "relative"
+
+end-of-line-diagnostics = "hint"
+
+bufferline = "always"
+
+cursorline = true
+
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-inlay-hints = true
+display-progress-messages = true 
+
+
+[editor.indent-guides]
+render = true
+character = "▏" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[editor.inline-diagnostics]
+cursor-line = "warning" # show warnings and errors on the cursorline inline
+
+
+[keys.normal]
+C-s = ":write" # Cmd or Win or Meta and 's' to write
+g = { a = "code_action" } # Maps `ga` to show possible code actions
+"S-x" = "select_line_above"
+
+[keys.insert]
+
+[keys.select]
+o = "flip_selections"

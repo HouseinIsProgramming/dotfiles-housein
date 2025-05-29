@@ -1,0 +1,29 @@
+(defcfg
+  ;; Use your Karabiner virtual keyboard
+  ;; input  (iokit-name "Apple Internal Keyboard / Trackpad")
+  input  (iokit-name "Karabiner DriverKit VirtualHIDKeyboard 1.8.0")
+  output (kext)
+  fallthrough true
+  allow-cmd true
+)
+
+;; Define a simple QWERTY keyboard layout
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lalt lmet           spc            rmet ralt rctl
+)
+
+;; Dramatically different layout - this will swap QWERTY to DVORAK
+;; This makes it obvious if KMonad is working
+(deflayer base
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    [    ]    bspc
+  tab  '    ,    .    p    y    f    g    c    r    l    /    =    \
+  caps a    o    e    u    i    d    h    t    n    s    -    ret
+  lsft ;    q    j    k    x    b    m    w    v    z    rsft
+  lctl lalt lmet           spc            rmet ralt rctl
+)

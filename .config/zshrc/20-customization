@@ -1,0 +1,99 @@
+# -----------------------------------------------------
+# CUSTOMIZATION
+# -----------------------------------------------------
+POSH=agnoster
+
+# -----------------------------------------------------
+# oh-myzsh themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# -----------------------------------------------------
+# ZSH_THEME=robbyrussell
+
+# -----------------------------------------------------
+# zinit plugins
+# -----------------------------------------------------
+
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+
+zinit ice wait lucid
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+zinit ice wait lucid
+zinit light zdharma-continuum/zinit-annex-as-monitor 
+zinit ice wait lucid
+zinit light zdharma-continuum/zinit-annex-bin-gem-node 
+zinit ice wait lucid
+zinit light zdharma-continuum/zinit-annex-patch-dl 
+zinit ice wait lucid
+zinit light zdharma-continuum/zinit-annex-rust 
+zinit ice wait lucid
+zinit light zsh-users/zsh-autosuggestions
+zinit ice wait lucid
+zinit light zsh-users/zsh-syntax-highlighting
+zinit ice wait lucid
+zinit light zsh-users/zsh-completions
+zinit ice wait lucid
+zinit light Aloxaf/fzf-tab
+zinit ice wait lucid
+zinit light olets/zsh-abbr
+zinit ice wait lucid
+zinit light joknarf/redo
+zinit ice wait lucid
+zinit light joknarf/seedee
+zinit ice wait lucid
+
+# load zsh-completions
+zinit ice wait lucid
+autoload -Uz compinit && compinit
+
+# Set-up oh-my-zsh
+# 
+
+# -----------------------------------------------------
+# Set-up FZF key bindings (CTRL R for fuzzy history finder)
+# -----------------------------------------------------
+source <(fzf --zsh)
+
+# Keybinds
+bindkey -e
+
+bindkey -r ^a
+bindkey -r ^b
+bindkey -r ^e
+bindkey ^a end-of-line
+bindkey ^b backward-word
+bindkey ^e forward-word
+
+# zsh history
+## History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# -----------------------------------------------------
+# Prompt
+# -----------------------------------------------------
+# eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pragmatic.transparent.omp.toml)"
+
+# Shipped Theme
+# eval "$(oh-my-posh init zsh --config /usr/share/oh-my-posh/themes/agnoster.omp.json)"
+

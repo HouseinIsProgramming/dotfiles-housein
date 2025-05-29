@@ -1,0 +1,57 @@
+;; KMonad configuration for macOS - Simplified for debugging
+;; Last updated: 2023-05-09
+
+(defcfg
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd") 
+  output (uinput-sink "My KMonad output")
+  fallthrough true
+  allow-cmd true
+)
+
+;; Let's count each key position explicitly
+;; Row 1: 13 keys
+;; Row 2: 13 keys
+;; Row 3: 12 keys
+;; Row 4: 11 keys
+;; Row 5: 11 keys (counting spacebar as 1)
+;; Total: 60 keys
+
+(defsrc
+  ;; Row 1 (13 keys)
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  ;; Row 2 (13 keys)
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  ;; Row 3 (12 keys)
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  ;; Row 4 (11 keys)
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  ;; Row 5 (11 keys with spacebar counted as 1)
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+;; The simplest deflayers with the exact same structure
+(deflayer base
+  ;; Row 1 (13 keys)
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  ;; Row 2 (13 keys)
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  ;; Row 3 (12 keys)
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  ;; Row 4 (11 keys)
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  ;; Row 5 (11 keys with spacebar counted as 1)
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(deflayer semicolon_layer
+  ;; Row 1 (13 keys)
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  ;; Row 2 (13 keys)
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  ;; Row 3 (12 keys)
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  ;; Row 4 (11 keys)
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  ;; Row 5 (11 keys with spacebar counted as 1)
+  lctl lmet lalt           spc            ralt rmet rctl
+)

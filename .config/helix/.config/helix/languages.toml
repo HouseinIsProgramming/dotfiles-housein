@@ -1,0 +1,81 @@
+[language-server.stylelint]
+command = "stylelint-lsp"
+args = ["--stdio"]
+
+[language-server.stylelint.config]
+stylelintplus = { autoFixOnFormat = true, autoFixOnSave = true }
+
+[language-server.ltex-ls.config]
+ltex.language = "de-DE"
+
+[language-server.emmet-ls]
+command = "emmet-ls"
+args = ["--stdio"]
+
+[[language]]
+name = "html"
+auto-format = true
+language-servers = ["vscode-html-language-server", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "html"] }
+
+[[language]]
+name = "typescript"
+auto-format = true
+language-servers = ["typescript-language-server", "vscode-eslint-language-server", "graphql-language-service"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+
+[[language]]
+name = "javascript"
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = ["vscode-eslint-language-server", "typescript-language-server"]
+auto-format = true
+
+[[language]]
+name = "tsx"
+auto-format = true
+language-servers = ["typescript-language-server", "vscode-eslint-language-server", "emmet-ls"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+
+[[language]]
+name = "jsx"
+auto-format = true
+language-servers = ["typescript-language-server", "vscode-eslint-language-server", "emmet-ls" ]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+
+[[language]]
+name = "json"
+formatter = { command = "prettier", args = ["--parser", "json"] }
+
+[[language]]
+name = "css"
+language-servers = [
+  "stylelint",
+  "vscode-css-language-server",
+]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "css"] }
+
+[[language]]
+name = "scss"
+file-types = ["scss"]
+language-servers = [
+  "stylelint",
+  { name = "vscode-css-language-server", only-features = ["completion"] },
+]
+auto-format = true
+formatter = { command = "bash", args = ["-c", "npx stylelint --fix 2>&1 | prettier --parser css "] }
+
+[[language]]
+name = "vue"
+formatter = { command = "prettier", args = ["--parser", "vue"] }
+auto-format = true
+
+[[language]]
+name = "lua"
+auto-format = true
+formatter = { command = "stylua" }
+
+[[language]]
+name = "java"
+auto-format = true
+formatter = { command = "google-java-format" }
