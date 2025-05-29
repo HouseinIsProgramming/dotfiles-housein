@@ -51,6 +51,7 @@ zinit light joknarf/redo
 zinit ice wait lucid
 zinit light joknarf/seedee
 zinit ice wait lucid
+zinit light lukechilds/zsh-nvm
 
 # load zsh-completions
 zinit ice wait lucid
