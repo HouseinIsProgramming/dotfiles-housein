@@ -24,6 +24,7 @@ fi
 
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 
+
 zinit ice wait lucid
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
@@ -52,6 +53,8 @@ zinit ice wait lucid
 zinit light joknarf/seedee
 zinit ice wait lucid
 zinit light lukechilds/zsh-nvm
+zinit ice wait lucid
+# Load zsh-tmux with Zinit
 
 # load zsh-completions
 zinit ice wait lucid
@@ -89,6 +92,15 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+# yazi wrapper
+function i() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 # -----------------------------------------------------
 # Prompt
 # -----------------------------------------------------
@@ -97,4 +109,5 @@ eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pragmatic.transparen
 
 # Shipped Theme
 # eval "$(oh-my-posh init zsh --config /usr/share/oh-my-posh/themes/agnoster.omp.json)"
+
 
