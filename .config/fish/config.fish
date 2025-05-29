@@ -1,4 +1,4 @@
-oh-my-posh init fish --config '~/.config/oh-my-posh/themes/pragmatic.transparent.omp.toml' | source
+oh-my-posh init fish --config '/Users/house/.config/ohmyposh/pragmatic.transparent.omp.toml' | source
 
 # Set maximum number of history entries
 set -U fish_history_limit 10000
@@ -122,9 +122,9 @@ set -U fish_user_paths $GOPATH/bin $fish_user_paths
 # Created by `pipx` on 2025-03-25 06:53:05
 set PATH $PATH /Users/house/.local/bin
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+#   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 fish_vi_key_bindings
 bind -M insert \cf accept-autosuggestion

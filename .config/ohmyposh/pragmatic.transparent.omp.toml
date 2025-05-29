@@ -1,0 +1,171 @@
+console_title_template =  '{{ .Folder }}'
+version = 3
+final_space = true
+
+[palette]
+auGray = 'darkGray'
+auGreen = 'lightGreen'
+auOrange = 'lightYellow'
+auPurple = 'magenta'
+auRed = 'red'
+auYellow = 'red'
+black = 'black'
+blackice = 'foreground'
+blue = 'blue'
+frost = 'lightBlue'
+green = 'green'
+ice = 'lightWhite'
+orange = 'orange'
+red = 'red'
+storm = 'lightWhite'
+subzero = 'lightBlue'
+white = 'foreground'
+yellow = 'yellow'
+
+[secondary_prompt]
+template = '󰅂󰅂 '
+foreground = 'black'
+background = 'transparent'
+
+[transient_prompt]
+template = '󰅂 '
+foreground = 'p:black'
+background = 'transparent'
+newline = true
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+trailing_diamond = ''
+foreground = 'p.blackice'
+type = 'os'
+style = 'diamond'
+
+# [[blocks.segments]]
+# template = ' in <p:blue><b>{{ .Name }}</b></>'
+# foreground = 'p:ice'
+# type = 'shell'
+# style = 'plain'
+
+[[blocks.segments]]
+template = ' | {{ .FormattedMs }} | '
+foreground = 'foreground'
+powerline_symbol = ''
+type = 'executiontime'
+style = 'plain'
+
+[blocks.segments.properties]
+always_enabled = true
+style = 'austin'
+threshold = 0
+
+[[blocks.segments]]
+template = '  {{ .Path }} '
+# template = '  <p:frost>{{ .Parent }}</><b>{{ .Path }}</b> '
+foreground = 'p.blackice'
+type = 'path'
+style = 'plain'
+
+[blocks.segments.properties]
+max_depth = 3
+style = 'agnoster_short'
+
+
+[[blocks.segments]]
+template = '  '
+foreground = 'p:white'
+powerline_symbol = ''
+type = 'root'
+style = 'plain'
+
+[[blocks.segments]]
+template = '{{ if gt .Code 0 }}{{ else }}{{ end }}'
+foreground = 'p:auGreen'
+type = 'status'
+style = 'plain'
+foreground_templates = ['{{ if gt .Code 0 }}p:auRed{{ end }}']
+
+[blocks.segments.properties]
+always_enabled = false
+
+[[blocks.segments]]
+template = '  JavaScript '
+foreground = 'p:auYellow'
+powerline_symbol = ''
+type = 'node'
+style = 'plain'
+
+[blocks.segments.properties]
+display_mode = 'files'
+fetch_package_manager = true
+home_enabled = true
+
+[[blocks.segments]]
+template = '  Go {{ .Full }} '
+foreground = 'p:ice'
+type = 'go'
+style = 'plain'
+
+[blocks.segments.properties]
+fetch_version = true
+
+[[blocks.segments]]
+template = '  {{ .Full }} '
+foreground = 'p:auYellow'
+type = 'python'
+style = 'plain'
+
+[blocks.segments.properties]
+display_mode = 'context'
+fetch_version = true
+fetch_virtual_env = true
+
+[[blocks.segments]]
+template = ' {{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }}{{ end }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} '
+foreground = 'p:frost'
+type = 'git'
+style = 'plain'
+foreground_templates = [
+  '{{ if or (.Working.Changed) (.Staging.Changed) }}p:auYellow{{ end }}',
+  '{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:auRed{{ end }}',
+  '{{ if gt .Ahead 0 }}p:subzero{{ end }}',
+]
+# background_templates = [
+#   '{{ if or (.Working.Changed) (.Staging.Changed) }}p:auOrange{{ end }}',
+#   '{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:auRed{{ end }}',
+#   '{{ if gt .Ahead 0 }}p:auPurple{{ end }}',
+#   '{{ if gt .Behind 0 }}p:auRed{{ end }}',
+# ]
+
+[blocks.segments.properties]
+branch_max_length = 25
+fetch_status = true
+fetch_upstream_icon = true
+
+# [[blocks.segments]]
+# template = ' at <p:blue><b>{{ .CurrentDate | date "15:04:05" }}</b></>'
+# foreground = 'p:white'
+# background = 'transparent'
+# type = 'time'
+# style = 'plain'
+
+[[blocks]]
+type = 'prompt'
+alignment = 'left'
+newline = true
+
+[[blocks.segments]]
+template = '{{ if .Venv }} venv{{ end }}'
+foreground = 'p:auYellow'
+type = 'python'
+style = 'plain'
+
+[[blocks.segments]]
+# template = ' ☤'
+# template = ' ♅'
+template = ' λ'
+type = 'text'
+style = 'plain'
