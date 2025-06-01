@@ -57,7 +57,7 @@ e = ["raycast://extensions/raycast/emoji-symbols/search-emoji-symbols", "emoji"]
 label = "[prefixes]"
 t = "text:sam@saml.dev"       # types "sam@saml.dev"
 z = "cmd:zed ~/.zshrc"       # run any terminal command
-x = "code: ~/.zshrc"          # open a file or directory in VS Code
+x = "zed: ~/.zshrc"          # open a file or directory in VS Code
 s = "shortcut:cmd shift 4"    # trigger a keyboard shortcut
 r = "reload"                  # reserved for reloading your hammerspoon config (helpful when auto_reload is false)
 i = "input:https://google.com/search?q={input}" # capture input and insert it into any other action
