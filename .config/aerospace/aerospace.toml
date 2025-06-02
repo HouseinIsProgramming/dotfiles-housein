@@ -52,7 +52,7 @@ accordion-padding = 12
 
     alt-f = 'fullscreen'
 
-    alt-s = 'layout v_accordion' # 'layout stacking' in i3
+    alt-s = 'layout h_accordion' # 'layout stacking' in i3
     alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
     alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 
@@ -109,11 +109,11 @@ run = 'move-node-to-workspace 1'
 if.app-name-regex-substring = 'zed'
 run = 'move-node-to-workspace 2'
 [[on-window-detected]]
-if.app-id = 'md.obsidian'
-run = 'move-node-to-workspace 4'
-[[on-window-detected]]
 if.app-id = 'com.figma.Desktop'
 run = 'move-node-to-workspace 3'
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace 4'
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
 run = 'move-node-to-workspace 9'
@@ -122,4 +122,7 @@ if.app-name-regex-substring = 'finder'
 run = 'layout floating'
 [[on-window-detected]]
 if.app-name-regex-substring = 'mail'
+run = 'layout floating'
+[[on-window-detected]]
+if.app-name-regex-substring = 'passwords'
 run = 'layout floating'
