@@ -25,6 +25,7 @@ alias cd....="cd ../../.."
 alias lgt="lazygit"
 alias ldkr="lazydocker"
 alias ta="tmux a"
+alias rm="rm -iv"
 
 # -----------------------------------------------------
 # ML4W Apps
