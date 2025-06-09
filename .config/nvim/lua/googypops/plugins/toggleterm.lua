@@ -3,7 +3,7 @@ return {
   config = function()
     require("toggleterm").setup({
       direction = "float",
-      open_mapping = "<D-j>",
+      open_mapping = "<C-j>",
       start_in_insert = true, -- Optional: Start in insert mode for immediate typing
     })
 

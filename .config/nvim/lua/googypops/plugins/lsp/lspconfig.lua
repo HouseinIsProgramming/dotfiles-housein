@@ -152,6 +152,11 @@ return {
       },
     })
 
+    -- Swift
+    lspconfig.sourcekit.setup({
+      capabilities = capabilities,
+    })
+
     -- Svelte
     lspconfig.svelte.setup({
       capabilities = capabilities,
