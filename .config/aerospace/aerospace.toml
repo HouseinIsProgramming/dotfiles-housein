@@ -16,12 +16,12 @@ accordion-padding = 12
 
 
 [gaps]
-    inner.horizontal = 12
-    inner.vertical =   8
-    outer.left =       8
-    outer.bottom =     8
-    outer.top =        8
-    outer.right =      8
+    inner.horizontal = 3
+    inner.vertical =   2
+    outer.left =       2
+    outer.bottom =     2
+    outer.top =        2
+    outer.right =      2
 
 [mode.main.binding]
     # See: https://nikitabobko.github.io/AeroSpace/goodies#open-a-new-window-with-applescript
