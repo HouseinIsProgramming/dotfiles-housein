@@ -1,6 +1,7 @@
 {
   "window.commandCenter": true,
-  "workbench.colorTheme": "ZED One Theme Light",
+  "workbench.preferredLightColorTheme": "ZED One Theme Light",
+  "window.autoDetectColorScheme": true,
   "git.autofetch": true,
   "editor.fontSize": 17,
   "editor.fontFamily": "\"GeistMono Nerd Font Mono\"",
@@ -13,7 +14,7 @@
   "vim.easymotion": true,
   "vim.incsearch": true,
   "vim.useSystemClipboard": true,
-  "vim.useCtrlKeys": true,
+//   "vim.useCtrlKeys": true,
   "vim.hlsearch": true,
 //   "vim.insertModeKeyBindings": [
 //     {
@@ -39,5 +40,23 @@
   // To improve performance
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
-  }
+  },
+  "sonarlint.focusOnNewCode": false,
+  "sonarlint.connectedMode.connections.sonarcloud": [
+    {
+      "organizationKey": "vendure-ecommerce",
+      "connectionId": "vendure-ecommerce",
+      "disableNotifications": true,
+      "region": "EU"
+    }
+  ],
+  "sonarlint.output.showVerboseLogs": true,
+  "workbench.colorTheme": "ZED One Theme Light",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "catppuccin-noctis-icons.hidesExplorerArrows": false,
+  "workbench.iconTheme": "catppuccin noctis icons",
+  "workbench.productIconTheme": "material-product-icons",
+  "workbench.preferredDarkColorTheme": "Nord Deep"
 }
