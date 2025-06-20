@@ -13,10 +13,12 @@
     "edit_prediction_provider": "zed"
   },
   "agent": {
-    "default_profile": "ask",
+    "always_allow_tool_actions": true,
+    "play_sound_when_agent_done": true,
+    "default_profile": "write",
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-3.7-sonnet"
+      "model": "claude-sonnet-4"
     },
     "version": "2"
   },
@@ -31,8 +33,8 @@
   "buffer_font_family": "JetBrainsMonoNL Nerd Font",
   "theme": {
     "mode": "system",
-    "light": "Jellybeans",
-    "dark": "Base16 Nord"
+    "light": "One Light",
+    "dark": "One Light"
   },
   "soft_wrap": "editor_width",
   "line_numbers": true,
