@@ -1,13 +1,43 @@
 {
-    "window.commandCenter": true,
-    "workbench.colorTheme": "ZED One Theme Light",
-    "git.autofetch": true,
-    "editor.fontSize": 17,
-    "editor.fontFamily": "\"GeistMono Nerd Font Mono\"",
-    "terminal.integrated.fontSize": 17,
-    "editor.lineHeight": 1.3,
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "window.commandCenter": true,
+  "workbench.colorTheme": "ZED One Theme Light",
+  "git.autofetch": true,
+  "editor.fontSize": 17,
+  "editor.fontFamily": "\"GeistMono Nerd Font Mono\"",
+  "terminal.integrated.fontSize": 17,
+  "editor.lineHeight": 1.3,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontLigatures": false,
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+//   "vim.insertModeKeyBindings": [
+//     {
+//       "before": ["j", "j"],
+//       "after": ["<Esc>"]
+//     }
+//   ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "d"],
+      "after": ["\"","_", "d", "d"]
     },
-    "editor.fontLigatures": false,
+    {
+      "before": ["<esc>"],
+      "commands": [":nohl"]
+    },
+  ],
+  "vim.leader": "<space>",
+//   "vim.handleKeys": {
+//     "<C-a>": false,
+//     "<C-f>": false
+//   },
+  // To improve performance
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  }
 }
