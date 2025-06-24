@@ -1,0 +1,3 @@
+[[manager.prepend_keymap]]
+on  = [ "g", "p", "g" ]
+run = 'cd ~/Documents/GitHub'
