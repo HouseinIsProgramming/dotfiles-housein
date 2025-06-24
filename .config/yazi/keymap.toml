@@ -1,3 +1,6 @@
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = [ "g", "p", "g" ]
 run = 'cd ~/Documents/GitHub'
+[[mgr.prepend_keymap]]
+on  = [ "g", "s" ]
+run = 'cd ~/dotfiles-housein/'
