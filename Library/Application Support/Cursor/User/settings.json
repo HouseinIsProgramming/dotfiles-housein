@@ -51,12 +51,14 @@
     }
   ],
   "sonarlint.output.showVerboseLogs": true,
-  "workbench.colorTheme": "ZED One Theme Light",
+  "workbench.colorTheme": "Nord Deep",
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "catppuccin-noctis-icons.hidesExplorerArrows": false,
   "workbench.iconTheme": "catppuccin noctis icons",
   "workbench.productIconTheme": "material-product-icons",
-  "workbench.preferredDarkColorTheme": "Nord Deep"
+  "workbench.preferredDarkColorTheme": "Nord Deep",
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "cursor.composer.textSizeScale": 1.15
 }
