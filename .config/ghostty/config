@@ -2,7 +2,8 @@ font-size = 17
 
 ##font-family = D2CodingLigature Nerd Font Mono
 
-font-family = IosevkaTerm Nerd Font Mono
+# font-family = IosevkaTerm Nerd Font Mono
+font-family = FiraCode Nerd Font
 
 font-feature =  -calt, -liga, -dliga
 
@@ -10,7 +11,7 @@ keybind = cmd+g>r=reload_config
 keybind = cmd+g>x=close_surface
 
 # theme = dark:Kanagawa Dragon, light:zenwritten_light_dim
-theme = dark:tokyonight-storm, light:zenwritten_light_dim
+# theme = dark:tokyonight-storm, light:zenwritten_light_dim
 
 mouse-hide-while-typing
 

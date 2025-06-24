@@ -1,3 +1,4 @@
 /Library/Application Support/Cursor/*
 !/Library/Application Support/Cursor/User/
+/Library/Application Support/Cursor/User/*Storage*
 !/.config/yazi/.toml$
