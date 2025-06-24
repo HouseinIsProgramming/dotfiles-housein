@@ -1,8 +1,8 @@
 # yazi.toml
-[manager]
+[mgr]
 show_hidden = true
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on   = "!"
 run  = 'shell "$SHELL" --block --confirm'
 desc = "Open shell here"
