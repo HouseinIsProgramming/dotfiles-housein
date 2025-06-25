@@ -5,10 +5,6 @@
     "command": "composerMode.agent"
   },
   {
-    "key": "cmd+e",
-    "command": "workbench.action.toggleSidebarVisibility"
-  },
-  {
     "key": "cmd+b",
     "command": "-workbench.action.toggleSidebarVisibility"
   },
@@ -86,10 +82,6 @@
     "key": "cmd+r cmd+l",
     "command": "-editor.toggleFold",
     "when": "editorTextFocus && foldingEnabled"
-  },
-  {
-    "key": "cmd+r",
-    "command": "aichat.newchataction"
   },
   {
     "key": "cmd+l",
@@ -1035,4 +1027,43 @@
     "command": "-cursorai.action.generateInTerminal",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported || terminalHasBeenCreated && terminalPromptBarVisible || terminalProcessSupported && terminalPromptBarVisible"
   },
+  {
+    "key": "shift+cmd+r",
+    "command": "workbench.action.toggleAuxiliaryBar"
+  },
+  {
+    "key": "cmd+0",
+    "command": "-workbench.action.focusSideBar"
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.focusSideBar"
+  },
+  {
+    "key": "cmd+l cmd+o",
+    "command": "workbench.action.closeOtherEditors"
+  },
+  {
+    "key": "alt+cmd+t",
+    "command": "-workbench.action.closeOtherEditors"
+  },
+  {
+    "key": "shift+cmd+r",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+            "aichat.close-sidebar",
+            "workbench.action.closeSidebar",
+        ]
+    }
+},
+{
+  "key": "shift+cmd+e",
+  "command": "workbench.files.action.focusFilesExplorer"
+},
+{
+  "key": "cmd+e",
+  "command": "workbench.action.focusActiveEditorGroup",
+  "when": "explorerViewletVisible && explorerViewletFocus"
+}
 ]

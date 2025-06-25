@@ -86,6 +86,8 @@ accordion-padding = 12
     alt-shift-9 = 'move-node-to-workspace 9'
     alt-shift-0 = 'move-node-to-workspace 10'
 
+    alt-shift-up = 'move-workspace-to-monitor --wrap-around next'
+
     alt-shift-c = 'reload-config'
 
     alt-r = 'mode resize'
@@ -104,6 +106,9 @@ if.app-id = 'company.thebrowser.Browser'
 run = 'move-node-to-workspace 1'
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace 1'
+[[on-window-detected]]
+if.app-name-regex-substring = 'alacritty'
 run = 'move-node-to-workspace 1'
 [[on-window-detected]]
 if.app-name-regex-substring = 'zed'
@@ -126,6 +131,9 @@ run = 'move-node-to-workspace 4'
 [[on-window-detected]]
 if.app-name-regex-substring = 'notion'
 run = 'move-node-to-workspace 5'
+[[on-window-detected]]
+if.app-name-regex-substring = 'slack'
+run = 'move-node-to-workspace 8'
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
 run = 'move-node-to-workspace 9'
