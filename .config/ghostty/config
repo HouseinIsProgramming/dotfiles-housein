@@ -1,6 +1,4 @@
-font-size = 17
-
-##font-family = D2CodingLigature Nerd Font Mono
+font-size = 18
 
 # font-family = IosevkaTerm Nerd Font Mono
 font-family = FiraCode Nerd Font
@@ -10,23 +8,24 @@ font-feature =  -calt, -liga, -dliga
 keybind = cmd+g>r=reload_config
 keybind = cmd+g>x=close_surface
 
-# theme = dark:Kanagawa Dragon, light:zenwritten_light_dim
-# theme = dark:tokyonight-storm, light:zenwritten_light_dim
-theme = dark:Ghostty Default Styledark, light:GitHub-Light-Default
+theme = dark:Ghostty Default Styledark, light:tokyonight_moon
 
 mouse-hide-while-typing
-
 window-save-state = "always"
 confirm-close-surface = false
 quit-after-last-window-closed = true
 custom-shader-animation = true
-
 
 window-height = 50
 window-width = 80
 window-position-x = 200	
 window-position-y = 200	
 window-subtitle = false
+
+window-decoration = none
+
+window-padding-x = 12
+window-padding-y = 12,0
 
 
 # Some shaders can be found in this repo, they're usually uploaded to discord
