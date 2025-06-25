@@ -12,6 +12,7 @@ keybind = cmd+g>x=close_surface
 
 # theme = dark:Kanagawa Dragon, light:zenwritten_light_dim
 # theme = dark:tokyonight-storm, light:zenwritten_light_dim
+theme = dark:Ghostty Default Styledark, light:GitHub-Light-Default
 
 mouse-hide-while-typing
 
