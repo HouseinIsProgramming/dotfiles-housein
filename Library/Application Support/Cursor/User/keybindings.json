@@ -580,7 +580,7 @@
     "command": "-workbench.action.closeAllEditors"
   },
   {
-    "key": "cmd+l shift+cmd+w",
+    "key": "cmd+w cmd+a",
     "command": "workbench.action.closeAllGroups"
   },
   {
@@ -1040,7 +1040,7 @@
     "command": "workbench.action.focusSideBar"
   },
   {
-    "key": "cmd+l cmd+o",
+    "key": "cmd+w cmd+o",
     "command": "workbench.action.closeOtherEditors"
   },
   {
@@ -1065,5 +1065,23 @@
   "key": "cmd+e",
   "command": "workbench.action.focusActiveEditorGroup",
   "when": "explorerViewletVisible && explorerViewletFocus"
+},
+{
+  "key": "cmd+w cmd+w",
+  "command": "workbench.action.backgroundComposer.close",
+  "when": "!editorTextFocus && focusedView =~ /^workbench.view.backgroundAgent.content/"
+},
+{
+  "key": "cmd+w",
+  "command": "-workbench.action.backgroundComposer.close",
+  "when": "!editorTextFocus && focusedView =~ /^workbench.view.backgroundAgent.content/"
+},
+{
+  "key": "cmd+w cmd+w",
+  "command": "workbench.action.closeActiveEditor"
+},
+{
+  "key": "cmd+w",
+  "command": "-workbench.action.closeActiveEditor"
 }
 ]

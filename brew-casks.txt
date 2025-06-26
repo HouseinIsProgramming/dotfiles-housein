@@ -1,6 +1,7 @@
 aerospace
 alacritty
 batfi
+claude
 discord
 figma
 ghostty
@@ -9,4 +10,5 @@ notion
 obsidian
 screen-studio
 shottr
+steam
 switchresx

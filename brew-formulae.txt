@@ -1,3 +1,4 @@
+bat
 ca-certificates
 eza
 fastfetch
@@ -17,6 +18,7 @@ luv
 ncurses
 neovim
 oh-my-posh
+oniguruma
 openssl@3
 pcre2
 ripgrep

@@ -146,3 +146,6 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-name-regex-substring = 'passwords'
 run = 'layout floating'
+[[on-window-detected]]
+if.app-name-regex-substring = 'steam'
+run = 'layout floating'
