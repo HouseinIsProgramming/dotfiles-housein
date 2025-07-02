@@ -14,29 +14,48 @@
   "vim.easymotion": true,
   "vim.incsearch": true,
   "vim.useSystemClipboard": true,
-//   "vim.useCtrlKeys": true,
+  //   "vim.useCtrlKeys": true,
   "vim.hlsearch": true,
-//   "vim.insertModeKeyBindings": [
-//     {
-//       "before": ["j", "j"],
-//       "after": ["<Esc>"]
-//     }
-//   ],
+  //   "vim.insertModeKeyBindings": [
+  //     {
+  //       "before": ["j", "j"],
+  //       "after": ["<Esc>"]
+  //     }
+  //   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
       "before": ["<leader>", "d"],
-      "after": ["\"","_", "d", "d"]
+      "after": ["\"", "_", "d", "d"]
     },
     {
       "before": ["<esc>"],
       "commands": [":nohl"]
     },
+    {
+      "before": ["g", "r"],
+      "commands": ["editor.action.referenceSearch.trigger"]
+    },
+    {
+      "before": ["y", "a", "g"],
+      "commands": [
+        "editor.action.selectAll",
+        "editor.action.clipboardCopyAction"
+      ]
+    },
+    {
+      "before": ["v", "a", "g"],
+      "commands": ["editor.action.selectAll"]
+    },
+    {
+      "before": ["<leader>", "c", "f"],
+      "commands": ["editor.action.formatDocument"]
+    }
   ],
   "vim.leader": "<space>",
-//   "vim.handleKeys": {
-//     "<C-a>": false,
-//     "<C-f>": false
-//   },
+  //   "vim.handleKeys": {
+  //     "<C-a>": false,
+  //     "<C-f>": false
+  //   },
   // To improve performance
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
@@ -60,5 +79,13 @@
   "workbench.productIconTheme": "material-product-icons",
   "cursor.composer.shouldChimeAfterChatFinishes": true,
   "cursor.composer.textSizeScale": 1.15,
-  "workbench.preferredDarkColorTheme": "Nord Deep"
+  "workbench.preferredDarkColorTheme": "Nord Deep",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.smoothScrolling": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "workbench.list.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true,
+  "editor.cursorBlinking": "smooth"
 }

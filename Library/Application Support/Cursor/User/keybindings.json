@@ -88,10 +88,6 @@
     "command": "-aichat.newchataction"
   },
   {
-    "key": "cmd+r",
-    "command": "workbench.action.toggleAuxiliaryBar"
-  },
-  {
     "key": "alt+cmd+b",
     "command": "-workbench.action.toggleAuxiliaryBar"
   },
@@ -1062,11 +1058,6 @@
   "command": "workbench.files.action.focusFilesExplorer"
 },
 {
-  "key": "cmd+e",
-  "command": "workbench.action.focusActiveEditorGroup",
-  "when": "explorerViewletVisible && explorerViewletFocus"
-},
-{
   "key": "cmd+w cmd+w",
   "command": "workbench.action.backgroundComposer.close",
   "when": "!editorTextFocus && focusedView =~ /^workbench.view.backgroundAgent.content/"
@@ -1083,5 +1074,15 @@
 {
   "key": "cmd+w",
   "command": "-workbench.action.closeActiveEditor"
+},
+{
+  "key": "cmd+r",
+  "command": "workbench.action.focusAuxiliaryBar"
+},
+{
+  "key": "cmd+e",
+  "command": "workbench.action.focusActiveEditorGroup",
+  // "when": "chatViewFocus || explorerViewletFocus || secondarySidebarFocus"
+  "when": "!editorFocus"
 }
 ]
