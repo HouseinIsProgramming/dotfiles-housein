@@ -87,5 +87,6 @@
   "editor.cursorSmoothCaretAnimation": "on",
   "workbench.list.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
-  "editor.cursorBlinking": "smooth"
+  "editor.cursorBlinking": "smooth",
+  "editor.formatOnSave": true
 }
