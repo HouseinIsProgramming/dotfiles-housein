@@ -3,8 +3,8 @@
   "workbench.preferredLightColorTheme": "ZED One Theme Light",
   "window.autoDetectColorScheme": true,
   "git.autofetch": true,
-  "editor.fontSize": 17,
-  "editor.fontFamily": "\"GeistMono Nerd Font Mono\"",
+  "editor.fontSize": 18,
+  "editor.fontFamily": "\"Iosevka Nerd Font Propo\"",
   "terminal.integrated.fontSize": 17,
   "editor.lineHeight": 1.3,
   "[jsonc]": {
@@ -78,7 +78,7 @@
   "workbench.iconTheme": "catppuccin noctis icons",
   "workbench.productIconTheme": "material-product-icons",
   "cursor.composer.shouldChimeAfterChatFinishes": true,
-  "cursor.composer.textSizeScale": 1.15,
+  "cursor.composer.textSizeScale": 1.3,
   "workbench.preferredDarkColorTheme": "Nord Deep",
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -88,5 +88,8 @@
   "workbench.list.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
   "editor.cursorBlinking": "smooth",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "spellright.addToSystemDictionary": true,
+  "vim.highlightedyank.enable": true,
+  "git.blame.statusBarItem.enabled": false
 }
