@@ -1046,43 +1046,40 @@
   {
     "key": "shift+cmd+r",
     "command": "extension.multiCommand.execute",
-    "args": { 
-        "sequence": [
-            "aichat.close-sidebar",
-            "workbench.action.closeSidebar",
-        ]
+    "args": {
+      "sequence": ["aichat.close-sidebar", "workbench.action.closeSidebar"]
     }
-},
-{
-  "key": "shift+cmd+e",
-  "command": "workbench.files.action.focusFilesExplorer"
-},
-{
-  "key": "cmd+w cmd+w",
-  "command": "workbench.action.backgroundComposer.close",
-  "when": "!editorTextFocus && focusedView =~ /^workbench.view.backgroundAgent.content/"
-},
-{
-  "key": "cmd+w",
-  "command": "-workbench.action.backgroundComposer.close",
-  "when": "!editorTextFocus && focusedView =~ /^workbench.view.backgroundAgent.content/"
-},
-{
-  "key": "cmd+w cmd+w",
-  "command": "workbench.action.closeActiveEditor"
-},
-{
-  "key": "cmd+w",
-  "command": "-workbench.action.closeActiveEditor"
-},
-{
-  "key": "cmd+r",
-  "command": "workbench.action.focusAuxiliaryBar"
-},
-{
-  "key": "cmd+e",
-  "command": "workbench.action.focusActiveEditorGroup",
-  // "when": "chatViewFocus || explorerViewletFocus || secondarySidebarFocus"
-  "when": "!editorFocus"
-}
+  },
+  {
+    "key": "shift+cmd+e",
+    "command": "workbench.files.action.focusFilesExplorer"
+  },
+  {
+    "key": "cmd+w cmd+w",
+    "command": "workbench.action.backgroundComposer.close",
+    "when": "!editorTextFocus && focusedView =~ /^workbench.view.backgroundAgent.content/"
+  },
+  {
+    "key": "cmd+w",
+    "command": "-workbench.action.backgroundComposer.close",
+    "when": "!editorTextFocus && focusedView =~ /^workbench.view.backgroundAgent.content/"
+  },
+  {
+    "key": "cmd+w cmd+w",
+    "command": "workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "cmd+w",
+    "command": "-workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "cmd+r",
+    "command": "workbench.action.focusAuxiliaryBar"
+  },
+  {
+    "key": "cmd+e",
+    "command": "workbench.action.focusActiveEditorGroup",
+    // "when": "chatViewFocus || explorerViewletFocus || secondarySidebarFocus"
+    "when": "!editorFocus"
+  }
 ]

@@ -60,12 +60,10 @@
   "extensions.experimental.affinity": {
     "vscodevim.vim": 1
   },
-  "sonarlint.focusOnNewCode": false,
   "sonarlint.connectedMode.connections.sonarcloud": [
     {
       "organizationKey": "vendure-ecommerce",
       "connectionId": "vendure-ecommerce",
-      "disableNotifications": true,
       "region": "EU"
     }
   ],
@@ -91,5 +89,24 @@
   "editor.formatOnSave": true,
   "spellright.addToSystemDictionary": true,
   "vim.highlightedyank.enable": true,
-  "git.blame.statusBarItem.enabled": false
+  "git.blame.statusBarItem.enabled": false,
+  "terminal.integrated.defaultLocation": "editor",
+  "accessibility.signals.terminalBell": {
+    "sound": "off",
+    "announcement": "off"
+  },
+  "editor.accessibilitySupport": "off",
+  "accessibility.signals.terminalCommandFailed": {
+    "sound": "off"
+  },
+  "accessibility.signals.terminalQuickFix": {
+    "announcement": "off"
+  },
+  "accessibility.signals.terminalCommandSucceeded": {
+    "announcement": "off"
+  },
+  "errorLens.enabledDiagnosticLevels": ["error", "info", "warning"],
+  "codeQL.variantAnalysis.controllerRepo": "vendure-ecommerce/vendure",
+  "sonarlint.pathToNodeExecutable": "/Users/housien/.nvm/versions/node/v22.16.0/bin/node",
+  "sonarlint.focusOnNewCode": true
 }

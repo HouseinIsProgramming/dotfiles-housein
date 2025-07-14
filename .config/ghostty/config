@@ -8,7 +8,8 @@ font-feature =  -calt, -liga, -dliga
 keybind = cmd+g>r=reload_config
 keybind = cmd+g>x=close_surface
 
-theme = dark:Ghostty Default Styledark, light:tokyonight_moon
+#theme = dark:Ghostty Default Styledark, light:tokyonight_moon
+theme = tokyonight_moon
 
 mouse-hide-while-typing
 window-save-state = "always"
