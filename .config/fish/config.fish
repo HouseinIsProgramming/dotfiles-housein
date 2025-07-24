@@ -153,3 +153,5 @@ bind -M insert \cp  history-search-forward
 
 # Added by Windsurf
 fish_add_path /Users/house/.codeium/windsurf/bin
+
+string match -q "$TERM_PROGRAM" "kiro" and . (kiro --locate-shell-integration-path fish)

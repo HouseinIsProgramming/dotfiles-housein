@@ -101,6 +101,10 @@ function i() {
 	rm -f -- "$tmp"
 }
 
+export EDITOR="nvim"
+export VISUAL="nvim"
+export GIT_EDITOR="nvim"
+
 # -----------------------------------------------------
 # Prompt
 # -----------------------------------------------------
