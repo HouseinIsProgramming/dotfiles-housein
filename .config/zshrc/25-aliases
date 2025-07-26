@@ -65,3 +65,40 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias res1='xrandr --output DisplayPort-0 --mode 2560x1440 --rate 120'
 alias res2='xrandr --output DisplayPort-0 --mode 1920x1080 --rate 120'
 alias setkb='setxkbmap de;echo "Keyboard set back to de."'
+
+
+# -----------------------------------------------------
+# functions as aliases
+# -----------------------------------------------------
+#
+# Gwt - git worktree
+gwt() {
+  if [[ $# -eq 0 ]]; then
+    git worktree list
+  else
+    git worktree "$@"
+  fi
+}
+
+gt() {
+  if [[ $# -eq 0 ]]; then
+    git status
+  elif [[ "$1" == "c" ]]; then
+    shift
+    git commit -m "$@"
+  elif [[ "$1" == "psh" ]]; then
+    shift
+    git push "$@"
+  elif [[ "$1" == "p" ]]; then
+    shift
+    git pull "$@"
+  elif [[ "$1" == "a" ]]; then
+    shift
+    git add "$@"
+  elif [[ "$1" == "s" ]]; then
+    shift
+    git switch "$@"
+  else
+    git "$@"
+  fi
+}

@@ -19,8 +19,10 @@ return {
         vim.cmd.colorscheme("catppuccin")
       end,
       set_light_mode = function()
-        vim.cmd.set("background=light")
-        vim.cmd.colorscheme("github_light_default")
+        -- vim.cmd.set("background=light")
+        vim.cmd.set("background=dark")
+        vim.cmd.colorscheme("catppuccin")
+        -- vim.cmd.colorscheme("github_light_default")
       end,
       -- update_interval = 3000,
       fallback = "dark",

@@ -1077,9 +1077,23 @@
     "command": "workbench.action.focusAuxiliaryBar"
   },
   {
+    "key": "cmd+enter",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "searchInputBoxFocus"
+  },
+  {
     "key": "cmd+e",
     "command": "workbench.action.focusActiveEditorGroup",
-    // "when": "chatViewFocus || explorerViewletFocus || secondarySidebarFocus"
     "when": "!editorFocus"
+  },
+  {
+    "key": "cmd+escape",
+    "command": "search.action.focusQueryEditorWidget",
+    "when": "inSearchEditor"
+  },
+  {
+    "key": "escape",
+    "command": "-search.action.focusQueryEditorWidget",
+    "when": "inSearchEditor"
   }
 ]

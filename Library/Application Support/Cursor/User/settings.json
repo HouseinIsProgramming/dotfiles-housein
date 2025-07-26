@@ -1,6 +1,6 @@
 {
   "window.commandCenter": true,
-  "workbench.preferredLightColorTheme": "ZED One Theme Light",
+  "workbench.preferredLightColorTheme": "Tokyo Night Storm",
   "window.autoDetectColorScheme": true,
   "git.autofetch": true,
   "editor.fontSize": 18,
@@ -49,6 +49,10 @@
     {
       "before": ["<leader>", "c", "f"],
       "commands": ["editor.action.formatDocument"]
+    },
+    {
+      "before": ["<leader>", "f", "g"],
+      "commands": ["search.action.openEditor"]
     }
   ],
   "vim.leader": "<space>",
@@ -68,7 +72,7 @@
     }
   ],
   "sonarlint.output.showVerboseLogs": true,
-  "workbench.colorTheme": "ZED One Theme Dark",
+  "workbench.colorTheme": "Nord Deep",
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -108,5 +112,33 @@
   "errorLens.enabledDiagnosticLevels": ["error", "info", "warning"],
   "codeQL.variantAnalysis.controllerRepo": "vendure-ecommerce/vendure",
   "sonarlint.pathToNodeExecutable": "/Users/housien/.nvm/versions/node/v22.16.0/bin/node",
-  "sonarlint.focusOnNewCode": true
+  "sonarlint.focusOnNewCode": true,
+  "json.schemaDownload.enable": true,
+  "typescript.validate.enable": true,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "terminal.integrated.suggest.showStatusBar": false,
+  "git.enableStatusBarSync": false,
+  "gitlens.statusBar.enabled": false,
+  "gitlens.statusBar.pullRequests.enabled": false,
+  "spellright.statusBarIndicator": false,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#232731",
+    "statusBar.noFolderBackground": "#232731",
+    "statusBar.debuggingBackground": "#232731",
+    "statusBar.foreground": "#ffffff",
+    "statusBar.debuggingForeground": "#ffffff"
+  },
+  "workbench.editor.languageDetectionHints": {
+    "notebookEditors": false,
+    "untitledEditors": false
+  },
+  "gitlens.graph.statusBar.enabled": false,
+  "zenMode.hideStatusBar": false,
+  "editor.experimentalGpuAcceleration": "on",
+  "editor.experimental.treeSitterTelemetry": true,
+  "errorLens.statusBarColorsEnabled": true,
+  "debug.enableStatusBarColor": false,
+  "outline.problems.enabled": false,
+  "outline.problems.colors": false,
+  "errorLens.enabled": true
 }
