@@ -7,9 +7,11 @@ figma
 ghostty
 hiddenbar
 linearmouse
+mechvibes
 notion
 obsidian
 screen-studio
 shottr
 steam
 switchresx
+trackweight
