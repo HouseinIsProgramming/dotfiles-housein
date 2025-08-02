@@ -1,6 +1,6 @@
 {
   "window.commandCenter": true,
-  "workbench.preferredLightColorTheme": "Tokyo Night Storm",
+  "workbench.preferredLightColorTheme": "Tokyo Night Light",
   "window.autoDetectColorScheme": true,
   "git.autofetch": true,
   "editor.fontSize": 18,
@@ -140,5 +140,13 @@
   "debug.enableStatusBarColor": false,
   "outline.problems.enabled": false,
   "outline.problems.colors": false,
-  "errorLens.enabled": true
+  "errorLens.enabled": true,
+  "svelte.enable-ts-plugin": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  "git.blame.editorDecoration.enabled": false
 }

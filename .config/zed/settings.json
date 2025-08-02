@@ -33,7 +33,7 @@
   "buffer_font_family": "JetBrainsMonoNL Nerd Font",
   "theme": {
     "mode": "system",
-    "light": "One Light",
+    "light": "Ayu Mirage",
     "dark": "One Light"
   },
   "soft_wrap": "editor_width",

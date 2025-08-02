@@ -1,0 +1,3 @@
+abbr "lt"="eza -a --tree --icons=always --level="
+abbr "pwdc"="pwd|pbcopy && pwd"
+abbr "ta"="tmux a"
