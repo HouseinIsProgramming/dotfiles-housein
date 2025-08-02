@@ -8,13 +8,9 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "show_edit_predictions": true,
-  "icon_theme": "Zed (Default)",
+  "icon_theme": "Material Icon Theme",
   "features": {
     "edit_prediction_provider": "zed"
-  },
-  "centered_layout": {
-    "left_padding": 0.12,
-    "right_padding": 0.1
   },
   "agent": {
     "always_allow_tool_actions": true,
@@ -23,28 +19,31 @@
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-sonnet-4"
-    }
+    },
+    "version": "2"
   },
   "vim_mode": true,
+  "use_system_clipboard": true,
   "relative_line_numbers": true,
   "vertical_scroll_margin": 12,
   "base_keymap": "VSCode",
   "ui_font_size": 18,
   "buffer_font_size": 17.0,
   "buffer_line_height": { "custom": 1.5 },
-  "buffer_font_family": "CommitMono Nerd Font Propo",
+  "buffer_font_family": "JetBrainsMonoNL Nerd Font",
   "theme": {
     "mode": "system",
-    "light": "Tokyo Night Storm",
+    "light": "Nord",
     "dark": "One Light"
   },
   "soft_wrap": "editor_width",
+  "line_numbers": true,
   "terminal": {
     "alternate_scroll": "off",
     "blinking": "terminal_controlled",
     "copy_on_select": false,
     "env": {},
-    "font_family": "CommitMono Nerd Font Propo",
+    "font_family": "0xProto Nerd Font Mono",
     "font_features": null,
     "font_size": null,
     "option_as_meta": false,
@@ -61,28 +60,8 @@
     }
   },
   "languages": {
-    "Lua": {
-      "inlay_hints": {
-        "enabled": true,
-        "show_type_hints": true,
-        "show_parameter_hints": true,
-        "show_other_hints": true
-      },
-      "format_on_save": "on",
-      "formatter": {
-        "external": {
-          "command": "stylua",
-          "arguments": [
-            "--syntax=Lua54",
-            "--respect-ignores",
-            "--stdin-filepath",
-            "{buffer_path}",
-            "-"
-          ]
-        }
-      }
-    },
     "JavaScript": {
+      "code_actions_on_format": { "source.fixAll.eslint": true },
       "formatter": {
         "external": {
           "command": "prettier",
@@ -91,6 +70,7 @@
       }
     }
   },
+  // "formatter": "prettier",
   "formatter": {
     "external": {
       "command": "prettier",
