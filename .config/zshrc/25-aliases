@@ -23,8 +23,8 @@ alias ta="tmux a"
 alias rm="rm -iv"
 alias fdd='cd "$(fd -t d . | fzf --preview "dirname {}")"'
 alias fdf='cd "$(fzf --preview "bat --style=numbers --color=always {}" | xargs dirname)"'
-alias cdvd= "cd ~/Documents/GitHub/vendure"
-alias cdvs= "cd ~/Documents/GitHub/vendure-testshops"
+alias cdvd="cd ~/Documents/GitHub/vendure"
+alias cdvs="cd ~/Documents/GitHub/vendure-testshops"
 
 # -----------------------------------------------------
 # functions as aliases

@@ -1,0 +1,17 @@
+vim.pack.add({
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/echasnovski/mini.pick" },
+	{ src = "https://github.com/ibhagwan/fzf-lua" },
+	{ src = "https://github.com/mikavilpas/yazi.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+	{ src = "https://github.com/saghen/blink.cmp" },
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/rafamadriz/friendly-snippets" },
+	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/folke/tokyonight.nvim" },
+})
+
