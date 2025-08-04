@@ -47,3 +47,4 @@ fi
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+source "$HOME/.cargo/env"

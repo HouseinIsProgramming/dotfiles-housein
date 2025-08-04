@@ -1,4 +1,19 @@
 [
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-1": ["pane::ActivateItem", 0],
+      "cmd-2": ["pane::ActivateItem", 1],
+      "cmd-3": ["pane::ActivateItem", 2],
+      "cmd-4": ["pane::ActivateItem", 3],
+      "cmd-5": ["pane::ActivateItem", 4],
+      "cmd-6": ["pane::ActivateItem", 5],
+      "cmd-7": ["pane::ActivateItem", 6],
+      "cmd-8": ["pane::ActivateItem", 7],
+      "cmd-9": ["pane::ActivateItem", 8],
+      "cmd-0": "pane::ActivateLastItem"
+    }
+  },
   // Window's navigation
   {
     "context": "Dock || Terminal || Editor",
@@ -8,7 +23,8 @@
       "ctrl-l": "workspace::ActivatePaneRight",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
-      "cmd-e": "workspace::ToggleLeftDock"
+      "cmd-e": "project_panel::ToggleFocus",
+      "space z m": "workspace::ToggleZoom"
     }
   },
   {
@@ -35,6 +51,7 @@
       "x": "project_panel::Cut",
       "c": "project_panel::Copy",
       "p": "project_panel::Paste",
+      "ctrl-l ctrl-c": "project_panel::CollapseAllEntries",
       // Close project panel as project file panel on the right
       "q": "workspace::ToggleLeftDock",
       "space e": "workspace::ToggleLeftDock",
@@ -62,23 +79,16 @@
   {
     "context": "EmptyPane || SharedScreen",
     "bindings": {
-      // Open file finder
       "space space": "file_finder::Toggle",
-      // New file
-      "space f n": "workspace::NewFile",
-      // Open recent project
       "space f p": "projects::OpenRecent",
-      // Search in all the files
-      "space s g": "workspace::NewSearch",
-      // Quit zed
-      "space q q": "zed::Quit"
+      "space f g": "workspace::NewSearch"
     }
   },
   {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
       // Refactoring
-      "space c r ": "editor::Rename",
+      "space r n ": "editor::Rename",
       // Chat with AI
       "space a a": "agent::ToggleFocus",
       "ctrl-\\": "workspace::ToggleRightDock",
@@ -90,7 +100,14 @@
       "space g g": [
         "task::Spawn",
         {
-          "task_name": "lazygit",
+          "task_name": "start lazygit",
+          "reveal_target": "center"
+        }
+      ],
+      "space i": [
+        "task::Spawn",
+        {
+          "task_name": "start yazi",
           "reveal_target": "center"
         }
       ],
@@ -121,7 +138,16 @@
       "space 7": ["pane::ActivateItem", 6],
       "space 8": ["pane::ActivateItem", 7],
       "space 9": ["pane::ActivateItem", 8],
-      "space 0": "pane::ActivateLastItem",
+      "cmd-1": ["pane::ActivateItem", 0],
+      "cmd-2": ["pane::ActivateItem", 1],
+      "cmd-3": ["pane::ActivateItem", 2],
+      "cmd-4": ["pane::ActivateItem", 3],
+      "cmd-5": ["pane::ActivateItem", 4],
+      "cmd-6": ["pane::ActivateItem", 5],
+      "cmd-7": ["pane::ActivateItem", 6],
+      "cmd-8": ["pane::ActivateItem", 7],
+      "cmd-9": ["pane::ActivateItem", 8],
+      "cmd-0": "pane::ActivateLastItem",
       "] b": "pane::ActivateNextItem",
       "[ b": "pane::ActivatePreviousItem",
       "space ,": "tab_switcher::Toggle",
@@ -130,14 +156,13 @@
       // Close buffer
       "space b d": "pane::CloseActiveItem",
       // Close inactive buffers
-      "space b q": "pane::CloseInactiveItems",
+      "space b q": "pane::CloseOtherItems",
       // New file
       "space b n": "workspace::NewFile",
       // Search in the current buffer
       "space s b": "vim::Search",
       // Search in all the files
       "space s g": "workspace::NewSearch",
-      "space f n": "workspace::NewFile",
       // Search
       "space /": "workspace::NewSearch",
       // Git

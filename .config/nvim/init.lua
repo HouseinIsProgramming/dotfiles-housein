@@ -15,6 +15,7 @@ vim.pack.add({
 
 vim.o.number = true
 vim.o.relativenumber = true
+vim.o.scrolloff = 8
 vim.o.signcolumn = "yes"
 vim.o.termguicolors = true
 vim.o.wrap = false
@@ -67,10 +68,11 @@ require("blink.cmp").setup({
 		},
 	},
 	keymap = {
-		["<C-f>"] = {},
-	},
+		["<C-f>"] = { "accept_and_enter" },
+		["<C-l>"] = { "show" },
+},
 	cmdline = {
-		enabled = false,
+		enabled = true,
 		completion = { menu = { auto_show = true } },
 		keymap = {
 			["<CR>"] = { "accept_and_enter", "fallback" },
@@ -94,7 +96,7 @@ require("blink.cmp").setup({
 			window = {
 				border = nil,
 				scrollbar = false,
-				winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc',
+				winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc",
 			},
 			auto_show = true,
 			auto_show_delay_ms = 500,

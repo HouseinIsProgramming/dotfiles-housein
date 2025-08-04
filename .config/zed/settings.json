@@ -8,7 +8,7 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "show_edit_predictions": true,
-  "icon_theme": "Zed (Default)",
+  "icon_theme": "Material Icon Theme",
   "features": {
     "edit_prediction_provider": "zed"
   },
@@ -16,13 +16,14 @@
     "left_padding": 0.12,
     "right_padding": 0.1
   },
+  "use_smartcase_search": true,
   "agent": {
     "always_allow_tool_actions": true,
     "play_sound_when_agent_done": true,
     "default_profile": "write",
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "claude-sonnet-4"
+      "provider": "openrouter",
+      "model": "qwen/qwen3-coder:free"
     }
   },
   "vim_mode": true,
@@ -34,9 +35,9 @@
   "buffer_line_height": { "custom": 1.5 },
   "buffer_font_family": "CommitMono Nerd Font Propo",
   "theme": {
-    "mode": "system",
+    "mode": "dark",
     "light": "Tokyo Night Storm",
-    "dark": "One Light"
+    "dark": "Tokyo Night Storm"
   },
   "soft_wrap": "editor_width",
   "terminal": {
@@ -52,6 +53,76 @@
     "working_directory": "current_project_directory"
   },
   "lsp": {
+    "vtsls": {
+      "settings": {
+        // For JavaScript:
+        "javascript": {
+          "tsserver": { "maxTsServerMemory": 16814 },
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": false
+            },
+            "parameterTypes": {
+              "enabled": true
+            },
+            "variableTypes": {
+              "enabled": true,
+              "suppressWhenTypeMatchesName": true
+            },
+            "propertyDeclarationTypes": {
+              "enabled": true
+            },
+            "functionLikeReturnTypes": {
+              "enabled": true
+            },
+            "enumMemberValues": {
+              "enabled": true
+            }
+          }
+        },
+        // For TypeScript:
+        "typescript": {
+          "tsserver": { "maxTsServerMemory": 16814 },
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": false
+            },
+            "parameterTypes": {
+              "enabled": true
+            },
+            "variableTypes": {
+              "enabled": true,
+              "suppressWhenTypeMatchesName": true
+            },
+            "propertyDeclarationTypes": {
+              "enabled": true
+            },
+            "functionLikeReturnTypes": {
+              "enabled": true
+            },
+            "enumMemberValues": {
+              "enabled": true
+            }
+          }
+        }
+      }
+    },
+    "typescript-language-server": {
+      "initialization_options": {
+        "preferences": {
+          "includeInlayParameterNameHints": "all",
+          "includeInlayParameterNameHintsWhenArgumentMatchesName": true,
+          "includeInlayFunctionParameterTypeHints": true,
+          "includeInlayVariableTypeHints": true,
+          "includeInlayVariableTypeHintsWhenTypeMatchesName": true,
+          "includeInlayPropertyDeclarationTypeHints": true,
+          "includeInlayFunctionLikeReturnTypeHints": true,
+          "includeInlayEnumMemberValueHints": true
+        }
+      }
+    },
     "eslint": {
       "settings": {
         "problems": {
