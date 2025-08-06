@@ -24,7 +24,7 @@
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-j": "workspace::ActivatePaneDown",
       "cmd-e": "project_panel::ToggleFocus",
-      "space z m": "workspace::ToggleZoom"
+      "cmd-k": "workspace::ToggleZoom"
     }
   },
   {
