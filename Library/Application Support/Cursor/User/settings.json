@@ -148,5 +148,22 @@
   "[markdown]": {
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
-  "git.blame.editorDecoration.enabled": false
+  "git.blame.editorDecoration.enabled": false,
+  "gitlens.mode.active": "zen",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.editor.centeredLayoutFixedWidth": true,
+  "workbench.editor.centeredLayoutAutoResize": false,
+  "editor.rulers": [
+    {
+      "color": "#505378",
+      "column": 110
+    },
+    {
+      "color": "#2d323e",
+      "column": 80
+    }
+  ],
+  "editor.wordWrapColumn": 100
 }
