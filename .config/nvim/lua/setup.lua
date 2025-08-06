@@ -121,3 +121,11 @@ vim.diagnostic.config({
 })
 
 vim.lsp.enable({ "lua_ls", "emmetls" })
+
+-- arduino autocmd
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "arduino",
+	callback = function()
+		require("arduino-nvim").setup()
+	end,
+})

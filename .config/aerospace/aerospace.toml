@@ -118,13 +118,13 @@ if.app-name-regex-substring = 'cursor'
 run = 'move-node-to-workspace 2'
 [[on-window-detected]]
 if.app-id = 'com.figma.Desktop'
-run = 'move-node-to-workspace 3'
+run = 'move-node-to-workspace 7'
 [[on-window-detected]]
 if.app-id = 'photoshop'
-run = 'move-node-to-workspace 3'
+run = 'move-node-to-workspace 7'
 [[on-window-detected]]
 if.app-id = 'premiere'
-run = 'move-node-to-workspace 3'
+run = 'move-node-to-workspace 7'
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
 run = 'move-node-to-workspace 4'
