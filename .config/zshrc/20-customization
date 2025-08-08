@@ -71,12 +71,10 @@ source <(fzf --zsh)
 # Keybinds
 bindkey -e
 
-bindkey -r ^a
-bindkey -r ^b
-bindkey -r ^e
-bindkey ^a end-of-line
-bindkey ^b backward-word
-bindkey ^e forward-word
+bindkey -r ^h
+bindkey -r ^l
+bindkey ^h backward-word
+bindkey ^l forward-word
 
 # zsh history
 ## History

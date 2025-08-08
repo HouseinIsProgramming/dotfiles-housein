@@ -52,7 +52,12 @@
     },
     {
       "before": ["<leader>", "f", "g"],
-      "commands": ["search.action.openEditor"]
+      "commands": [
+        {
+          "command": "periscope.search",
+          "when": "editorTextFocus"
+        }
+      ]
     }
   ],
   "vim.leader": "<space>",
@@ -149,7 +154,6 @@
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
   "git.blame.editorDecoration.enabled": false,
-  "gitlens.mode.active": "zen",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
