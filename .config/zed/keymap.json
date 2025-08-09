@@ -7,7 +7,8 @@
       "space f p": "projects::OpenRecent",
       "space f g": "workspace::NewSearch",
       "space f f": "file_finder::Toggle",
-      "space l s": "task::Spawn"
+      "space l s": "task::Spawn",
+      "cmd-shift-r": "workspace::CloseAllDocks"
     }
   },
 
@@ -84,13 +85,10 @@
     "bindings": {
       // File operations
       "a": "project_panel::NewFile",
-      "o": "project_panel::Open",
-      "%": "project_panel::NewFile",
       "A": "project_panel::NewDirectory",
       "r": "project_panel::Rename",
-      "shift-r": "project_panel::Rename",
       "d": "project_panel::Delete",
-      "shift-d": "project_panel::Delete",
+      "i": "project_panel::CollapseAllEntries",
 
       // Copy/paste operations
       "x": "project_panel::Cut",
@@ -107,7 +105,8 @@
       "-": "project_panel::SelectParent",
 
       // Opening files
-      "enter": "project_panel::OpenPermanent",
+      "enter": ["workspace::SendKeystrokes", "o shift-cmd-r"],
+      "o": "project_panel::OpenPermanent",
       "t": "project_panel::OpenPermanent",
       "v": "project_panel::OpenPermanent",
 
@@ -300,8 +299,9 @@
       "ctrl-l": "editor::MoveRight",
       "ctrl-h": "editor::MoveLeft",
       "ctrl-a": "editor::MoveLeft",
-      "ctrl-d": "editor::MoveRight",
-      "ctrl-s": "editor::ShowSignatureHelp"
+      "ctrl-d": "editor::AcceptEditPrediction",
+      "ctrl-s": "editor::ShowSignatureHelp",
+      "k j": "vim::SwitchToNormalMode"
     }
   },
 

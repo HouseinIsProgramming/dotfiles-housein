@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/housien/.zsh/completions:"* ]]; then export FPATH="/Users/housien/.zsh/completions:$FPATH"; fi
 #            _
 #    _______| |__  _ __ ___
 #   |_  / __| '_ \| '__/ __|
@@ -49,3 +51,12 @@ fi
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 source "$HOME/.cargo/env"
 export PATH="$HOME/.local/bin:$PATH"
+. "/Users/housien/.deno/env"
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/Users/housien/.opam/opam-init/init.zsh' ]] || source '/Users/housien/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration

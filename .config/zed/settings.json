@@ -7,6 +7,12 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "inlay_hints": {
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true
+  },
+  "tab_size": 2,
   "show_edit_predictions": true,
   "icon_theme": "Material Icon Theme",
   "features": {
@@ -110,6 +116,7 @@
         }
       }
     },
+
     "typescript-language-server": {
       "initialization_options": {
         "preferences": {

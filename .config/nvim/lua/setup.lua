@@ -24,6 +24,9 @@ require("conform").setup({
 	},
 })
 
+require("nvim-autopairs").setup({})
+require("mini.ai").setup({})
+
 require("mini.pick").setup()
 require("nvim-treesitter.configs").setup({
 	ensure_installed = { "svelte", "typescript", "javascript", "c", "lua" },
@@ -47,7 +50,7 @@ require("blink.cmp").setup({
 		},
 	},
 	keymap = {
-		["<C-f>"] = { "accept_and_enter" },
+		["<C-f>"] = { "accept" },
 		["<C-l>"] = { "show" },
 	},
 	cmdline = {
@@ -120,9 +123,8 @@ vim.diagnostic.config({
 	severity_sort = true, -- Sort diagnostics by severity
 })
 
-vim.lsp.enable({ "lua_ls", "emmetls" })
+vim.lsp.enable({ "lua_ls", "emmetls", "ts_ls", "html" })
 
--- arduino autocmd
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "arduino",
 	callback = function()

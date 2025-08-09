@@ -14,4 +14,6 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/folke/tokyonight.nvim" },
 	{ src = "https://github.com/glebzlat/arduino-nvim" },
+	{ src = "https://github.com/echasnovski/mini.ai" },
+	{ src = "https://github.com/windwp/nvim-autopairs" },
 })
