@@ -9,6 +9,7 @@ vim.o.swapfile = false
 vim.g.mapleader = " "
 vim.o.winborder = "rounded"
 vim.o.clipboard = "unnamedplus"
+vim.o.confirm = true
 
 require("plugins")
 require("setup")
@@ -17,4 +18,3 @@ require("keymaps")
 
 vim.cmd("set completeopt+=noselect")
 vim.cmd(":hi statusline guibg=NONE")
-

@@ -5,6 +5,8 @@ require("mason-tool-installer").setup({
 		"lua_ls",
 		"stylua",
 		"typescript-language-server",
+		"ocamllsp",
+		"ocamlformat",
 	},
 })
 
@@ -17,6 +19,7 @@ require("conform").setup({
 		rust = { "rustfmt", lsp_format = "fallback" },
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
+		ocaml = { "ocamlformat" },
 	},
 	format_on_save = {
 		timeout_ms = 500,
@@ -29,7 +32,7 @@ require("mini.ai").setup({})
 
 require("mini.pick").setup()
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "svelte", "typescript", "javascript", "c", "lua" },
+	ensure_installed = { "svelte", "typescript", "javascript", "c", "lua", "ocaml" },
 	highlight = { enable = true },
 })
 require("yazi").setup()
@@ -50,7 +53,7 @@ require("blink.cmp").setup({
 		},
 	},
 	keymap = {
-		["<C-f>"] = { "accept" },
+		["<C-d>"] = { "accept" },
 		["<C-l>"] = { "show" },
 	},
 	cmdline = {
@@ -123,7 +126,7 @@ vim.diagnostic.config({
 	severity_sort = true, -- Sort diagnostics by severity
 })
 
-vim.lsp.enable({ "lua_ls", "emmetls", "ts_ls", "html" })
+vim.lsp.enable({ "lua_ls", "emmetls", "ts_ls", "html", "ocamllsp" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "arduino",

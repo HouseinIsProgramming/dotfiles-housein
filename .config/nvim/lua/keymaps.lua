@@ -9,6 +9,7 @@ vim.keymap.set("n", "<leader>fc", ":FzfLua lsp_code_actions<CR>")
 vim.keymap.set("n", "<leader>fh", ":Pick help<CR>")
 vim.keymap.set("n", "<leader>i", ":Yazi<CR>")
 vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format)
+vim.keymap.set("i", "<C-f>", "<Right>", { noremap = true, silent = true })
 
 -- Function to toggle LSP diagnostics
 local diagnostics_enabled = true
@@ -44,4 +45,3 @@ end
 
 -- Keybinding to toggle virtual lines
 vim.keymap.set("n", "<leader>uv", toggle_virtual_lines, { desc = "Toggle virtual lines for diagnostics" })
-
