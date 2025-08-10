@@ -1,8 +1,9 @@
 [
   // ============================================================================
-  // ALWAYS
-  // ============================================================================
+  // ALWAYS - not terminal
   {
+    // "context": "!Terminal",
+    "context": "Editor && VimControl && !VimWaiting && !menu && vim_mode != insert",
     "bindings": {
       "space f p": "projects::OpenRecent",
       "space f g": "workspace::NewSearch",
@@ -12,7 +13,7 @@
     }
   },
 
-  // ============================================================================
+  //  ============================================================================
   // TERMINAL CONTEXT
   // ============================================================================
   {
@@ -296,8 +297,7 @@
   {
     "context": "Editor && vim_mode == insert && !menu",
     "bindings": {
-      "ctrl-l": "editor::MoveRight",
-      "ctrl-h": "editor::MoveLeft",
+      "ctrl-l": "editor::ShowCompletions",
       "ctrl-a": "editor::MoveLeft",
       "ctrl-d": "editor::AcceptEditPrediction",
       "ctrl-s": "editor::ShowSignatureHelp",

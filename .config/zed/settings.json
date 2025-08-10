@@ -37,6 +37,11 @@
   "vertical_scroll_margin": 12,
   "base_keymap": "VSCode",
   "ui_font_size": 18,
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": true
+  },
+  "auto_indent_on_paste": true,
   "buffer_font_size": 17.0,
   "buffer_line_height": { "custom": 1.5 },
   "buffer_font_family": "CommitMono Nerd Font Propo",
