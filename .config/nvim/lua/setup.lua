@@ -27,14 +27,31 @@ require("conform").setup({
 	},
 })
 
+require("nvim-treesitter.configs").setup({
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			node_incremental = "v",
+			node_decremental = "V",
+		},
+	},
+})
+
+require("supermaven-nvim").setup({
+	keymaps = {
+		accept_suggestion = "<C-e>",
+		clear_suggestion = "<C-]>",
+		accept_word = "<C-j>",
+	},
+})
 require("nvim-autopairs").setup({})
 require("mini.ai").setup({})
-
 require("mini.pick").setup()
 require("nvim-treesitter.configs").setup({
 	ensure_installed = { "svelte", "typescript", "javascript", "c", "lua", "ocaml" },
 	highlight = { enable = true },
 })
+
 require("yazi").setup()
 
 require("blink.cmp").setup({
@@ -55,12 +72,15 @@ require("blink.cmp").setup({
 	keymap = {
 		["<C-d>"] = { "accept" },
 		["<C-l>"] = { "show" },
+		["<Tab>"] = { "accept", "snippet_forward", "fallback" },
+		["<S-Tab>"] = { "snippet_backward", "fallback" },
 	},
+
 	cmdline = {
 		enabled = true,
 		completion = { menu = { auto_show = true } },
 		keymap = {
-			["<CR>"] = { "accept_and_enter", "fallback" },
+			["<TAB>"] = { "accept" },
 		},
 	},
 	completion = {
@@ -134,3 +154,5 @@ vim.api.nvim_create_autocmd("FileType", {
 		require("arduino-nvim").setup()
 	end,
 })
+
+vim.cmd("FzfLua register_ui_select")
