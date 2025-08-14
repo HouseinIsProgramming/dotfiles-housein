@@ -20,6 +20,7 @@ require("conform").setup({
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 		ocaml = { "ocamlformat" },
+		go = { "gofmt" },
 	},
 	format_on_save = {
 		timeout_ms = 500,
@@ -110,6 +111,7 @@ require("blink.cmp").setup({
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_lua").load({ paths = { vim.fn.stdpath("config") .. "/lua/snippets" } })
 
 vim.lsp.config("lua_ls", {
 	settings = {
@@ -146,7 +148,7 @@ vim.diagnostic.config({
 	severity_sort = true, -- Sort diagnostics by severity
 })
 
-vim.lsp.enable({ "lua_ls", "emmetls", "ts_ls", "html", "ocamllsp" })
+vim.lsp.enable({ "lua_ls", "emmetls", "ts_ls", "html", "ocamllsp", "gopls" })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "arduino",
