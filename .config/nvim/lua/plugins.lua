@@ -18,4 +18,8 @@ vim.pack.add({
 	{ src = "https://github.com/windwp/nvim-autopairs" },
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 	{ src = "https://github.com/supermaven-inc/supermaven-nvim" },
+	{ src = "https://github.com/kevinhwang91/promise-async" },
+	{ src = "https://github.com/kevinhwang91/nvim-ufo" },
+	-- { src = "https://github.com/chrisgrieser/nvim-origami" },
+	{ src = "https://github.com/jmattaa/regedit.vim" },
 })

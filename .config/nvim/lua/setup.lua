@@ -55,6 +55,31 @@ require("nvim-treesitter.configs").setup({
 
 require("yazi").setup()
 
+--folding UFO
+require("ufo").setup()
+vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+require("ufo").setup({
+	provider_selector = function(bufnr, filetype, buftype)
+		return { "treesitter", "indent" }
+	end,
+})
+local folds_augroup = vim.api.nvim_create_augroup("Folds", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+	group = folds_augroup,
+	command = "mkview | filetype detect | set foldmethod=manual",
+})
+vim.api.nvim_create_autocmd("QuitPre", {
+	group = folds_augroup,
+	command = "mkview | filetype detect | set foldmethod=manual",
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = folds_augroup,
+	command = "silent! loadview | filetype detect | set foldmethod=manual | silent! foldclose!",
+})
+
+-- require("origami").setup()
+
 require("blink.cmp").setup({
 	snippets = { preset = "luasnip" },
 	signature = { enabled = true },
