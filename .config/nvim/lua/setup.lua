@@ -15,7 +15,7 @@ vim.cmd("colorscheme tokyonight-moon")
 require("conform").setup({
 	formatters_by_ft = {
 		lua = { "stylua" },
-		python = { "isort", "black" },
+		python = { "ruff" },
 		rust = { "rustfmt", lsp_format = "fallback" },
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
@@ -160,6 +160,14 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
+vim.lsp.config("ruff", {
+	init_options = {
+		settings = {
+			args = { "--select", "E,F", "--ignore", "E501,B018" },
+		},
+	},
+})
+
 -- Configure diagnostics
 vim.diagnostic.config({
 	virtual_text = {
@@ -173,7 +181,15 @@ vim.diagnostic.config({
 	severity_sort = true, -- Sort diagnostics by severity
 })
 
-vim.lsp.enable({ "lua_ls", "emmetls", "ts_ls", "html", "ocamllsp", "gopls" })
+vim.lsp.enable({
+	"lua_ls",
+	"emmetls",
+	"ts_ls",
+	"html",
+	"ocamllsp",
+	"gopls",
+	"ruff",
+})
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "arduino",

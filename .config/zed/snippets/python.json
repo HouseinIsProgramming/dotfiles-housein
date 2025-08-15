@@ -1,0 +1,183 @@
+{
+  "If Statement": {
+    "prefix": "if",
+    "body": ["if ${1:condition}:", "    ${0:pass}"],
+    "description": "Basic if statement"
+  },
+  "If-Else Statement": {
+    "prefix": "ifelse",
+    "body": ["if ${1:condition}:", "    ${2:pass}", "else:", "    ${0:pass}"],
+    "description": "If-else statement"
+  },
+  "Elif Statement": {
+    "prefix": "elif",
+    "body": ["elif ${1:condition}:", "    ${0:pass}"],
+    "description": "Elif statement"
+  },
+  "For Loop": {
+    "prefix": "for",
+    "body": ["for ${1:item} in ${2:iterable}:", "    ${0:pass}"],
+    "description": "For loop"
+  },
+  "For Loop with Enumerate": {
+    "prefix": "forenum",
+    "body": [
+      "for ${1:index}, ${2:item} in enumerate(${3:iterable}):",
+      "    ${0:pass}"
+    ],
+    "description": "For loop with enumerate"
+  },
+  "For Loop with Zip": {
+    "prefix": "forzip",
+    "body": [
+      "for ${1:a}, ${2:b} in zip(${3:iter1}, ${4:iter2}):",
+      "    ${0:pass}"
+    ],
+    "description": "For loop with zip"
+  },
+  "While Loop": {
+    "prefix": "while",
+    "body": ["while ${1:condition}:", "    ${0:pass}"],
+    "description": "While loop"
+  },
+  "Function Definition": {
+    "prefix": "def",
+    "body": ["def ${1:function_name}(${2:args}):", "    ${0:pass}"],
+    "description": "Function definition"
+  },
+  "Async Function": {
+    "prefix": "adef",
+    "body": ["async def ${1:function_name}(${2:args}):", "    ${0:pass}"],
+    "description": "Async function definition"
+  },
+  "Class Definition": {
+    "prefix": "class",
+    "body": [
+      "class ${1:ClassName}(${2:object}):",
+      "    def __init__(self, ${3:args}):",
+      "        ${0:pass}"
+    ],
+    "description": "Class definition"
+  },
+  "Dataclass": {
+    "prefix": "dataclass",
+    "body": [
+      "from dataclasses import dataclass",
+      "",
+      "@dataclass",
+      "class ${1:ClassName}:",
+      "    ${2:field_name}: ${3:type}"
+    ],
+    "description": "Python dataclass"
+  },
+  "Try Except": {
+    "prefix": "try",
+    "body": [
+      "try:",
+      "    ${1:pass}",
+      "except ${2:Exception} as ${3:e}:",
+      "    ${0:pass}"
+    ],
+    "description": "Try-except block"
+  },
+  "Try Except Finally": {
+    "prefix": "tryf",
+    "body": [
+      "try:",
+      "    ${1:pass}",
+      "except ${2:Exception} as ${3:e}:",
+      "    ${4:pass}",
+      "finally:",
+      "    ${0:pass}"
+    ],
+    "description": "Try-except-finally block"
+  },
+  "With Statement": {
+    "prefix": "with",
+    "body": ["with ${1:expression} as ${2:var}:", "    ${0:pass}"],
+    "description": "With statement"
+  },
+  "List Comprehension": {
+    "prefix": "listcomp",
+    "body": ["[${1:expr} for ${2:item} in ${3:iterable}]"],
+    "description": "List comprehension"
+  },
+  "Dict Comprehension": {
+    "prefix": "dictcomp",
+    "body": ["{${1:key}: ${2:value} for ${3:item} in ${4:iterable}}"],
+    "description": "Dictionary comprehension"
+  },
+  "Import": {
+    "prefix": "imp",
+    "body": ["import ${1:module}"],
+    "description": "Import module"
+  },
+  "From Import": {
+    "prefix": "fromimp",
+    "body": ["from ${1:module} import ${2:thing}"],
+    "description": "From-import statement"
+  },
+  "Main Guard": {
+    "prefix": "main",
+    "body": ["if __name__ == \"__main__\":", "    ${0:main()}"],
+    "description": "Main entry point guard"
+  },
+  "Print": {
+    "prefix": "print",
+    "body": ["print(${1:\"text\"})"],
+    "description": "Print statement"
+  },
+  "F-String": {
+    "prefix": "fstr",
+    "body": ["f\"${1:text} {${2:var}}\""],
+    "description": "F-string"
+  },
+  "Logging Setup": {
+    "prefix": "logsetup",
+    "body": [
+      "import logging",
+      "",
+      "logging.basicConfig(level=logging.${1:DEBUG})",
+      "logger = logging.getLogger(__name__)"
+    ],
+    "description": "Basic logging setup"
+  },
+  "Match Case": {
+    "prefix": "match",
+    "body": [
+      "match ${1:variable}:",
+      "    case ${2:pattern}:",
+      "        ${0:pass}"
+    ],
+    "description": "Match-case statement (Python 3.10+)"
+  },
+  "Open File Read": {
+    "prefix": "fileread",
+    "body": [
+      "with open(${1:\"filename\"}, \"r\") as f:",
+      "    ${0:data} = f.read()"
+    ],
+    "description": "Open file for reading"
+  },
+  "Open File Write": {
+    "prefix": "filewrite",
+    "body": [
+      "with open(${1:\"filename\"}, \"w\") as f:",
+      "    f.write(${0:data})"
+    ],
+    "description": "Open file for writing"
+  },
+  "Range Loop": {
+    "prefix": "forrange",
+    "body": ["for ${1:i} in range(${2:10}):", "    ${0:pass}"],
+    "description": "For loop with range"
+  },
+  "Enumerate Loop": {
+    "prefix": "forenum",
+    "body": [
+      "for ${1:index}, ${2:item} in enumerate(${3:iterable}):",
+      "    ${0:pass}"
+    ],
+    "description": "For loop with enumerate"
+  }
+}
