@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "horizontal_scroll_margin": 24,
   "inlay_hints": {
     "show_type_hints": true,
     "show_parameter_hints": true,
@@ -179,6 +180,27 @@
         "external": {
           "command": "prettier",
           "arguments": ["--stdin-filepath", "{buffer_path}"]
+        }
+      }
+    },
+    "Python": {
+      "formatter": {
+        "external": {
+          "command": "ruff",
+          "arguments": ["format", "--stdin-filename", "{buffer_path}"]
+        }
+      },
+      "format_on_save": {
+        "external": {
+          "command": "ruff",
+          "arguments": [
+            "check",
+            "--exit-zero",
+            "--fix",
+            "--stdin-filename",
+            "{buffer_path}",
+            "-"
+          ]
         }
       }
     }
