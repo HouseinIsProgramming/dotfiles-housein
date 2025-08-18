@@ -10,6 +10,7 @@ vim.keymap.set("n", "<leader>la", ":FzfLua lsp_code_actions<CR>")
 vim.keymap.set("n", "<leader>fh", ":Pick help<CR>")
 vim.keymap.set("n", "<leader>i", ":Yazi<CR>")
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>e", ":e!<CR>")
 
 vim.keymap.set("n", "<ESC>", ":nohlsearch<CR>", { noremap = true, silent = true })
 

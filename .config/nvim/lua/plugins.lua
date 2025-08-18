@@ -22,4 +22,5 @@ vim.pack.add({
 	{ src = "https://github.com/kevinhwang91/nvim-ufo" },
 	-- { src = "https://github.com/chrisgrieser/nvim-origami" },
 	{ src = "https://github.com/jmattaa/regedit.vim" },
+	{ src = "https://github.com/nvimdev/indentmini.nvim" },
 })

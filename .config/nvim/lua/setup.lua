@@ -9,7 +9,6 @@ require("mason-tool-installer").setup({
 		"ocamlformat",
 	},
 })
-
 vim.cmd("colorscheme tokyonight-moon")
 
 require("conform").setup({
@@ -54,6 +53,7 @@ require("nvim-treesitter.configs").setup({
 })
 
 require("yazi").setup()
+require("indentmini").setup()
 
 --folding UFO
 require("ufo").setup()
@@ -163,7 +163,37 @@ vim.lsp.config("lua_ls", {
 vim.lsp.config("ruff", {
 	init_options = {
 		settings = {
-			args = { "--select", "E,F", "--ignore", "E501,B018" },
+			-- Game dev friendly settings - ignore annoying warnings
+			args = {
+				"--ignore",
+				"B018,F841,F401,E501,E701,E731,W291,W292,W293,C901,N806,N803,B007",
+				"--line-length",
+				"120",
+			},
+		},
+	},
+})
+
+-- Minimal BasedPyright config - only catch real errors
+vim.lsp.config("basedpyright", {
+	settings = {
+		basedpyright = {
+			analysis = {
+				typeCheckingMode = "off", -- Turn off most type checking
+
+				-- Only keep essential error checking
+				diagnosticSeverityOverrides = {
+					reportSyntaxErrors = "error", -- Keep syntax errors
+					reportUndefinedVariable = "error", -- Keep undefined variables
+					reportMissingImports = "warning", -- Keep import issues as warnings
+
+					-- Turn off everything else
+					reportUnusedExpression = "none",
+					-- reportUnusedVariable = "none",
+					reportUnusedImport = "none",
+					reportGeneralTypeIssues = "none",
+				},
+			},
 		},
 	},
 })
@@ -189,6 +219,7 @@ vim.lsp.enable({
 	"ocamllsp",
 	"gopls",
 	"ruff",
+	"basedpyright",
 })
 
 vim.api.nvim_create_autocmd("FileType", {
