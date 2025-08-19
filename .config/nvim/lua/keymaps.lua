@@ -11,6 +11,8 @@ vim.keymap.set("n", "<leader>fh", ":Pick help<CR>")
 vim.keymap.set("n", "<leader>i", ":Yazi<CR>")
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>e", ":e!<CR>")
+vim.keymap.set("n", "<leader>ww", ":w<CR>")
+vim.keymap.set("n", "<leader>wu", "<cmd>lua require('undotree').toggle()<cr>")
 
 vim.keymap.set("n", "<ESC>", ":nohlsearch<CR>", { noremap = true, silent = true })
 

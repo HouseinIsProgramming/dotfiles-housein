@@ -54,6 +54,7 @@ require("nvim-treesitter.configs").setup({
 
 require("yazi").setup()
 require("indentmini").setup()
+require("undotree").setup()
 
 --folding UFO
 require("ufo").setup()

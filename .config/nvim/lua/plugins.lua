@@ -23,4 +23,5 @@ vim.pack.add({
 	-- { src = "https://github.com/chrisgrieser/nvim-origami" },
 	{ src = "https://github.com/jmattaa/regedit.vim" },
 	{ src = "https://github.com/nvimdev/indentmini.nvim" },
+	{ src = "https://github.com/jiaoshijie/undotree" },
 })
