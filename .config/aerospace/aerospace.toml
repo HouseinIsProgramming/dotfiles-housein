@@ -149,3 +149,7 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-name-regex-substring = 'steam'
 run = 'layout floating'
+[[on-window-detected]]
+if.app-name-regex-substring = 'Screen'
+if.app-id = 'com.timpler.screenstudio'
+run = 'layout floating'
