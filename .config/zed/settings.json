@@ -49,7 +49,7 @@
   "theme": {
     "mode": "dark",
     "light": "Tokyo Night Storm",
-    "dark": "Tokyo Night Storm"
+    "dark": "Gleam Dark"
   },
   "soft_wrap": "editor_width",
   "terminal": {
