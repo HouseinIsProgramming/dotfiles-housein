@@ -5,7 +5,8 @@
 # -----------------------------------------------------
 # Exports
 # -----------------------------------------------------
-export EDITOR=nvim
+export EDITOR="zed --wait"
+export VISUAL="zed --wait"
 export PATH=$PATH:~/.cargo/bin/
 export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
 fpath=($HOME/.config/zshrc/completion_zsh $fpath)
