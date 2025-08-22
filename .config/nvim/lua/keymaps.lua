@@ -61,3 +61,7 @@ end
 
 -- Keybinding to toggle virtual lines
 vim.keymap.set("n", "<leader>uv", toggle_virtual_lines, { desc = "Toggle virtual lines for diagnostics" })
+
+-- Configure c command to put deleted text into c register
+vim.keymap.set("n", "c", '"cc', { noremap = true })
+vim.keymap.set("v", "c", '"cc', { noremap = true })

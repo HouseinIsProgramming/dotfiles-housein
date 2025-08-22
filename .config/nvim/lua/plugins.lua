@@ -24,4 +24,7 @@ vim.pack.add({
 	{ src = "https://github.com/jmattaa/regedit.vim" },
 	{ src = "https://github.com/nvimdev/indentmini.nvim" },
 	{ src = "https://github.com/jiaoshijie/undotree" },
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+	{ src = "https://github.com/davidmh/mdx.nvim" },
+	{ src = "https://github.com/echasnovski/mini.nvim" },
 })

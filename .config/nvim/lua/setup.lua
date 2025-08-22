@@ -18,6 +18,17 @@ require("conform").setup({
 		rust = { "rustfmt", lsp_format = "fallback" },
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
+		json = { "prettierd", "prettier", stop_after_first = true },
+		jsonc = { "prettierd", "prettier", stop_after_first = true },
+		yaml = { "prettier", stop_after_first = true },
+		yml = { "prettier", stop_after_first = true },
+		markdown = { "prettierd", "prettier", stop_after_first = true },
+		html = { "prettierd", "prettier", stop_after_first = true },
+		css = { "prettierd", "prettier", stop_after_first = true },
+		scss = { "prettierd", "prettier", stop_after_first = true },
+		less = { "prettierd", "prettier", stop_after_first = true },
+		xml = { "prettierd", "prettier", stop_after_first = true },
+		toml = { "prettier", stop_after_first = true },
 		ocaml = { "ocamlformat" },
 		go = { "gofmt" },
 	},
@@ -57,26 +68,30 @@ require("indentmini").setup()
 require("undotree").setup()
 
 --folding UFO
-require("ufo").setup()
-vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-require("ufo").setup({
-	provider_selector = function(bufnr, filetype, buftype)
-		return { "treesitter", "indent" }
-	end,
-})
-local folds_augroup = vim.api.nvim_create_augroup("Folds", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-	group = folds_augroup,
-	command = "mkview | filetype detect | set foldmethod=manual",
-})
-vim.api.nvim_create_autocmd("QuitPre", {
-	group = folds_augroup,
-	command = "mkview | filetype detect | set foldmethod=manual",
-})
-vim.api.nvim_create_autocmd("BufWinEnter", {
-	group = folds_augroup,
-	command = "silent! loadview | filetype detect | set foldmethod=manual | silent! foldclose!",
+-- require("ufo").setup()
+-- vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+-- vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+-- require("ufo").setup({
+-- 	provider_selector = function(bufnr, filetype, buftype)
+-- 		return { "treesitter", "indent" }
+-- 	end,
+-- })
+-- local folds_augroup = vim.api.nvim_create_augroup("Folds", { clear = true })
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+-- 	group = folds_augroup,
+-- 	command = "mkview | filetype detect | set foldmethod=manual",
+-- })
+-- vim.api.nvim_create_autocmd("QuitPre", {
+-- 	group = folds_augroup,
+-- 	command = "mkview | filetype detect | set foldmethod=manual",
+-- })
+-- vim.api.nvim_create_autocmd("BufWinEnter", {
+-- 	group = folds_augroup,
+-- 	command = "silent! loadview | filetype detect | set foldmethod=manual | silent! foldclose!",
+-- })
+--
+require("render-markdown").setup({
+	completions = { lsp = { enabled = true } },
 })
 
 -- require("origami").setup()
@@ -135,6 +150,7 @@ require("blink.cmp").setup({
 		},
 	},
 })
+require("mini.icons").setup()
 
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_lua").load({ paths = { vim.fn.stdpath("config") .. "/lua/snippets" } })
@@ -200,6 +216,7 @@ vim.lsp.config("basedpyright", {
 })
 
 -- Configure diagnostics
+
 vim.diagnostic.config({
 	virtual_text = {
 		prefix = "●", -- Customize the prefix (e.g., ●, ✗, etc.)
