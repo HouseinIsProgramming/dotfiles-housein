@@ -40,7 +40,8 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args) vim.bo[args.buf].omnifunc = nil end,
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   callback = function(args) vim.bo[args.buf].omnifunc = nil end,
+-- })
+
 vim.cmd(":hi statusline guibg=NONE")
