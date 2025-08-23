@@ -1,6 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "de10d8414235b0a8cabfeba60d07c24304e71f5c" },
-  "coc.nvim": { "branch": "release", "commit": "0e8e1cbb731f420b5d3a41bae6b712b4911273a0" },
+  "blink.cmp": { "branch": "main", "commit": "485c03400608cb6534bbf84da8c1c471fc4808c0" },
   "conform.nvim": { "branch": "master", "commit": "a0ab60ed666c56b37fd7ed1847d2ac52f2482ce0" },
   "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
@@ -22,8 +22,10 @@
   "regedit.vim": { "branch": "main", "commit": "e211d895b9f0c046789582a661c38efa28818cb2" },
   "render-markdown.nvim": { "branch": "main", "commit": "c4ff9acddcf0f79b3187393319adb5cac5865bd3" },
   "schemastore.nvim": { "branch": "main", "commit": "433a310de5cbab41f1eb3424332a583e21e39f5c" },
+  "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
   "tokyonight.nvim": { "branch": "main", "commit": "057ef5d260c1931f1dffd0f052c685dcd14100a3" },
   "undotree": { "branch": "main", "commit": "eab459ab87dd249617b5f7187bb69e614a083047" },
+  "vim-floaterm": { "branch": "master", "commit": "fd4bdd66eca56c6cc59f2119e4447496d8cde2ea" },
   "yazi.nvim": { "branch": "main", "commit": "cb504275173e4463a3e87def172977fb9c0dcf5b" }
 }
