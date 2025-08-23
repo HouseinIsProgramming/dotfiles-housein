@@ -143,6 +143,25 @@
           "shortenToSingleLine": true
         }
       }
+    },
+    "lua-language-server": {
+      "binary": {
+        "path": "/opt/homebrew/bin/lua-language-server"
+      },
+      "settings": {
+        "Lua": {
+          "workspace": {
+            "library": [
+              "/Users/housien/.luarocks/share/lua/5.1",
+              "./lua_modules/share/lua/5.1",
+              "./lua_modules/lib/lua/5.1"
+            ]
+          },
+          "diagnostics": {
+            "globals": ["vim"]
+          }
+        }
+      }
     }
   },
   "languages": {
@@ -165,7 +184,8 @@
             "-"
           ]
         }
-      }
+      },
+      "language_servers": ["lua-language-server"]
     },
     "JavaScript": {
       "formatter": {
