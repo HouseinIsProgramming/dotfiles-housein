@@ -1,8 +1,21 @@
 {
-    "diagnostics.globals": [
-        "vim"
-    ],
-    "diagnostics.disable": [
-        "missing-fields"
-    ]
+    "runtime": {
+        "version": "Lua 5.1"
+    },
+    "workspace": {
+        "library": [
+            "/Users/housien/.luarocks/share/lua/5.1",
+            "/Users/housien/.luarocks/lib/lua/5.1",
+            "./lua_modules/share/lua/5.1",
+            "./lua_modules/lib/lua/5.1"
+        ],
+        "checkThirdParty": false
+    },
+    "diagnostics": {
+        "globals": ["vim"]
+    },
+    "completion": {
+        "enable": true,
+        "callSnippet": "Both"
+    }
 }
