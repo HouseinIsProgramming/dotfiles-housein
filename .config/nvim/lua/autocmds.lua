@@ -16,3 +16,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+	group = vim.api.nvim_create_augroup("RememberCursorPosition", { clear = true }),
+	callback = function()
+		-- Only jump if the mark exists, is not the first line (often default),
+		-- and is within the file's current bounds.
+		if vim.fn.line("'\"'") > 1 and vim.fn.line("'\"'") <= vim.fn.line("$") then
+			vim.cmd('normal! g`"')
+		end
+	end,
+})

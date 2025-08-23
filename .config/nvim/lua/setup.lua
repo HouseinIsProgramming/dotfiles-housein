@@ -95,17 +95,23 @@ require("render-markdown").setup({
 })
 
 -- require("origami").setup()
+--
 
 require("blink.cmp").setup({
 	snippets = { preset = "luasnip" },
 	signature = { enabled = true },
 	appearance = {
 		use_nvim_cmp_as_default = false,
-		nerd_font_variant = "normal",
+		nerd_font_variant = "mono",
 	},
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer" },
+		default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 		providers = {
+			lazydev = {
+				name = "LazyDev",
+				module = "lazydev.integrations.blink",
+				score_offset = 100,
+			},
 			cmdline = {
 				min_keyword_length = 2,
 			},
@@ -127,18 +133,18 @@ require("blink.cmp").setup({
 	},
 	completion = {
 		menu = {
-			border = nil,
+			border = "solid",
 			scrolloff = 1,
 			scrollbar = false,
 			draw = {
 				columns = {
-					{ "kind_icon" },
-					{ "label", "label_description", gap = 1 },
-					{ "kind" },
-					{ "source_name" },
+					{ "label", "label_description", gap = 2 },
+					{ "kind_icon", "kind", gap = 2 },
 				},
+				false,
 			},
 		},
+
 		documentation = {
 			window = {
 				border = nil,
@@ -166,9 +172,6 @@ vim.lsp.config("lua_ls", {
 					"vim",
 					"require",
 				},
-			},
-			workspace = {
-				library = vim.api.nvim_get_runtime_file("", true),
 			},
 			telemetry = {
 				enable = false,
