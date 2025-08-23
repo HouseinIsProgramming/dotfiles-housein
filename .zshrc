@@ -52,7 +52,6 @@ source "$HOME/.cargo/env"
 export PATH="$HOME/.local/bin:$PATH"
 . "/Users/housien/.deno/env"
 
-[ -s ~/.luaver/luaver ] && . ~/.luaver/luaver
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
@@ -61,8 +60,6 @@ export PATH="$HOME/.local/bin:$PATH"
 # This section can be safely removed at any time if needed.
 [[ ! -r '/Users/housien/.opam/opam-init/init.zsh' ]] || source '/Users/housien/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration
-
-[ -s ~/.luaver/luaver ] && . ~/.luaver/luaver
 
 export LUA_PATH="/Users/housien/.luarocks/share/lua/5.1/?.lua;;"
 export LUA_CPATH="/Users/housien/.luarocks/lib/lua/5.1/?.so;;"
