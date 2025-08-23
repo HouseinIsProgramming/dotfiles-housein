@@ -8,12 +8,12 @@ return {
   },
   config = function()
     local lspconfig = require("lspconfig")
-    
+
     local capabilities = require("blink.cmp").get_lsp_capabilities()
-    
+
     local on_attach = function(client, bufnr)
       local opts = { buffer = bufnr, silent = true }
-      
+
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
       vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
       vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
@@ -25,7 +25,7 @@ return {
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
       vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
     end
-    
+
     -- Lua
     lspconfig.lua_ls.setup({
       capabilities = capabilities,
@@ -36,7 +36,7 @@ return {
             callSnippet = "Replace",
           },
           diagnostics = {
-            globals = { "vim" },
+            globals = { "vim", "love", "self" },
           },
           workspace = {
             library = {
@@ -148,3 +148,4 @@ return {
     })
   end,
 }
+
