@@ -13,7 +13,7 @@ return {
   opts = {
     formatters_by_ft = {
       -- Lua
-      lua = { "stylua" },
+      lua = { "stylua", extra_args = { "--column-width", "80" } },
       -- Web Development
       javascript = { "prettierd", "prettier", stop_after_first = true },
       javascriptreact = { "prettierd", "prettier", stop_after_first = true },

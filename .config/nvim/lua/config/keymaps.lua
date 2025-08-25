@@ -9,11 +9,26 @@ vim.keymap.set("n", "<leader>fs", ":FzfLua lsp_document_symbols<CR>")
 vim.keymap.set("n", "<leader>la", ":FzfLua lsp_code_actions<CR>")
 vim.keymap.set("n", "<leader>fh", ":Pick help<CR>")
 
+vim.keymap.set("n", "<TAB>", ":bn<CR>", { silent = true })
+vim.keymap.set("n", "<S-TAB>", ":bp<CR>", { silent = true })
+
 vim.keymap.set("n", "<leader>i", ":Yazi<CR>")
+
+vim.keymap.set({ "v" }, "J", function()
+  require("mini.move").move_selection("down")
+  vim.cmd("normal! =gv") -- Re-select then reindent
+end, { silent = true, desc = "Move selection down and reindent" })
+
+-- Map Shift+K to move selected lines UP and then reindent
+vim.keymap.set({ "v" }, "K", function()
+  require("mini.move").move_selection("up")
+  vim.cmd("normal! =gv") -- Re-select then reindent
+end, { silent = true, desc = "Move selection up and reindent" })
 
 vim.keymap.set("n", "<leader>e", ":e!<CR>")
 vim.keymap.set("n", "<leader>ww", ":w<CR>")
 vim.keymap.set("n", "<leader>wu", "<cmd>lua require('undotree').toggle()<cr>")
+vim.keymap.set("n", "<leader>qq", ":q<CR>")
 
 vim.keymap.set("n", "<ESC>", ":nohlsearch<CR>", { noremap = true, silent = true })
 
@@ -31,17 +46,17 @@ vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]])
 -- Function to toggle LSP diagnostics
 local diagnostics_enabled = true
 local function toggle_diagnostics()
-	diagnostics_enabled = not diagnostics_enabled
-	vim.diagnostic.config({
-		virtual_text = diagnostics_enabled, -- Toggle virtual text
-		signs = diagnostics_enabled, -- Toggle signs in the gutter
-		underline = diagnostics_enabled, -- Toggle underlining
-	})
-	if diagnostics_enabled then
-		print("LSP diagnostics enabled")
-	else
-		print("LSP diagnostics disabled")
-	end
+  diagnostics_enabled = not diagnostics_enabled
+  vim.diagnostic.config({
+    virtual_text = diagnostics_enabled, -- Toggle virtual text
+    signs = diagnostics_enabled, -- Toggle signs in the gutter
+    underline = diagnostics_enabled, -- Toggle underlining
+  })
+  if diagnostics_enabled then
+    print("LSP diagnostics enabled")
+  else
+    print("LSP diagnostics disabled")
+  end
 end
 
 -- Keybinding to toggle diagnostics
@@ -50,14 +65,14 @@ vim.keymap.set("n", "<leader>ud", toggle_diagnostics, { desc = "Toggle LSP diagn
 -- Function to toggle between virtual text and virtual lines
 local virtual_lines_enabled = false
 local function toggle_virtual_lines()
-	virtual_lines_enabled = not virtual_lines_enabled
-	vim.diagnostic.config({
-		virtual_text = not virtual_lines_enabled, -- Disable virtual text when virtual lines are enabled
-		virtual_lines = virtual_lines_enabled, -- Enable virtual lines
-		signs = true, -- Keep signs in the gutter
-		underline = true, -- Keep underlining
-	})
-	vim.notify(virtual_lines_enabled and "Virtual lines enabled" or "Virtual text enabled", vim.log.levels.INFO)
+  virtual_lines_enabled = not virtual_lines_enabled
+  vim.diagnostic.config({
+    virtual_text = not virtual_lines_enabled, -- Disable virtual text when virtual lines are enabled
+    virtual_lines = virtual_lines_enabled, -- Enable virtual lines
+    signs = true, -- Keep signs in the gutter
+    underline = true, -- Keep underlining
+  })
+  vim.notify(virtual_lines_enabled and "Virtual lines enabled" or "Virtual text enabled", vim.log.levels.INFO)
 end
 
 -- Keybinding to toggle virtual lines
@@ -66,3 +81,8 @@ vim.keymap.set("n", "<leader>uv", toggle_virtual_lines, { desc = "Toggle virtual
 -- Configure c command to put deleted text into c register
 vim.keymap.set("n", "c", '"cc', { noremap = true })
 vim.keymap.set("v", "c", '"cc', { noremap = true })
+
+-- Lazygit in floaterm
+vim.keymap.set("n", "<leader>lg", function()
+  vim.cmd("FloatermNew --autoclose=2 lazygit")
+end, { desc = "Open Lazygit in floaterm", silent = true })

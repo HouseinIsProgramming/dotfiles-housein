@@ -1,5 +1,5 @@
 vim.o.number = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.o.scrolloff = 8
 vim.o.signcolumn = "yes"
 vim.o.termguicolors = true
@@ -12,12 +12,13 @@ vim.g.mapleader = " "
 vim.o.winborder = "solid"
 vim.o.clipboard = "unnamedplus"
 vim.o.confirm = true
+vim.o.cursorline = true
 
 vim.o.foldcolumn = "1"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.o.foldmethod = "syntax"
+vim.o.foldmethod = "indent"
 
 vim.o.smartcase = true
 -- vim.o.wildmenu = true

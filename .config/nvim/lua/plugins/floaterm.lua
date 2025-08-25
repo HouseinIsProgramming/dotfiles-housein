@@ -12,9 +12,8 @@ return {
     vim.g.floaterm_opener = "edit"
 
     -- Custom keybindings using leader+t (should work reliably)
-    vim.keymap.set("n", "<leader>j", "<cmd>FloatermToggle<CR>", { silent = true })
-    vim.keymap.set("t", "<leader>j", "<C-\\><C-n><cmd>FloatermToggle<CR>", { silent = true })
-    vim.keymap.set("i", "<leader>j", "<cmd>FloatermToggle<CR>", { silent = true })
+    vim.keymap.set("n", "gm", "<cmd>FloatermToggle<CR>", { silent = true })
+    vim.keymap.set("t", "<C-q>", "<C-\\><C-n><cmd>FloatermToggle<CR>", { silent = true })
 
     -- Additional terminal mode bindings for better control
     vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { silent = true })
