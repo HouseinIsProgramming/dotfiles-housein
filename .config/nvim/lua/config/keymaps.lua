@@ -25,10 +25,11 @@ vim.keymap.set({ "v" }, "K", function()
   vim.cmd("normal! =gv") -- Re-select then reindent
 end, { silent = true, desc = "Move selection up and reindent" })
 
-vim.keymap.set("n", "<leader>e", ":e!<CR>")
-vim.keymap.set("n", "<leader>ww", ":w<CR>")
-vim.keymap.set("n", "<leader>wu", "<cmd>lua require('undotree').toggle()<cr>")
-vim.keymap.set("n", "<leader>qq", ":q<CR>")
+vim.keymap.set("n", "<leader>qe", ":e!<CR>", { desc = "Open from disk" })
+vim.keymap.set("n", "<leader>ww", ":w<CR>", { desc = "Save" })
+vim.keymap.set("n", "<leader>wu", "<cmd>lua require('undotree').toggle()<cr>", { desc = "Undo tree" })
+vim.keymap.set("n", "<leader>qq", ":bd<CR>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>qa", ":qa<CR>", { desc = "Quit all" })
 
 vim.keymap.set("n", "<ESC>", ":nohlsearch<CR>", { noremap = true, silent = true })
 
@@ -82,7 +83,12 @@ vim.keymap.set("n", "<leader>uv", toggle_virtual_lines, { desc = "Toggle virtual
 vim.keymap.set("n", "c", '"cc', { noremap = true })
 vim.keymap.set("v", "c", '"cc', { noremap = true })
 
--- Lazygit in floaterm
-vim.keymap.set("n", "<leader>lg", function()
-  vim.cmd("FloatermNew --autoclose=2 lazygit")
-end, { desc = "Open Lazygit in floaterm", silent = true })
+vim.keymap.set("n", "<S-d>", '"dd', { noremap = true })
+vim.keymap.set("v", "<S-d>", '"dd', { noremap = true })
+
+vim.keymap.set(
+  "n",
+  "<leader>lg",
+  function() vim.cmd("FloatermNew --autoclose=2 lazygit") end,
+  { desc = "Open Lazygit in floaterm", silent = true }
+)

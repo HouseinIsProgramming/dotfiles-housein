@@ -26,7 +26,8 @@ return {
       -- Other Languages
       "taplo", -- TOML
       "marksman", -- Markdown
+      "glow", -- Markdown
+      "mdx-analyzer", -- Markdown
     },
   },
 }
-
