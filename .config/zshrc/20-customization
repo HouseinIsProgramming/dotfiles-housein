@@ -30,13 +30,13 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 zinit ice wait lucid
-zinit light zdharma-continuum/zinit-annex-as-monitor 
+zinit light zdharma-continuum/zinit-annex-as-monitor
 zinit ice wait lucid
-zinit light zdharma-continuum/zinit-annex-bin-gem-node 
+zinit light zdharma-continuum/zinit-annex-bin-gem-node
 zinit ice wait lucid
-zinit light zdharma-continuum/zinit-annex-patch-dl 
+zinit light zdharma-continuum/zinit-annex-patch-dl
 zinit ice wait lucid
-zinit light zdharma-continuum/zinit-annex-rust 
+zinit light zdharma-continuum/zinit-annex-rust
 zinit ice wait lucid
 zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid
@@ -61,7 +61,7 @@ zinit ice wait lucid
 autoload -Uz compinit && compinit
 
 # Set-up oh-my-zsh
-# 
+#
 
 # -----------------------------------------------------
 # Set-up FZF key bindings (CTRL R for fuzzy history finder)
@@ -107,9 +107,11 @@ export GIT_EDITOR="nvim"
 # Prompt
 # -----------------------------------------------------
 # eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pragmatic.transparent.omp.toml)"
+# eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pragmatic.transparent.omp.toml)"
+#
+# ~/.zshrc
+
+eval "$(starship init zsh)"
 
 # Shipped Theme
 # eval "$(oh-my-posh init zsh --config /usr/share/oh-my-posh/themes/agnoster.omp.json)"
-
-
