@@ -1,25 +1,6 @@
 [
-  // ============================================================================
-  // ALWAYS - not terminal
   {
-    // "context": "!Terminal",
-    "context": "Editor && VimControl && !VimWaiting && !menu && vim_mode != insert",
     "bindings": {
-      "space f p": "projects::OpenRecent",
-      "space f g": "workspace::NewSearch",
-      "space f f": "file_finder::Toggle",
-      "space l s": "task::Spawn",
-      "cmd-shift-r": "workspace::CloseAllDocks"
-    }
-  },
-
-  //  ============================================================================
-  // TERMINAL CONTEXT
-  // ============================================================================
-  {
-    "context": "Terminal",
-    "bindings": {
-      // Tab switching with cmd keys
       "cmd-1": ["pane::ActivateItem", 0],
       "cmd-2": ["pane::ActivateItem", 1],
       "cmd-3": ["pane::ActivateItem", 2],
@@ -31,57 +12,29 @@
       "cmd-9": ["pane::ActivateItem", 8],
       "cmd-0": "pane::ActivateLastItem",
 
+      "cmd-e": "project_panel::ToggleFocus",
+      "cmd-k": "workspace::ToggleZoom"
+    }
+  },
+  {
+    "context": "!Terminal && (vim_mode==normal || vim_mode==normal)|| KeyContextView || ProjectPanel",
+    "bindings": {
+      "space f p": "projects::OpenRecent",
+      "cmd-alt-g": ["agent::NewExternalAgentThread", { "agent": "gemini" }],
+      "space f g": "workspace::NewSearch",
+      "space f f": "file_finder::Toggle",
+      "space l s": "task::Spawn",
+      "cmd-shift-r": "workspace::CloseAllDocks",
       // Pane resizing
       "ctrl-w =": "vim::ResetPaneSizes",
-      "ctrl-cmd-w ctrl-h": "vim::ResizePaneLeft",
+      "ctrl-w ctrl-h": "vim::ResizePaneLeft",
       "ctrl-w ctrl-l": "vim::ResizePaneRight",
       "ctrl-w ctrl-k": "vim::ResizePaneUp",
       "ctrl-w ctrl-j": "vim::ResizePaneDown"
     }
   },
-
-  // ============================================================================
-  // WORKSPACE NAVIGATION (DOCK/TERMINAL/EDITOR)
-  // ============================================================================
   {
-    "context": "Dock || Terminal || Editor",
-    "bindings": {
-      "cmd-e": "project_panel::ToggleFocus",
-
-      "cmd-k": "workspace::ToggleZoom"
-    }
-  },
-
-  // ============================================================================
-  // WORKSPACE GENERAL
-  // ============================================================================
-  {
-    "context": "Workspace",
-    "bindings": {}
-  },
-
-  // ============================================================================
-  // GIT PANEL
-  // ============================================================================
-  {
-    "context": "GitPanel",
-    "bindings": {
-      "q": "git_panel::Close"
-    }
-  },
-
-  // ============================================================================
-  // AGENT PANEL (AI ASSISTANT)
-  // ============================================================================
-  {
-    "context": "AgentPanel",
-    "bindings": {}
-  },
-
-  // ============================================================================
-  // PROJECT PANEL (FILE EXPLORER - NETRW STYLE)
-  // ============================================================================
-  {
+    // ProjectPanel
     "context": "ProjectPanel && not_editing",
     "bindings": {
       // File operations
@@ -113,46 +66,30 @@
 
       // Panel management
       "q": "workspace::ToggleLeftDock",
-      "space e": "workspace::ToggleLeftDock",
       "escape": "project_panel::ToggleFocus",
 
       // Other operations
       ":": "command_palette::Toggle",
       "/": "project_panel::NewSearchInDirectory",
       "ctrl-l ctrl-c": "project_panel::CollapseAllEntries",
-      "ctrl-6": "pane::AlternateFile"
+      "ctrl-a": "pane::AlternateFile"
     }
   },
-
-  // ============================================================================
-  // EDITOR GENERAL
-  // ============================================================================
-  {
-    "context": "Editor",
-    "bindings": {
-      "cmd-e": "workspace::ToggleLeftDock"
-    }
-  },
-
-  // ============================================================================
-  // EDITOR - VIM CONTROL (MAIN KEYBINDINGS)
-  // ============================================================================
   {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
       // AI Assistant
       "space a a": "agent::ToggleFocus",
+      "space a i": "agent::NewThread",
       "space a e": "assistant::InlineAssist",
       "space a t": "workspace::ToggleRightDock",
       "cmd-l": "assistant::InlineAssist",
 
       // File management
-      "space f p": "projects::OpenRecent",
 
       // Buffer management
       "space b b": "pane::AlternateFile",
       "space b d": "pane::CloseActiveItem",
-      "space b q": "pane::CloseOtherItems",
       "space b n": "workspace::NewFile",
       "space b p": "pane::TogglePinTab",
       "space ,": "tab_switcher::Toggle",
@@ -169,24 +106,12 @@
       "space 7": ["pane::ActivateItem", 6],
       "space 8": ["pane::ActivateItem", 7],
       "space 9": ["pane::ActivateItem", 8],
-      "cmd-1": ["pane::ActivateItem", 0],
-      "cmd-2": ["pane::ActivateItem", 1],
-      "cmd-3": ["pane::ActivateItem", 2],
-      "cmd-4": ["pane::ActivateItem", 3],
-      "cmd-5": ["pane::ActivateItem", 4],
-      "cmd-6": ["pane::ActivateItem", 5],
-      "cmd-7": ["pane::ActivateItem", 6],
-      "cmd-8": ["pane::ActivateItem", 7],
-      "cmd-9": ["pane::ActivateItem", 8],
-      "cmd-0": "pane::ActivateLastItem",
 
       // Search operations
-      "space s w": "buffer_search::Deploy",
-      "space s W": "pane::DeploySearch",
-      "space s b": "vim::Search",
-      "space s g": "workspace::NewSearch",
-      "space s d": "diagnostics::Deploy",
-      "space s s": "outline::Toggle",
+      "space f w": "vim::Search",
+      "space f d": "diagnostics::Deploy",
+      "space f s": "outline::Toggle",
+      "space f S": "project_symbols::Toggle",
 
       // Git operations
       "space g g": [
@@ -197,8 +122,8 @@
         }
       ],
       "space g b": "git::Blame",
-      "space g h d": "editor::ExpandAllDiffHunks",
-      "space g h D": "git::Diff",
+      "space g d ": "editor::ExpandAllDiffHunks",
+      "space g D": "git::Diff",
       "space g h r": "git::Restore",
       "space g h R": "git::RestoreFile",
 
@@ -210,22 +135,11 @@
       // UI toggles
       "space u i": "editor::ToggleInlayHints",
       "space u w": "editor::ToggleSoftWrap",
+      "space u c": "workspace::ToggleCenteredLayout",
 
       // Markdown
       "space m p": "markdown::OpenPreview",
       "space m P": "markdown::OpenPreviewToTheSide",
-
-      // Panels
-      "space e": "workspace::ToggleLeftDock",
-      "space t": "workspace::ToggleBottomDock",
-
-      // Window management
-      "space w s": "pane::SplitDown",
-      "space w v": "pane::SplitRight",
-      "space -": "pane::SplitDown",
-      "space |": "pane::SplitRight",
-      "space w x": "pane::CloseAllItems",
-      "space w q": "pane::CloseAllItems",
 
       // Navigation - hunks
       "] h": "editor::GoToHunk",
@@ -248,28 +162,14 @@
       "[ l": "editor::GoToPreviousHunk",
 
       // Add empty lines
-      "] space": "editor::NewlineBelow",
-      "[ space": "editor::NewlineAbove",
+      "] space": "vim::NextMethodStart",
+      "[ space": "vim::PreviousMethodStart"
 
       // File manager
-      "space i": [
-        "task::Spawn",
-        {
-          "task_name": "start yazi",
-          "reveal_target": "center"
-        }
-      ],
-
-      // Quit
-      "space q q": "zed::Quit"
     }
   },
-
-  // ============================================================================
-  // EDITOR - VIM NORMAL MODE
-  // ============================================================================
   {
-    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "context": "Editor && (vim_mode == normal || vim_mode == helix_normal)",
     "bindings": {
       "space o": ["tab_switcher::Toggle", {}],
 
@@ -277,91 +177,54 @@
       "g r n": "editor::Rename",
       "g r r": "editor::FindAllReferences",
       "g r i": "editor::GoToImplementation",
-      "g shift-o": "outline::Toggle",
-      "g r a": "editor::ToggleCodeActions"
+      "space q q": "pane::CloseActiveItem",
+      "space i": [
+        "task::Spawn",
+        {
+          "task_name": "start yazi",
+          "reveal_target": "center"
+        }
+      ]
     }
   },
-
   {
-    "context": "Editor && vim_mode == normal && !menu",
-    "bindings": {
-      "ctrl-g e": "git_panel::ToggleFocus",
-      "ctrl-s": "workspace::Save",
-      "g p": "diagnostics::Deploy"
-    }
-  },
-
-  // ============================================================================
-  // EDITOR - VIM INSERT MODE
-  // ============================================================================
-  {
-    "context": "Editor && vim_mode == insert && !menu",
+    "context": "Editor && (vim_mode == insert || vim_mode==helix_insert) && !menu",
     "bindings": {
       "ctrl-l": "editor::ShowCompletions",
       "ctrl-a": "editor::MoveLeft",
-      "ctrl-x ctrl-a": "editor::AcceptEditPrediction",
-      "ctrl-x ctrl-w": "editor::AcceptPartialEditPrediction",
+      "ctrl-m": "editor::ConfirmCompletion",
+      "ctrl-a ctrl-a": "editor::AcceptEditPrediction",
+      "ctrl-a ctrl-w": "editor::AcceptPartialEditPrediction",
       "ctrl-s": "editor::ShowSignatureHelp",
       "k j": "vim::SwitchToNormalMode"
     }
   },
-
-  // ============================================================================
-  // EDITOR - VIM VISUAL MODE
-  // ============================================================================
   {
-    "context": "vim_mode == visual",
+    "context": "Editor && (vim_mode == insert || vim_mode == helix_insert) && menu",
+    "bindings": {
+      "ctrl-m": "editor::ConfirmCompletion"
+    }
+  },
+  {
+    "context": "vim_mode == visual || vim_mode == helix_visual",
     "bindings": {
       "space g s": "vim::PushAddSurrounds",
       "space g d": "vim::PushDeleteSurrounds",
-      "space g c": "vim::PushChangeSurrounds"
-    }
-  },
-
-  {
-    "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
-    "bindings": {
       "shift-j": "editor::MoveLineDown",
       "shift-k": "editor::MoveLineUp"
     }
   },
-
-  // ============================================================================
-  // VIM CONTROL GENERAL (SCROLLING & NAVIGATION)
-  // ============================================================================
   {
     "context": "VimControl && !menu",
     "bindings": {
       // Centered scrolling
       "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
       "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
-      "n": ["workspace::SendKeystrokes", "n z z z v"],
-      "shift-n": ["workspace::SendKeystrokes", "shift-n z z z v"],
-      "shift-g": ["workspace::SendKeystrokes", "shift-g z z"],
-
-      // References
-      "g r r": "editor::FindAllReferences",
-
-      // Project symbols
-      "space f s": "project_symbols::Toggle",
-
-      // Page navigation (legacy bindings)
-      "vimScrollDown": "vim::PageDown",
-      "vimScrollUp": "vim::PageUp"
+      "n": ["workspace::SendKeystrokes", "n z z z "],
+      "shift-n": ["workspace::SendKeystrokes", "shift-n z z z"],
+      "shift-g": ["workspace::SendKeystrokes", "shift-g z z"]
     }
   },
-
-  // ============================================================================
-  // VIM OPERATORS
-  // ============================================================================
-  {
-    "context": "vim_operator == d",
-    "bindings": {
-      "o": "editor::ExpandAllDiffHunks",
-      "r": "git::Restore"
-    }
-  },
-
   {
     "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
     "bindings": {
@@ -370,13 +233,11 @@
       "c": "vim::CurlyBrackets",
       "t": "vim::AngleBrackets"
     }
-  },
-
-  // ============================================================================
+  }, // ============================================================================
   // VIM MOTION MODES (NORMAL/VISUAL)
   // ============================================================================
   {
-    "context": "vim_mode == normal || vim_mode == visual",
+    "context": "vim_mode == normal || vim_mode == visual || vim_mode == helix_visual || vim_mode == normal ",
     "bindings": {
       "s": "vim::PushSneak",
       "S": "vim::PushSneakBackward"
