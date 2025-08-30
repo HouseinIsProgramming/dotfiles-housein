@@ -1,3 +1,5 @@
+format = "$all"
+
 [directory]
 read_only = " 󰌾"
 style = "blue"
@@ -10,10 +12,16 @@ success_symbol = "[\\$](blue)"
 error_symbol = "[\\$](red)"
 vimcmd_symbol = "[\\$](green)"
 
+[git_metrics]
+disabled = false
+
+
 [git_status]
-format = "[($ahead_behind)$diverged $modified]($style) "
-style = "red"
-modified = "(red)"
+format = "[($ahead_behind)$diverged$modified$staged]($style) "
+style = "cyan"
+
+staged = " 󱓞"
+modified = "[](red) "
 ahead = "${count}"
 behind = "{count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
@@ -70,6 +78,8 @@ symbol = "  "
 
 [git_branch]
 symbol = " "
+always_show_remote = true
+style = "bold cyan"
 
 [git_commit]
 tag_symbol = '  '
