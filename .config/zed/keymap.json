@@ -91,7 +91,8 @@
       "space b b": "pane::AlternateFile",
       "space b d": "pane::CloseActiveItem",
       "space b n": "workspace::NewFile",
-      "space b p": "pane::TogglePinTab",
+      "space m m": "vim::ToggleMarksView",
+      "space m a": "pane::TogglePinTab",
       "space ,": "tab_switcher::Toggle",
       "] b": "pane::ActivateNextItem",
       "[ b": "pane::ActivatePreviousItem",
@@ -228,8 +229,8 @@
   {
     "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
     "bindings": {
-      "b": "vim::AnyBrackets",
-      "q": "vim::AnyQuotes",
+      "b": "vim::MiniBrackets",
+      "q": "vim::MiniQuotes",
       "c": "vim::CurlyBrackets",
       "t": "vim::AngleBrackets"
     }
