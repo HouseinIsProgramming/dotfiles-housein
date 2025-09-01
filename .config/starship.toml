@@ -3,8 +3,7 @@ format = "$all"
 [directory]
 read_only = " 󰌾"
 style = "blue"
-truncation_length = 2
-truncation_symbol = "/"
+truncation_length = 3
 
 
 [character]
@@ -78,7 +77,7 @@ symbol = "  "
 
 [git_branch]
 symbol = " "
-always_show_remote = true
+# always_show_remote = true
 style = "bold cyan"
 
 [git_commit]

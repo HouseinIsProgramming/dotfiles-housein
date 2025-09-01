@@ -21,12 +21,15 @@ alias cd....="cd ../../.."
 alias lg="luajit"
 alias lgt="lazygit"
 alias ldkr="lazydocker"
-alias ta="tmux a"
 alias rm="rm -iv"
 alias fdd='cd "$(fd -t d . | fzf --preview "dirname {}")"'
 alias fdf='cd "$(fzf --preview "bat --style=numbers --color=always {}" | xargs dirname)"'
 alias cdvd="cd ~/Documents/GitHub/vendure"
 alias cdvs="cd ~/Documents/GitHub/vendure-testshops"
+alias ..="j .."
+alias ...="j ../.."
+alias ....="j ../../.."
+
 
 # -----------------------------------------------------
 # functions as aliases

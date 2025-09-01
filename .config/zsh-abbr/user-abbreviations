@@ -1,3 +1,10 @@
 abbr "lt"="eza -a --tree --icons=always --level="
 abbr "pwdc"="pwd|pbcopy && pwd"
 abbr "ta"="tmux a"
+
+abbr ta="tmux a"
+abbr npv="npm run dev"
+abbr npd="npm run build"
+abbr nps="npm run start"
+abbr npw="npm run watch"
+
