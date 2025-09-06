@@ -10,6 +10,7 @@ export VISUAL="zed --wait"
 export PATH=$PATH:~/.cargo/bin/
 export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
 fpath=($HOME/.config/zshrc/completion_zsh $fpath)
+export PATH=$PATH:/Users/housien/dotfiles-housein/.config/scripts
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
