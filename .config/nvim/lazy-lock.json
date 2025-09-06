@@ -5,13 +5,13 @@
   "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
   "fzf-lua": { "branch": "main", "commit": "2dce48dac09cec8143820f1d33381fe6d03a3900" },
+  "gitsigns.nvim": { "branch": "main", "commit": "6e3c66548035e50db7bd8e360a29aec6620c3641" },
   "harpoon": { "branch": "master", "commit": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3" },
   "indentmini.nvim": { "branch": "main", "commit": "0dc4bc2b3fc763420793e748b672292bc43ee722" },
   "lackluster.nvim": { "branch": "main", "commit": "b247a6f51cb43e49f3f753f4a59553b698bf5438" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "lazydev.nvim": { "branch": "main", "commit": "2367a6c0a01eb9edb0464731cc0fb61ed9ab9d2c" },
   "lualine.nvim": { "branch": "master", "commit": "b8c23159c0161f4b89196f74ee3a6d02cdc3a955" },
-  "lush.nvim": { "branch": "main", "commit": "9c60ec2279d62487d942ce095e49006af28eed6e" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "5e085efe67fccb13372d54331d849219662a7e93" },
   "mason-tool-installer.nvim": { "branch": "main", "commit": "517ef5994ef9d6b738322664d5fdd948f0fdeb46" },
   "mason.nvim": { "branch": "main", "commit": "7dc4facca9702f95353d5a1f87daf23d78e31c2a" },
@@ -37,6 +37,5 @@
   "undotree": { "branch": "main", "commit": "444a7b0a96648eaed2aae7e0d07f5096896a188c" },
   "vim-floaterm": { "branch": "master", "commit": "fd4bdd66eca56c6cc59f2119e4447496d8cde2ea" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
-  "yazi.nvim": { "branch": "main", "commit": "6afc63a6f2996de06b77813c473fddd08a9edba3" },
-  "zenbones.nvim": { "branch": "main", "commit": "a934bc07d2ed4a98b74526c172d7f043736d8935" }
+  "yazi.nvim": { "branch": "main", "commit": "6afc63a6f2996de06b77813c473fddd08a9edba3" }
 }

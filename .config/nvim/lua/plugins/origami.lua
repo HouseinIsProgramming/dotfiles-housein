@@ -3,6 +3,10 @@ return {
   event = "VeryLazy",
   opts = {}, -- needed even when using default config
 
+  autoFold = {
+    enable = false,
+  },
+
   -- recommended: disable vim's auto-folding
   init = function()
     vim.opt.foldlevel = 99

@@ -14,6 +14,8 @@ vim.keymap.set("n", "<S-TAB>", ":bp<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>i", ":Yazi<CR>")
 
+vim.keymap.set("n", "<C-k>", ":")
+
 vim.keymap.set({ "v" }, "J", function()
   require("mini.move").move_selection("down")
   vim.cmd("normal! =gv") -- Re-select then reindent
