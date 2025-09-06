@@ -7,6 +7,21 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "diagnostics": {
+    "button": true,
+    "include_warnings": true,
+    "lsp_pull_diagnostics": {
+      "enabled": true,
+      "debounce_ms": 50
+    },
+    "inline": {
+      "enabled": true,
+      "update_debounce_ms": 150,
+      "padding": 4,
+      "min_column": 0,
+      "max_severity": null
+    }
+  },
   "edit_predictions": {
     "mode": "eager",
     "copilot": {
@@ -59,7 +74,7 @@
   "theme": {
     "mode": "dark",
     "light": "Gleam Dark",
-    "dark": "Gleam Dark"
+    "dark": "Tokyo Night Storm"
   },
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 100,

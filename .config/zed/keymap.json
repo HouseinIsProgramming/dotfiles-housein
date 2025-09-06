@@ -30,7 +30,8 @@
       "ctrl-w ctrl-h": "vim::ResizePaneLeft",
       "ctrl-w ctrl-l": "vim::ResizePaneRight",
       "ctrl-w ctrl-k": "vim::ResizePaneUp",
-      "ctrl-w ctrl-j": "vim::ResizePaneDown"
+      "ctrl-w ctrl-j": "vim::ResizePaneDown",
+      "ctrl-w ctrl-m": "editor::OpenContextMenu"
     }
   },
   {
