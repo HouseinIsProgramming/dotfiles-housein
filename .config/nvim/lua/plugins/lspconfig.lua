@@ -5,6 +5,7 @@ return {
     "mason.nvim",
     "mason-lspconfig.nvim",
     "schemastore.nvim",
+    "SmiteshP/nvim-navic",
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -24,6 +25,14 @@ return {
       vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
       vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
+      
+      -- Attach navic if the server supports document symbols
+      if client.server_capabilities.documentSymbolProvider then
+        local navic_ok, navic = pcall(require, "nvim-navic")
+        if navic_ok then
+          navic.attach(client, bufnr)
+        end
+      end
     end
 
     -- Lua

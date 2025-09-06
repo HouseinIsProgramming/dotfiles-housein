@@ -20,7 +20,11 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.foldmethod = "indent"
 
+vim.o.undofile = true
+vim.o.foldcolumn = "0"
+
 vim.o.smartcase = true
+vim.o.ignorecase = true
 -- vim.o.wildmenu = true
 vim.o.splitright = true
 
