@@ -3,10 +3,24 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Documents/Github ~/ -mindepth 1 -maxdepth 2 -type d | \
-        sed "s|^$HOME/||" | \
-        sk --margin 10% --color="bw" 
+    # selected=$(find ~/Documents/Github ~/Documents/Work/ ~/dotfiles-housein/ -mindepth 1 -maxdepth 2 -type d | \
+    #     sed "s|^$HOME/||" | \
+    #     sk --margin 10% --color="bw" 
+    # )
+
+    crawled_paths=$(find ~/Documents/Github -mindepth 1 -maxdepth 2 -type d | sed "s|^$HOME/||")
+
+    # The directory you want to add without crawling its contents, formatted
+    uncrawled_path="~/dotfiles-housein/" # Assuming it's directly under $HOME/Documents/Work
+
+    selected=$( \
+        {
+            echo "$crawled_paths"
+            echo "$uncrawled_path"
+        } | \
+        sk --margin 10% --color="bw"
     )
+
     # Add home path back
     if [[ -n "$selected" ]]; then
         selected="$HOME/$selected"
