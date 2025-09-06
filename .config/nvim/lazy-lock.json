@@ -35,6 +35,7 @@
   "supermaven-nvim": { "branch": "main", "commit": "07d20fce48a5629686aefb0a7cd4b25e33947d50" },
   "tokyonight.nvim": { "branch": "main", "commit": "057ef5d260c1931f1dffd0f052c685dcd14100a3" },
   "undotree": { "branch": "main", "commit": "444a7b0a96648eaed2aae7e0d07f5096896a188c" },
+  "vague.nvim": { "branch": "main", "commit": "4ad623881eb69b6bc0c61a93a90e528d1d4f91da" },
   "vim-floaterm": { "branch": "master", "commit": "fd4bdd66eca56c6cc59f2119e4447496d8cde2ea" },
   "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
   "yazi.nvim": { "branch": "main", "commit": "6afc63a6f2996de06b77813c473fddd08a9edba3" }
