@@ -54,6 +54,9 @@ zinit light joknarf/seedee
 zinit ice wait lucid
 zinit light lukechilds/zsh-nvm
 zinit ice wait lucid
+zinit light lukechilds/zsh-nvm
+zinit load wfxr/forgit
+
 # Load zsh-tmux with Zinit
 
 # load zsh-completions
