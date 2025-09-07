@@ -29,7 +29,26 @@ vim.api.nvim_create_autocmd(
 )
 
 local function set_blink_highlights()
-	vim.api.nvim_set_hl(0, "BlinkCmpMenu", { fg = "NONE", bg = "#FFFFFF" })
+	-- Completion Menu Background
+	vim.api.nvim_set_hl(0, "BlinkCmpMenu", { fg = "NONE", bg = "#18181B" })
+	vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "NONE", bg = "#27272A" })
+
+	-- Highlight for the SELECTED completion menu item
+	vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { fg = "NONE", bg = "#3B4252" }) -- Example: distinct background for selected item
+	-- Highlight for the main label text
+	vim.api.nvim_set_hl(0, "BlinkCmpLabel", { fg = "#D8DEE9", bg = "NONE" }) -- Example: light text for labels
+	vim.api.nvim_set_hl(0, "BlinkCmpKind", {
+		fg = "#A3BE8C",
+		bg = "NONE",
+		bold = true,
+	})
+
+	vim.api.nvim_set_hl(0, "BlinkCmpKindFunction", { fg = "#8FBCBB", bold = true }) -- Teal
+	vim.api.nvim_set_hl(0, "BlinkCmpKindMethod", { fg = "#8FBCBB", bold = true }) -- Teal
+	vim.api.nvim_set_hl(0, "BlinkCmpKindVariable", { fg = "#EBCB8B", bold = true }) -- Yellow
+	vim.api.nvim_set_hl(0, "BlinkCmpKindKeyword", { fg = "#B48EAD", bold = true }) -- Purple
+	vim.api.nvim_set_hl(0, "BlinkCmpKindText", { fg = "#BF616A", bold = false }) -- Reddish
+	vim.api.nvim_set_hl(0, "BlinkCmpKindSnippet", { fg = "#D08770", bold = false }) -- Yellowish
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {

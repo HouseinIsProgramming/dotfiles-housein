@@ -6,6 +6,8 @@ vim.keymap.set("n", "<leader>wu", "<cmd>lua require('undotree').toggle()<cr>", {
 vim.keymap.set("n", "<leader>qq", ":bd<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>qa", ":qa<CR>", { desc = "Quit all" })
 
+vim.keymap.set("n", "<CR>", "<CR><Cmd>cclose<CR>", { noremap = true, silent = true })
+
 -- Little one from Primeagen to mass replace string in a file
 vim.keymap.set("n", "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { silent = false })
 

@@ -27,7 +27,7 @@ return {
 						},
 					},
 				},
-				ts_ls = {
+				vtsls = {
 					on_attach = function(client, bufnr)
 						require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 					end,
@@ -40,7 +40,7 @@ return {
 			require("mason").setup()
 
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "eslint", "ts_ls" },
+				ensure_installed = { "lua_ls", "eslint", "vtsls", "tailwindcss" },
 			})
 			local lspconfig = require("lspconfig")
 

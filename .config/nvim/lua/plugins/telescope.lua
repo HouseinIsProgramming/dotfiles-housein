@@ -12,13 +12,18 @@ return {
 		{ "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<cr>" },
 		-- { "<leader>lc", "<cmd>Telescope lsp_code_actions<cr>" },
 	},
-	lazy = false,
+	lazy = false, -- Keep lazy=false if you want Telescope loaded immediately
 	tag = "0.1.8",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope-ui-select.nvim",
+		"nvim-telescope/telescope-ui-select.nvim", -- Ensure this is here
 	},
+
 	config = function()
-		require("telescope").load_extension("ui-select")
+		local telescope = require("telescope")
+		telescope.setup({
+			defaults = require("telescope.themes").get_ivy(),
+		})
+		telescope.load_extension("ui-select")
 	end,
 }
