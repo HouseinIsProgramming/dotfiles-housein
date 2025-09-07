@@ -1,0 +1,16 @@
+return {
+  "chrisgrieser/nvim-origami",
+  event = "VeryLazy",
+  opts = {}, -- needed even when using default config
+
+  autoFold = {
+    enable = false,
+  },
+
+  -- recommended: disable vim's auto-folding
+  init = function()
+    vim.opt.foldlevel = 99
+    vim.opt.foldlevelstart = 99
+    vim.o.foldmethod = "indent"
+  end,
+}

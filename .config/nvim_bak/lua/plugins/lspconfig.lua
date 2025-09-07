@@ -1,0 +1,179 @@
+return {
+  "neovim/nvim-lspconfig",
+  event = { "BufReadPre", "BufNewFile" },
+  dependencies = {
+    "mason.nvim",
+    "mason-lspconfig.nvim",
+    "schemastore.nvim",
+    "SmiteshP/nvim-navic",
+  },
+  config = function()
+    local lspconfig = require("lspconfig")
+
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+    local on_attach = function(client, bufnr)
+      local opts = { buffer = bufnr, silent = true }
+
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+      vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
+      vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, opts)
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, opts)
+      vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
+      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+      vim.keymap.set(
+        "n",
+        "<leader>ls", -- Or any keymap you prefer, e.g., "leader source"
+        function()
+          vim.lsp.buf.code_action({
+            context = {
+              only = { "source" }, -- Request all "source" actions
+              diagnostics = {},
+            },
+            -- We remove 'apply = true' to get a list instead of an immediate action
+          })
+        end,
+        opts
+      )
+
+      -- Attach navic if the server supports document symbols
+      if client.server_capabilities.documentSymbolProvider then
+        local navic_ok, navic = pcall(require, "nvim-navic")
+        if navic_ok then navic.attach(client, bufnr) end
+      end
+    end
+
+    -- Lua
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- lspconfig.ts_ls.setup({
+    --   enable = false,
+    -- })
+
+    -- TypeScript/JavaScript
+    lspconfig.vtsls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        typescript = {
+          inlayHints = {
+            includeInlayParameterNameHints = "literal",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = false,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+          },
+          preferences = {
+            includePackageJsonAutoImports = "auto",
+            includeCompletionsWithSnippetText = true,
+            includeAutomaticOptionalChainCompletions = true,
+          },
+        },
+        vtsls = {
+          enableMoveToFileCodeAction = true,
+          autoUseWorkspaceTsdk = true,
+          experimental = {
+            completion = {
+              enableServerSideFuzzyMatch = true,
+            },
+          },
+        },
+      },
+      javascript = {
+        preferences = {
+          includePackageJsonAutoImports = "auto",
+          includeCompletionsWithSnippetText = true,
+          includeAutomaticOptionalChainCompletions = true,
+        },
+      },
+    })
+
+    -- HTML
+    lspconfig.html.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- CSS
+    lspconfig.cssls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- JSON
+    lspconfig.jsonls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        json = {
+          schemas = require("schemastore").json.schemas(),
+          validate = { enable = true },
+        },
+      },
+    })
+
+    -- ESLint
+    lspconfig.eslint.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        codeAction = {
+          disableRuleComment = {
+            enable = true,
+            location = "separateLine",
+          },
+          showDocumentation = {
+            enable = true,
+          },
+        },
+        codeActionOnSave = {
+          enable = false,
+          mode = "all",
+        },
+        format = true,
+        nodePath = "",
+        onIgnoredFiles = "off",
+        packageManager = "npm",
+        quiet = false,
+        rulesCustomizations = {},
+        run = "onType",
+        useESLintClass = false,
+        validate = "on",
+        workingDirectory = { mode = "location" },
+      },
+    })
+
+    -- Tailwind CSS
+    lspconfig.tailwindcss.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- Emmet
+    lspconfig.emmet_ls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    })
+
+    -- TOML
+    lspconfig.taplo.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    -- Markdown
+    lspconfig.marksman.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+  end,
+}
