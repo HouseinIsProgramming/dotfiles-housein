@@ -1,6 +1,10 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-refactor",
+		},
 		build = ":TSUpdate",
 		config = function()
 			local configs = require("nvim-treesitter.configs")
@@ -25,13 +29,13 @@ return {
 						set_jumps = true, -- whether to set jumps in the jumplist
 						goto_next_start = {
 							["]m"] = "@function.outer",
-							["]f"] = "@function.outer",
-							["]]"] = { query = "@class.outer", desc = "Next class start" },
+							["])"] = "@class.outer",
+							["]]"] = { query = "@function.outer", desc = "Next function start" },
 						},
 						goto_previous_start = {
 							["[m"] = "@function.outer",
-							["[f"] = "@function.outer",
-							["[["] = { query = "@class.outer", desc = "Previous class start" },
+							["[("] = "@class.outer",
+							["[["] = { query = "@function.outer", desc = "Previous function start" },
 						},
 					},
 					select = {
