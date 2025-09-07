@@ -10,10 +10,10 @@ return {
 			"nvim-neotest/neotest-jest",
 		},
 		keys = {
-			{ "<leader>tr", "<cmd>Neotest run<cr>" },
-			{ "<leader>ti", "<cmd>Neotest output<cr>" },
-			{ "<leader>ts", "<cmd>Neotest summary<cr>" },
-			{ "<leader>ta", "<cmd>lua require('neotest').run.run({ suite = true })<cr>" },
+			{ "<leader>tr", "<cmd>Neotest run<cr>", desc = "Run tests" },
+			{ "<leader>ti", "<cmd>Neotest output<cr>", desc = "Show output" },
+			{ "<leader>ts", "<cmd>Neotest summary<cr>", desc = "Show summary" },
+			{ "<leader>ta", "<cmd>lua require('neotest').run.run({ suite = true })<cr>", desc = "Run all tests" },
 		},
 		config = function()
 			require("neotest").setup({
