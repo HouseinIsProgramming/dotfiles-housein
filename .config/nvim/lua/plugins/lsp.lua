@@ -1,54 +1,164 @@
 return {
+	-- 1. Install servers
 	{
 		"williamboman/mason.nvim",
+		build = ":MasonUpdate",
+	},
+
+	-- 2. Bridge mason → lspconfig
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+	},
+
+	-- 3. Actual LSP configuration
+	{
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
+			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			"neovim/nvim-lspconfig",
+			"b0o/schemastore.nvim",
+			"SmiteshP/nvim-navic",
 			"artemave/workspace-diagnostics.nvim",
 		},
-		opts = {
-			servers = {
-				lua_ls = {
-					settings = {
-						Lua = {
-							version = "LuaJIT",
-							diagnostics = {
-								globals = {
-									"vim",
-									"require",
-								},
-							},
-							workspace = {
-								library = vim.api.nvim_get_runtime_file("", true),
-							},
-							telemetry = {
-								enable = false,
-							},
-						},
+		config = function()
+			---------------------------------------------------------------------------
+			-- Mason ------------------------------------------------------------------
+			---------------------------------------------------------------------------
+			require("mason").setup()
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"lua_ls",
+					"vtsls",
+					"eslint",
+					"tailwindcss",
+					"html",
+					"cssls",
+					"jsonls",
+					"emmet_ls",
+					"taplo",
+					"marksman",
+				},
+			})
+
+			---------------------------------------------------------------------------
+			-- Helpers ----------------------------------------------------------------
+			---------------------------------------------------------------------------
+			local lspconfig = require("lspconfig")
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+			local function on_attach(client, bufnr)
+				local map = function(mode, lhs, rhs)
+					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true })
+				end
+				map("n", "gd", vim.lsp.buf.definition)
+				map("n", "gr", vim.lsp.buf.references)
+				map("n", "gI", vim.lsp.buf.implementation)
+				map("n", "gy", vim.lsp.buf.type_definition)
+				map("n", "gD", vim.lsp.buf.declaration)
+				map("n", "K", vim.lsp.buf.hover)
+				map("n", "gK", vim.lsp.buf.signature_help)
+				map("i", "<C-k>", vim.lsp.buf.signature_help)
+				map("n", "<leader>ca", vim.lsp.buf.code_action)
+				map("n", "<leader>d", function()
+					vim.diagnostic.open_float({ border = "single" })
+				end)
+				map("n", "<leader>ls", function()
+					vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } })
+				end)
+
+				if client.server_capabilities.documentSymbolProvider then
+					local ok, navic = pcall(require, "nvim-navic")
+					if ok then
+						navic.attach(client, bufnr)
+					end
+				end
+			end
+
+			---------------------------------------------------------------------------
+			-- Per-server configuration -----------------------------------------------
+			---------------------------------------------------------------------------
+			-- Lua
+			lspconfig.lua_ls.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					Lua = {
+						version = "LuaJIT",
+						diagnostics = { globals = { "vim", "require" } },
+						workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+						telemetry = { enable = false },
 					},
 				},
-				vtsls = {
-					on_attach = function(client, bufnr)
-						require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-					end,
-				},
-				eslint = {},
-				tailwindcss = {},
-			},
-		},
-		config = function(_, opts)
-			require("mason").setup()
-
-			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "eslint", "vtsls", "tailwindcss" },
 			})
-			local lspconfig = require("lspconfig")
 
-			for server, config in pairs(opts.servers) do
-				-- vim.lsp.config(server, config)
-				lspconfig[server].setup(config)
-				vim.lsp.enable(server)
-			end
+			-- TS/JS (vtsls)
+			lspconfig.vtsls.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					typescript = {
+						inlayHints = {
+							includeInlayParameterNameHints = "literal",
+							includeInlayFunctionParameterTypeHints = true,
+							includeInlayPropertyDeclarationTypeHints = true,
+							includeInlayFunctionLikeReturnTypeHints = true,
+							includeInlayEnumMemberValueHints = true,
+						},
+					},
+					vtsls = {
+						enableMoveToFileCodeAction = true,
+						autoUseWorkspaceTsdk = true,
+						experimental = { completion = { enableServerSideFuzzyMatch = true } },
+					},
+				},
+			})
+
+			-- Web
+			lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
+			lspconfig.cssls.setup({ capabilities = capabilities, on_attach = on_attach })
+
+			-- JSON
+			lspconfig.jsonls.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = { json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } } },
+			})
+
+			-- ESLint
+			lspconfig.eslint.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					codeAction = {
+						disableRuleComment = { enable = true, location = "separateLine" },
+						showDocumentation = { enable = true },
+					},
+					format = true,
+					run = "onType",
+					validate = "on",
+					workingDirectory = { mode = "location" },
+				},
+			})
+
+			-- Tailwind CSS, Emmet, TOML, Markdown
+			lspconfig.tailwindcss.setup({ capabilities = capabilities, on_attach = on_attach })
+			lspconfig.emmet_ls.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				filetypes = {
+					"html",
+					"css",
+					"scss",
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+				},
+			})
+			lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
+			lspconfig.marksman.setup({ capabilities = capabilities, on_attach = on_attach })
 		end,
 	},
 }
