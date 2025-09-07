@@ -7,16 +7,16 @@ return {
 		require("vague").setup({
 			-- optional configuration here
 		})
-		-- vim.cmd("colorscheme vague")
-		-- local function set_blink_highlights()
-		-- 	vim.api.nvim_set_hl(0, "BlinkCmpMenu", { fg = "NONE", bg = "#18181B" })
-		-- 	vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "NONE", bg = "#27272A" })
-		-- end
-		--
-		-- vim.api.nvim_create_autocmd("ColorScheme", {
-		-- 	pattern = "*",
-		-- 	callback = set_blink_highlights,
-		-- 	desc = "Set custom BlinkCmp highlights after colorscheme loads",
-		-- })
+		vim.cmd("colorscheme vague")
+		local function set_blink_highlights()
+			vim.api.nvim_set_hl(0, "BlinkCmpMenu", { fg = "NONE", bg = "#18181B" })
+			vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "NONE", bg = "#27272A" })
+		end
+
+		vim.api.nvim_create_autocmd("ColorScheme", {
+			pattern = "*",
+			callback = set_blink_highlights,
+			desc = "Set custom BlinkCmp highlights after colorscheme loads",
+		})
 	end,
 }
