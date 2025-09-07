@@ -1,92 +1,42 @@
------------------------------------------------------------
--- General
------------------------------------------------------------
--- Set leader key to space
+vim.o.number = true
+vim.o.scrolloff = 8
+vim.o.signcolumn = "yes"
+vim.o.termguicolors = true
+vim.o.wrap = false
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
 vim.g.mapleader = " "
--- Set leader key to space
 vim.g.maplocalleader = " "
+vim.o.winborder = "solid"
+vim.o.clipboard = "unnamedplus"
+vim.o.confirm = true
+vim.o.cursorline = true
 
--- Number of spaces a tab represents
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
+vim.o.foldcolumn = "1"
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+vim.o.foldmethod = "indent"
 
--- Use appropriate when using indent command
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
+vim.o.undofile = true
+vim.o.foldcolumn = "0"
 
--- Indenting correctly after { etc
-vim.opt.smartindent = true
+vim.o.smartcase = true
+vim.o.ignorecase = true
+-- vim.o.wildmenu = true
+vim.o.splitright = true
 
--- Copy indent from current line when starting new line
-vim.opt.autoindent = true
+vim.cmd("set completeopt=menu,menuone,noselect")
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
--- Prevent line wrapping
-vim.opt.breakindent = true
-
--- Disable text wrap
-vim.opt.wrap = false
-
--- Speeds up plugin wait time
-vim.opt.updatetime = 50
-
--- Persistant undo file history
-vim.opt.undofile = true
------------------------------------------------------------
--- UI Config
------------------------------------------------------------
--- Enable line numbers
-vim.opt.nu = true
-
--- Enable relative line numbers
-vim.opt.rnu = true
-
--- Disable showing the mode below the statusline
-vim.opt.showmode = false
-
--- Better completion experience
-vim.opt.completeopt = { "menuone", "noselect" }
-
--- Enable 24-bit color
-vim.opt.termguicolors = true
-
--- Enable the sign column to prevent the screen from jumping
-vim.opt.signcolumn = "yes"
-
--- Enable cursor line highlight
-vim.opt.cursorline = true
-
--- Always keep 8 lines above/below cursor unless at start/end of file
-vim.opt.scrolloff = 8
-
--- Better splitting
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-
--- Faster scrolling
-vim.opt.lazyredraw = true
-
--- Highlight yank
-vim.api.nvim_create_autocmd("textyankpost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
-	pattern = "*",
-	desc = "highlight selection on yank",
-	callback = function()
-		vim.highlight.on_yank({ timeout = 200, visual = true })
-	end,
-})
-
------------------------------------------------------------
--- Search Config
------------------------------------------------------------
--- Enable highlighting search in progress
-vim.opt.incsearch = true
-
--- Ignore case for searches
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Diagnostic display inline
+-- Configure LSP diagnostics
 vim.diagnostic.config({
-  virtual_text = true,
-  underline = true
+	virtual_text = true,
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
 })
+
+vim.cmd(":hi statusline guibg=NONE")

@@ -9,6 +9,7 @@ vim.o.shiftwidth = 2
 vim.o.expandtab = true
 vim.o.swapfile = false
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 vim.o.winborder = "solid"
 vim.o.clipboard = "unnamedplus"
 vim.o.confirm = true
