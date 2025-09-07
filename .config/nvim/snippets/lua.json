@@ -1,0 +1,72 @@
+{
+  "@param": {
+    "prefix": "-param",
+    "body": [
+      "---@param ${1:name} ${2:type} ${3:Parameter description}$0"
+    ],
+    "description": "EmmyLua param annotation"
+  },
+  "@return": {
+    "prefix": "-return",
+    "body": [
+      "---@return ${1:type} ${2:Description of the returned object}$0"
+    ],
+    "description": "EmmyLua return annotation"
+  },
+  "@type": {
+    "prefix": "-type",
+    "body": [
+      "---@type ${1:type}$0"
+    ],
+    "description": "EmmyLua type annotation"
+  },
+  "@class": {
+    "prefix": "-class",
+    "body": [
+      "---@class ${1:name}$0"
+    ],
+    "description": "EmmyLua class annotation"
+  },
+  "@field": {
+    "prefix": "-field",
+    "body": [
+      "---@field ${1:name} ${2:type} ${3:Field description}$0"
+    ],
+    "description": "EmmyLua field annotation"
+  },
+  "@enum": {
+    "prefix": "-enum",
+    "body": [
+      "---@enum ${1:name}$0"
+    ],
+    "description": "EmmyLua enum annotation"
+  },
+  "@alias": {
+    "prefix": "-alias",
+    "body": [
+      "---@alias ${1:name} ${2:type}$0"
+    ],
+    "description": "EmmyLua type alias annotation"
+  },
+  "@generic": {
+    "prefix": "-generic",
+    "body": [
+      "---@generic ${1:T}: ${2:type}$0"
+    ],
+    "description": "EmmyLua generic annotation"
+  },
+  "@overload": {
+    "prefix": "-overload",
+    "body": [
+      "---@overload fun(${1:params}): ${2:return_type}$0"
+    ],
+    "description": "EmmyLua overload annotation"
+  },
+  "@deprecated": {
+    "prefix": "-deprecated",
+    "body": [
+      "---@deprecated$0"
+    ],
+    "description": "EmmyLua deprecated annotation"
+  }
+}
