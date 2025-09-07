@@ -3,31 +3,8 @@ return {
   cmd = "Mason",
   build = ":MasonUpdate",
   opts = {
-    ensure_installed = {
-      -- Lua
-      "lua-language-server",
-      "stylua",
-      "luacheck",
-
-      -- Web Development
-      "typescript-language-server",
-      "html-lsp",
-      "css-lsp",
-      "json-lsp",
-      "eslint-lsp",
-      "tailwindcss-language-server",
-      "emmet-ls",
-
-      -- Formatters
-      "prettier",
-      "prettierd",
-      "rustywind",
-
-      -- Other Languages
-      "taplo", -- TOML
-      "marksman", -- Markdown
-      "glow", -- Markdown
-      "mdx-analyzer", -- Markdown
-    },
+    -- Mason core settings
+    -- LSP servers are managed by mason-lspconfig.lua
+    -- Tools are managed by mason-tool-installer.lua
   },
 }

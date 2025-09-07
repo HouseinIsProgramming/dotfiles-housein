@@ -24,14 +24,25 @@ return {
       vim.keymap.set("n", "gK", vim.lsp.buf.signature_help, opts)
       vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-      vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
-      
+      vim.keymap.set(
+        "n",
+        "<leader>ls", -- Or any keymap you prefer, e.g., "leader source"
+        function()
+          vim.lsp.buf.code_action({
+            context = {
+              only = { "source" }, -- Request all "source" actions
+              diagnostics = {},
+            },
+            -- We remove 'apply = true' to get a list instead of an immediate action
+          })
+        end,
+        opts
+      )
+
       -- Attach navic if the server supports document symbols
       if client.server_capabilities.documentSymbolProvider then
         local navic_ok, navic = pcall(require, "nvim-navic")
-        if navic_ok then
-          navic.attach(client, bufnr)
-        end
+        if navic_ok then navic.attach(client, bufnr) end
       end
     end
 
@@ -39,27 +50,14 @@ return {
     lspconfig.lua_ls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      settings = {
-        Lua = {
-          completion = {
-            callSnippet = "Replace",
-          },
-          diagnostics = {
-            globals = { "vim", "love", "self" },
-          },
-          workspace = {
-            library = {
-              vim.env.VIMRUNTIME,
-              "${3rd}/luv/library",
-              "${3rd}/love2d/library",
-            },
-          },
-        },
-      },
     })
 
+    -- lspconfig.ts_ls.setup({
+    --   enable = false,
+    -- })
+
     -- TypeScript/JavaScript
-    lspconfig.ts_ls.setup({
+    lspconfig.vtsls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -73,6 +71,27 @@ return {
             includeInlayFunctionLikeReturnTypeHints = true,
             includeInlayEnumMemberValueHints = true,
           },
+          preferences = {
+            includePackageJsonAutoImports = "auto",
+            includeCompletionsWithSnippetText = true,
+            includeAutomaticOptionalChainCompletions = true,
+          },
+        },
+        vtsls = {
+          enableMoveToFileCodeAction = true,
+          autoUseWorkspaceTsdk = true,
+          experimental = {
+            completion = {
+              enableServerSideFuzzyMatch = true,
+            },
+          },
+        },
+      },
+      javascript = {
+        preferences = {
+          includePackageJsonAutoImports = "auto",
+          includeCompletionsWithSnippetText = true,
+          includeAutomaticOptionalChainCompletions = true,
         },
       },
     })
@@ -158,4 +177,3 @@ return {
     })
   end,
 }
-

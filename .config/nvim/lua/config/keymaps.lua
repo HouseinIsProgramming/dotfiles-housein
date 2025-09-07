@@ -6,7 +6,8 @@ vim.keymap.set("n", "<leader>fd", ":FzfLua lsp_workspace_diagnostics<CR>")
 vim.keymap.set("n", "<leader>fo", ":FzfLua oldfiles<CR>")
 vim.keymap.set("n", "<leader>fi", ":FzfLua lsp_implementations<CR>")
 vim.keymap.set("n", "<leader>fs", ":FzfLua lsp_document_symbols<CR>")
-vim.keymap.set("n", "<leader>la", ":FzfLua lsp_code_actions<CR>")
+vim.keymap.set("n", "<leader>fS", ":FzfLua lsp_workspace_symbols<CR>")
+vim.keymap.set("n", "<leader>lc", ":FzfLua lsp_code_actions<CR>")
 vim.keymap.set("n", "<leader>fh", ":Pick help<CR>")
 
 vim.keymap.set("n", "<TAB>", ":bn<CR>", { silent = true })
@@ -39,12 +40,9 @@ vim.keymap.set("n", "yag", ":%y<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "vag", "ggVG", { noremap = true, silent = true })
 
 vim.keymap.set("i", "<C-f>", "<Right>", { noremap = true, silent = true })
+vim.keymap.set("i", "<C-b>", "<Left>", { noremap = true, silent = true })
 
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
-vim.keymap.set("t", "<C-h>", [[<C-\><C-n><C-w>h]])
-vim.keymap.set("t", "<C-j>", [[<C-\><C-n><C-w>j]])
-vim.keymap.set("t", "<C-k>", [[<C-\><C-n><C-w>k]])
-vim.keymap.set("t", "<C-l>", [[<C-\><C-n><C-w>l]])
+vim.keymap.set("t", "<C-c>", [[<C-\><C-n>]])
 
 -- Function to toggle LSP diagnostics
 local diagnostics_enabled = true

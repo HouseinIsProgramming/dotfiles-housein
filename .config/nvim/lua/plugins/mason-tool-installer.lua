@@ -5,27 +5,18 @@ return {
   },
   opts = {
     ensure_installed = {
-      -- Lua
-      "lua-language-server",
+      -- Lua Tools
       "stylua",
-      
-      -- Web Development LSP
-      "typescript-language-server",
-      "html-lsp",
-      "css-lsp",
-      "json-lsp",
-      "eslint-lsp",
-      "tailwindcss-language-server",
-      "emmet-ls",
-      
+      "luacheck",
+
       -- Formatters
       "prettier",
       "prettierd",
       "rustywind",
-      
-      -- Other Languages
-      "taplo", -- TOML
-      "marksman", -- Markdown
+
+      -- Other Tools
+      "glow", -- Markdown viewer
     },
   },
 }
+
