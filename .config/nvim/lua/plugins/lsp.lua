@@ -5,7 +5,6 @@ return {
 		build = ":MasonUpdate",
 	},
 
-	-- 2. Bridge mason → lspconfig
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "williamboman/mason.nvim" },
@@ -21,30 +20,22 @@ return {
 			"b0o/schemastore.nvim",
 			"SmiteshP/nvim-navic",
 			"artemave/workspace-diagnostics.nvim",
+			{
+				"folke/lazydev.nvim",
+				ft = "lua", -- only load on lua files
+				opts = {
+					library = {
+						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+					},
+				},
+			},
 		},
 		config = function()
 			---------------------------------------------------------------------------
 			-- Mason ------------------------------------------------------------------
 			---------------------------------------------------------------------------
 			require("mason").setup()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"vtsls",
-					"eslint",
-					"tailwindcss",
-					"html",
-					"cssls",
-					"jsonls",
-					"emmet_ls",
-					"taplo",
-					"marksman",
-				},
-			})
 
-			---------------------------------------------------------------------------
-			-- Helpers ----------------------------------------------------------------
-			---------------------------------------------------------------------------
 			local lspconfig = require("lspconfig")
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -81,16 +72,16 @@ return {
 			---------------------------------------------------------------------------
 			-- Lua
 			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-				settings = {
-					Lua = {
-						version = "LuaJIT",
-						diagnostics = { globals = { "vim", "require" } },
-						workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-						telemetry = { enable = false },
-					},
-				},
+				-- capabilities = capabilities,
+				-- on_attach = on_attach,
+				-- settings = {
+				-- 	Lua = {
+				-- 		version = "LuaJIT",
+				-- 		diagnostics = { globals = { "vim", "require", "hs" } },
+				-- 		workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+				-- 		telemetry = { enable = false },
+				-- 	},
+				-- },
 			})
 
 			-- TS/JS (vtsls)
@@ -142,21 +133,8 @@ return {
 				},
 			})
 
-			-- Tailwind CSS, Emmet, TOML, Markdown
+			-- Tailwind CSS, TOML, Markdown
 			lspconfig.tailwindcss.setup({ capabilities = capabilities, on_attach = on_attach })
-			lspconfig.emmet_ls.setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-				filetypes = {
-					"html",
-					"css",
-					"scss",
-					"javascript",
-					"javascriptreact",
-					"typescript",
-					"typescriptreact",
-				},
-			})
 			lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
 			lspconfig.marksman.setup({ capabilities = capabilities, on_attach = on_attach })
 		end,
