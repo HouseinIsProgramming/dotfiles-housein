@@ -1,6 +1,10 @@
 return {
 	"lewis6991/gitsigns.nvim",
 	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"nvim-telescope/telescope.nvim",
+		"nvim-lua/plenary.nvim",
+	},
 	opts = {
 		current_line_blame_opts = {
 			delay = 200,
@@ -13,7 +17,11 @@ return {
 
 		on_attach = function(bufnr)
 			local gs = package.loaded.gitsigns
-			local fzf = require("fzf-lua")
+			local pickers = require("telescope.pickers")
+			local finders = require("telescope.finders")
+			local conf = require("telescope.config").values
+			local actions = require("telescope.actions")
+			local action_state = require("telescope.actions.state")
 
 			local function map(mode, l, r, opts)
 				opts = opts or {}
@@ -21,9 +29,9 @@ return {
 				vim.keymap.set(mode, l, r, opts)
 			end
 
-			-- Gitsigns FZF picker
+			-- Gitsigns Telescope picker
 			local function gitsigns_picker()
-				local actions = {
+				local git_actions = {
 					{
 						name = "Stage Hunk",
 						action = function()
@@ -129,24 +137,40 @@ return {
 				}
 
 				local entries = {}
-				for _, item in ipairs(actions) do
-					table.insert(entries, item.name)
+				for _, item in ipairs(git_actions) do
+					table.insert(entries, {
+						value = item,
+						display = item.name,
+						ordinal = item.name,
+					})
 				end
 
-				fzf.fzf_exec(entries, {
-					prompt = "Gitsigns> ",
-					actions = {
-						["default"] = function(selected, opts)
-							local selection = selected[1]
-							for _, item in ipairs(actions) do
-								if item.name == selection then
-									item.action()
-									break
+				pickers
+					.new({}, {
+						prompt_title = "Gitsigns",
+						finder = finders.new_table({
+							results = entries,
+							entry_maker = function(entry)
+								return {
+									value = entry.value,
+									display = entry.display,
+									ordinal = entry.ordinal,
+								}
+							end,
+						}),
+						sorter = conf.generic_sorter({}),
+						attach_mappings = function(prompt_bufnr, map)
+							actions.select_default:replace(function()
+								local selection = action_state.get_selected_entry()
+								actions.close(prompt_bufnr)
+								if selection and selection.value and selection.value.action then
+									selection.value.action()
 								end
-							end
+							end)
+							return true
 						end,
-					},
-				})
+					})
+					:find()
 			end
 
 			-- Navigation

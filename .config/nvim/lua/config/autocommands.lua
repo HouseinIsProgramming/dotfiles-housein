@@ -9,7 +9,6 @@ vim.api.nvim_create_autocmd(
 			-- See `:help vim.lsp.*` for documentation on any of the below functions
 			local opts = { buffer = ev.buf }
 			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-			vim.keymap.set("n", "<leader><space>", vim.lsp.buf.hover, opts)
 			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 			vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
@@ -28,3 +27,13 @@ vim.api.nvim_create_autocmd(
 		end,
 	}
 )
+
+local function set_blink_highlights()
+	vim.api.nvim_set_hl(0, "BlinkCmpMenu", { fg = "NONE", bg = "#FFFFFF" })
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "*",
+	callback = set_blink_highlights,
+	desc = "Set custom BlinkCmp highlights after colorscheme loads",
+})
