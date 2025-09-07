@@ -74,7 +74,7 @@
   "theme": {
     "mode": "dark",
     "light": "Gleam Dark",
-    "dark": "Tokyo Night Storm"
+    "dark": "Ayu Dark"
   },
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 100,
