@@ -18,6 +18,14 @@ return {
 					lsp_format = "fallback",
 				},
 			})
+			
+			vim.keymap.set({ "n", "v" }, "<leader>lf", function()
+				require("conform").format({
+					lsp_format = "fallback",
+					async = false,
+					timeout_ms = 1000,
+				})
+			end, { desc = "Format file or range (in visual mode)" })
 		end,
 	},
 	{
