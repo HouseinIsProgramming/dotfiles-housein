@@ -5,10 +5,10 @@ return {
 		build = ":MasonUpdate",
 	},
 
-	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "williamboman/mason.nvim" },
-	},
+	-- {
+	-- 	"williamboman/mason-lspconfig.nvim",
+	-- 	dependencies = { "williamboman/mason.nvim" },
+	-- },
 
 	-- 3. Actual LSP configuration
 	{
@@ -16,7 +16,7 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			-- "williamboman/mason-lspconfig.nvim",
 			"b0o/schemastore.nvim",
 			"SmiteshP/nvim-navic",
 			"artemave/workspace-diagnostics.nvim",
@@ -27,6 +27,9 @@ return {
 					library = {
 						{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 					},
+					integrations = {
+						lspconfig = true,
+					},
 				},
 			},
 		},
@@ -35,7 +38,21 @@ return {
 			-- Mason ------------------------------------------------------------------
 			---------------------------------------------------------------------------
 			require("mason").setup()
-
+			-- require("mason-lspconfig").setup({
+			-- 	ensure_installed = {
+			-- 		"emmylua_ls",
+			-- 		"vtsls",
+			-- 		"html",
+			-- 		"cssls",
+			-- 		"jsonls",
+			-- 		"eslint",
+			-- 		"tailwindcss",
+			-- 		"taplo",
+			-- 		"marksman",
+			-- 	},
+			-- 	automatic_enable = false, --disable
+			-- })
+			--
 			local lspconfig = require("lspconfig")
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -70,18 +87,52 @@ return {
 			---------------------------------------------------------------------------
 			-- Per-server configuration -----------------------------------------------
 			---------------------------------------------------------------------------
-			-- Lua
-			lspconfig.lua_ls.setup({
-				-- capabilities = capabilities,
-				-- on_attach = on_attach,
-				-- settings = {
-				-- 	Lua = {
-				-- 		version = "LuaJIT",
-				-- 		diagnostics = { globals = { "vim", "require", "hs" } },
-				-- 		workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-				-- 		telemetry = { enable = false },
-				-- 	},
-				-- },
+			-- Lua (EmmyLua)
+			-- lspconfig.emmylua_ls.setup({
+			-- 	capabilities = capabilities,
+			-- 	on_attach = on_attach,
+			-- 	settings = {
+			-- 		Lua = {
+			-- 			completion = {
+			-- 				enable = true,
+			-- 			},
+			-- 			diagnostics = {
+			-- 				enable = true,
+			-- 				globals = { "vim", "hs" },
+			-- 			},
+			-- 			hint = {
+			-- 				enable = true,
+			-- 			},
+			-- 		},
+			-- 	},
+			-- })
+
+			vim.lsp.enable("emmylua_ls")
+			vim.lsp.config("emmylua_ls", {
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					Lua = {
+						cmd = { "emmylua_ls" },
+						filetypes = { "lua" },
+						root_markers = {
+							".luarc.json",
+							".emmyrc.json",
+							".luacheckrc",
+							".git",
+						},
+						completion = {
+							enable = true,
+						},
+						diagnostics = {
+							enable = true,
+							globals = { "vim", "hs" },
+						},
+						hint = {
+							enable = true,
+						},
+					},
+				},
 			})
 
 			-- TS/JS (vtsls)
@@ -137,6 +188,38 @@ return {
 			lspconfig.tailwindcss.setup({ capabilities = capabilities, on_attach = on_attach })
 			lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
 			lspconfig.marksman.setup({ capabilities = capabilities, on_attach = on_attach })
+		end,
+	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy",
+		priority = 1000,
+		config = function()
+			require("tiny-inline-diagnostic").setup({
+				preset = "simple",
+				multilines = {
+					-- Enable multiline diagnostic messages
+					enabled = true,
+
+					-- Always show messages on all lines for multiline diagnostics
+					always_show = true,
+
+					-- Trim whitespaces from the start/end of each line
+					trim_whitespaces = false,
+
+					-- Replace tabs with this many spaces in multiline diagnostics
+					tabstop = 4,
+				},
+				show_all_diags_on_cursorline = true,
+				break_line = {
+					-- Enable breaking messages after a specific length
+					enabled = true,
+
+					-- Number of characters after which to break the line
+					after = 30,
+				},
+			})
+			vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
 		end,
 	},
 }
