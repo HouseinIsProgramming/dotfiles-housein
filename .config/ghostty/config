@@ -9,13 +9,16 @@ font-feature =  -calt, -liga, -dliga
 keybind = cmd+g>r=reload_config
 keybind = cmd+g>x=close_surface
 
-#theme = dark:Ghostty Default Styledark, light:tokyonight_moon
-theme = tokyonight_moon
+# theme = dark:Ghostty Default Styledark, light:tokyonight_moon
+theme = iceberg-dark
+
+background = 101013
 
 mouse-hide-while-typing
 window-save-state = "always"
 confirm-close-surface = false
 quit-after-last-window-closed = true
+
 custom-shader-animation = true
 
 window-height = 50
@@ -26,8 +29,6 @@ window-subtitle = false
 
 window-decoration = none
 
-window-padding-x = 0
-window-padding-y = 0
 
 
 # Some shaders can be found in this repo, they're usually uploaded to discord
