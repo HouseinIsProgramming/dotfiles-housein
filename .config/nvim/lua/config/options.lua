@@ -27,6 +27,9 @@ vim.o.ignorecase = true
 -- vim.o.wildmenu = true
 vim.o.splitright = true
 
+vim.o.wrap = true
+vim.o.linebreak = true
+
 vim.cmd("set completeopt=menu,menuone,noselect")
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 

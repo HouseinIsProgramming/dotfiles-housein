@@ -28,6 +28,10 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+-- use j and k with gj and gk to navigate between lines
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
+
 -- Paste without replacing paste with what you are highlighted over
 vim.keymap.set("n", "<leader>p", '"_dP')
 vim.keymap.set("n", "<S-p>", '"_dP')
