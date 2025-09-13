@@ -2,6 +2,19 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
+		vim.fn.reg_recording()
+		function macro_status()
+			local recording_register = vim.fn.reg_recording()
+			if recording_register ~= "" then
+				-- You can customize this string
+				return "Recording @" .. recording_register
+			else
+				return "" -- Return empty string if not recording
+			end
+		end
+
+		vim.o.cmdheight = 0
+
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
@@ -28,7 +41,7 @@ return {
 					},
 				},
 				lualine_x = { "diagnostics" },
-				lualine_y = { "filetype" },
+				lualine_y = { macro_status, "filetype" },
 			},
 		})
 	end,

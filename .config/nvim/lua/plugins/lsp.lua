@@ -135,6 +135,23 @@ return {
 				},
 			})
 
+			lspconfig.bashls.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					bash = {
+						format = {
+							enable = true,
+						},
+					},
+				},
+			})
+
+			lspconfig.svelte.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+			})
+
 			-- TS/JS (vtsls)
 			lspconfig.vtsls.setup({
 				capabilities = capabilities,
