@@ -13,7 +13,7 @@ CATEGORIES=(
   "STOP"
 )
 
-selected=$(printf "%s\n" "${CATEGORIES[@]}" | sk --margin 10% --color="bw")
+selected=$(printf "%s\n" "${CATEGORIES[@]}" | sk --margin 30% --color="bw")
 
 if [[ $selected == "STOP" ]]; then
   timew stop
