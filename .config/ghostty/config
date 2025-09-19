@@ -4,15 +4,13 @@ font-size = 19
 # font-family = FiraCode Nerd Font
 font-family = CommitMono Nerd Font
 
-font-feature =  -calt, -liga, -dliga
-
-keybind = cmd+g>r=reload_config
+font-feature =  -calt, -liga, -dliga keybind = cmd+g>r=reload_config
 keybind = cmd+g>x=close_surface
 
-# theme = dark:Ghostty Default Styledark, light:tokyonight_moon
-theme = iceberg-dark
+theme = light:Nord, dark:Iceberg Dark
+# theme = Iceberg Dark
 
-background = 101013
+# background = 101013
 
 mouse-hide-while-typing
 window-save-state = "always"
@@ -71,6 +69,12 @@ window-decoration = none
 # custom-shader = shaders/fade-in-typing.glsl
 # custom-shader = shaders/paperlike-intense.glsl
 # custom-shader = shaders/paperlike-subtle.glsl
+# custom-shader = shaders/cursor-blade.glsl
+custom-shader = shaders/blaze-no-trail.glsl
+# custom-shader = shaders/manga-slash.glsl
+# custom-shader = shaders/frozen-cursor.glsl
+
+#
 #
 #
 ###active-shaderblock-start###
