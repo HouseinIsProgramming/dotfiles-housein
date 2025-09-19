@@ -1,17 +1,15 @@
 [general]
 live_config_reload = true
-import = [
-    "~/.config/alacritty/themes/themes/nordic.toml"
-]
+import = ["~/.config/alacritty/themes/themes/nordic.toml"]
 
 [window]
 decorations = "Buttonless"
-padding = { x=4 , y=4 }
+padding = { x = 6, y = 0 }
 dynamic_padding = true
 
 [font]
-normal= { family = "FiraCode Nerd Font", style = "Regular" }
+normal = { family = "FiraCode Nerd Font", style = "Regular" }
 size = 18
 
 [mouse]
-hide_when_typing= true
+hide_when_typing = true
