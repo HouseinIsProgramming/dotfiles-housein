@@ -5,7 +5,7 @@ return {
 	version = "1.*",
 	opts = {
 		keymap = {
-			preset = "default",
+			preset = "super-tab",
 			["<CR>"] = { "accept", "fallback" },
 			["<C-l>"] = { "show", "show_documentation", "hide_documentation" },
 		},
