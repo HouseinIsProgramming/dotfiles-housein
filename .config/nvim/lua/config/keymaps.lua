@@ -16,6 +16,9 @@ vim.keymap.set("n", "<ESC>", ":nohlsearch<CR>", { noremap = true, silent = true 
 vim.keymap.set("n", "yag", ":%y<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "vag", "ggVG", { noremap = true, silent = true })
 
+-- auto-correct under cursor
+vim.keymap.set({ "n", "v" }, "<leader>cc", "1z=")
+
 -- Navigate through buffers
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", { silent = false })
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { silent = false })
@@ -32,14 +35,16 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 
+vim.keymap.set("n", "gh", "0", { desc = "Jump: Start of line" })
+vim.keymap.set("n", "gl", "$", { desc = "Jump: End of line" })
+
 -- Paste without replacing paste with what you are highlighted over
 vim.keymap.set("n", "<leader>p", '"_dP')
 vim.keymap.set("n", "<S-p>", '"_dP')
 
--- Configure c command to put deleted text into c register
 vim.keymap.set("n", "c", '"cc', { noremap = true })
 vim.keymap.set("v", "c", '"cc', { noremap = true })
--- Configure d command to put deleted text into d register
+
 vim.keymap.set("n", "<S-d>", '"dd', { noremap = true })
 vim.keymap.set("v", "<S-d>", '"dd', { noremap = true })
 
