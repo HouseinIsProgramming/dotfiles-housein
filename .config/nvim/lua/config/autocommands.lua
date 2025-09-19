@@ -146,3 +146,18 @@ autocmd({ "BufEnter", "DirChanged" }, {
 		end
 	end,
 })
+
+-- Node project detection and keymap setup
+--
+autocmd("FileType", {
+	pattern = "javascript",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(0, "n", "<leader>rn", ":lua RunNodeFile()<CR>", { noremap = true, silent = true })
+	end,
+})
+
+function RunNodeFile()
+	vim.cmd("split term://node " .. vim.fn.expand("%"))
+	vim.cmd("tnoremap <buffer> <C-c> exit<CR>")
+	vim.cmd("startinsert")
+end
