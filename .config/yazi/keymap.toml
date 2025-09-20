@@ -1,6 +1,9 @@
 [[mgr.prepend_keymap]]
-on  = [ "g", "p", "g" ]
+on = ["g", "p", "g"]
 run = 'cd ~/Documents/GitHub'
 [[mgr.prepend_keymap]]
-on  = [ "g", "s" ]
+on = ["g", "s"]
 run = 'cd ~/dotfiles-housein/'
+[[mgr.prepend_keymap]]
+on = ["g", "D"]
+run = 'cd "/Users/housien/Google Drive/My Drive"'
