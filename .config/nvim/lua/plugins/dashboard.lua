@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -18,7 +19,11 @@ return {
     -- explorer = { enabled = false },
     -- indent = { enabled = false },
     -- input = { enabled = false },
-    picker = { enabled = true, ui_select = true },
+    picker = {
+      enabled = true,
+      ui_select = true,
+      layout = "sidebar"
+    },
     -- notifier = { enabled = false },
     -- quickfile = { enabled = false },
     -- scope = { enabled = false },
@@ -56,12 +61,4 @@ return {
 
 
   },
-  {
-    "folke/todo-comments.nvim",
-    optional = true,
-    keys = {
-      { "<leader>ft", function() Snacks.picker.todo_comments() end,                                          desc = "Todo" },
-      { "<leader>fT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
-    },
-  }
 }
