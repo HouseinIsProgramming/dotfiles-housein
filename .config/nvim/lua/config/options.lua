@@ -4,7 +4,7 @@ vim.o.scrolloff = 8
 vim.o.signcolumn = "yes"
 vim.o.clipboard = "unnamedplus"
 
--- searching 
+-- searching
 vim.o.smartcase = true
 vim.o.ignorecase = true
 
@@ -28,9 +28,9 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 vim.o.foldmethod = "indent"
 
-vim.undofile = true
+vim.o.undofile = true
 
--- warping 
+-- warping
 vim.o.wrap = true
 vim.o.linebreak = true
 
@@ -41,9 +41,9 @@ vim.o.wildmenu = true
 
 -- Configure LSP diagnostics
 vim.diagnostic.config({
-	virtual_text = true,
-	signs = true,
-	underline = true,
-	update_in_insert = false,
-	severity_sort = true,
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
 })
