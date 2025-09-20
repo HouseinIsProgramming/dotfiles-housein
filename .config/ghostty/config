@@ -2,17 +2,18 @@ font-size = 19
 
 # font-family = IosevkaTerm Nerd Font Mono
 # font-family = FiraCode Nerd Font
-font-family = CommitMono Nerd Font
+font-family = GeistMono Nerd Font
+# font-family = CommitMono Nerd Font
+#
 
-font-feature =  -calt, -liga, -dliga keybind = cmd+g>r=reload_config
-adjust-cell-height = 10%
+font-feature =  -calt, -liga, -dliga 
+adjust-cell-height = 15%
 
 keybind = cmd+g>x=close_surface
-
+keybind = cmd+g>r=reload_config
 
 theme = light:Nord, dark:Iceberg Dark
 # theme = Iceberg Dark
-
 # background = 101013
 
 mouse-hide-while-typing
