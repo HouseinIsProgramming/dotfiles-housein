@@ -1,16 +1,51 @@
 {
-  "Debug format": {
-    "prefix": "{{",
+  "println debug": {
+    "prefix": "pld",
     "body": [
-      "{:?}"
+      "println!(\"${1:variable} = {:?}\", ${1:variable});"
     ],
-    "description": "Debug format {:?}"
+    "description": "println with debug formatting"
   },
-  "Pretty debug format": {
-    "prefix": "{{{",
+  "println pretty debug": {
+    "prefix": "plpd",
     "body": [
-      "{:#?}"
+      "println!(\"${1:variable} = {:#?}\", ${1:variable});"
     ],
-    "description": "Pretty debug format {:#?}"
+    "description": "println with pretty debug formatting"
+  },
+  "println display": {
+    "prefix": "pln",
+    "body": [
+      "println!(\"${1:message}: {}\", ${2:value});"
+    ],
+    "description": "println with display formatting"
+  },
+  "println simple": {
+    "prefix": "pl",
+    "body": [
+      "println!(\"${1:message}\");"
+    ],
+    "description": "Simple println"
+  },
+  "dbg macro": {
+    "prefix": "dbg",
+    "body": [
+      "dbg!(${1:expression});"
+    ],
+    "description": "Debug macro - prints expression and value"
+  },
+  "format debug": {
+    "prefix": "fd",
+    "body": [
+      "format!(\"${1:message}: {:?}\", ${2:value})"
+    ],
+    "description": "format! with debug"
+  },
+  "format display": {
+    "prefix": "f",
+    "body": [
+      "format!(\"${1:message}: {}\", ${2:value})"
+    ],
+    "description": "format! with display"
   }
 }
