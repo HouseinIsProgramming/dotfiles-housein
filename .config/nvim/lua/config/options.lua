@@ -41,9 +41,13 @@ vim.o.wildmenu = true
 
 -- Configure LSP diagnostics
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = {
+    -- current_line = true,
+    virt_text_pos = "eol_right_align"
+  },
   signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = true,
+
 })

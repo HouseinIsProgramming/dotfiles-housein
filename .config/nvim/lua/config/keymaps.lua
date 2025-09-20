@@ -88,10 +88,14 @@ local virtual_lines_enabled = false
 local function toggle_virtual_lines()
   virtual_lines_enabled = not virtual_lines_enabled
   vim.diagnostic.config({
-    virtual_text = not virtual_lines_enabled, -- Disable virtual text when virtual lines are enabled
-    virtual_lines = virtual_lines_enabled,    -- Enable virtual lines
-    signs = true,                             -- Keep signs in the gutter
-    underline = true,                         -- Keep underlining
+    virtual_text = virtual_lines_enabled and false or {
+      virt_text_pos = "eol_right_align"
+    },
+    virtual_lines = virtual_lines_enabled,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = true,
   })
   vim.notify(virtual_lines_enabled and "Virtual lines enabled" or "Virtual text enabled", vim.log.levels.INFO)
 end
