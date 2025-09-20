@@ -38,6 +38,7 @@ return {
 
 
       vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format() end)
+      vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help)
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('my.lsp', {}),
         callback = function(args)
@@ -73,7 +74,7 @@ return {
             end,
             opts
           )
-          
+
           -- Attach navic if the server supports document symbols
           if client:supports_method('textDocument/documentSymbol') then
             local navic_ok, navic = pcall(require, "nvim-navic")
@@ -81,7 +82,7 @@ return {
               navic.attach(client, args.buf)
             end
           end
-          
+
           if not client:supports_method('textDocument/willSaveWaitUntil')
               and client:supports_method('textDocument/formatting') then
             vim.api.nvim_create_autocmd('BufWritePre', {
