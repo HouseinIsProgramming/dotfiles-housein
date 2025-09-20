@@ -201,6 +201,39 @@ return {
 				},
 			})
 
+			-- Rust (rust-analyzer)
+			lspconfig.rust_analyzer.setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					["rust-analyzer"] = {
+						checkOnSave = {
+							command = "clippy",
+						},
+						diagnostics = {
+							enable = true,
+							enableExperimental = true,
+						},
+						completion = {
+							autoimport = {
+								enable = true,
+							},
+						},
+						inlayHints = {
+							typeHints = {
+								enable = true,
+							},
+							parameterHints = {
+								enable = true,
+							},
+							chainingHints = {
+								enable = true,
+							},
+						},
+					},
+				},
+			})
+
 			-- Tailwind CSS, TOML, Markdown
 			lspconfig.tailwindcss.setup({ capabilities = capabilities, on_attach = on_attach })
 			lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
