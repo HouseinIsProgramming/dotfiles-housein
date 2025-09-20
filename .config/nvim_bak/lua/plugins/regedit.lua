@@ -1,3 +1,0 @@
-return {
-  "jmattaa/regedit.vim",
-}
