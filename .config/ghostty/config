@@ -5,7 +5,10 @@ font-size = 19
 font-family = CommitMono Nerd Font
 
 font-feature =  -calt, -liga, -dliga keybind = cmd+g>r=reload_config
+adjust-cell-height = 10%
+
 keybind = cmd+g>x=close_surface
+
 
 theme = light:Nord, dark:Iceberg Dark
 # theme = Iceberg Dark
