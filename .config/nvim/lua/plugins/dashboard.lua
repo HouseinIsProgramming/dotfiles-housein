@@ -22,7 +22,7 @@ return {
     picker = {
       enabled = true,
       ui_select = true,
-      layout = "sidebar"
+      layout = "ivy_split"
     },
     -- notifier = { enabled = false },
     -- quickfile = { enabled = false },
@@ -58,7 +58,5 @@ return {
     { "grt",        function() Snacks.picker.lsp_type_definitions() end,                    desc = "Goto T[y]pe Definition" },
     { "<leader>fs", function() Snacks.picker.lsp_symbols() end,                             desc = "LSP Symbols" },
     { "<leader>fS", function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
-
-
   },
 }

@@ -73,6 +73,15 @@ return {
             end,
             opts
           )
+          
+          -- Attach navic if the server supports document symbols
+          if client:supports_method('textDocument/documentSymbol') then
+            local navic_ok, navic = pcall(require, "nvim-navic")
+            if navic_ok then
+              navic.attach(client, args.buf)
+            end
+          end
+          
           if not client:supports_method('textDocument/willSaveWaitUntil')
               and client:supports_method('textDocument/formatting') then
             vim.api.nvim_create_autocmd('BufWritePre', {
