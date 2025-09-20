@@ -1,0 +1,16 @@
+{
+  "Debug format": {
+    "prefix": "{{",
+    "body": [
+      "{:?}"
+    ],
+    "description": "Debug format {:?}"
+  },
+  "Pretty debug format": {
+    "prefix": "{{{",
+    "body": [
+      "{:#?}"
+    ],
+    "description": "Pretty debug format {:#?}"
+  }
+}
