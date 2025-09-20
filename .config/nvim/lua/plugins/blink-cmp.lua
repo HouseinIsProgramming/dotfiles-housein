@@ -12,7 +12,6 @@ return { {
     },
     completion = {
       menu = {
-        window = { border = "rounded" },
         draw = {
           padding = { 1, 1 },
           components = {
