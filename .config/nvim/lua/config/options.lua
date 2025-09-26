@@ -15,6 +15,7 @@ vim.o.cursorline = true
 vim.o.termguicolors = true
 vim.o.splitright = true
 vim.cmd(":hi statusline guibg=NONE")
+vim.o.laststatus = 0
 
 -- tab vs spaces
 vim.o.tabstop = 2
@@ -43,11 +44,10 @@ vim.o.wildmenu = true
 vim.diagnostic.config({
   virtual_text = {
     -- current_line = true,
-    virt_text_pos = "eol_right_align"
+    virt_text_pos = "eol_right_align",
   },
   signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = true,
-
 })
