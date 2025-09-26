@@ -24,7 +24,8 @@ return {
           "emmylua_ls",
           "vtsls",
           "rust_analyzer",
-          "gopls"
+          "gopls",
+          "bashls"
         },
       })
       require("mason-tool-installer").setup({

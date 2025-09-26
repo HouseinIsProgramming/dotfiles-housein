@@ -1,14 +1,18 @@
 return {
-  "vague2k/vague.nvim",
+  "EdenEast/nightfox.nvim",
   lazy = false,   -- make sure we load this during startup if it is your main colorscheme
   priority = 1000, -- make sure to load this before all the other plugins
   config = function()
-    require("vague").setup({
-      -- optional configuration here
+    require("nightfox").setup({
+      options = {
+        styles = {
+          -- comments = "italic",
+          keywords = "bold",
+          types = "italic,bold",
+        },
+      },
     })
-
-    -- toggle this to change
-    --   vim.cmd("colorscheme vague")
+    vim.cmd("colorscheme nordfox") -- Change "nightfox" to "nordfox" here
     --   local function set_blink_highlights()
     --     vim.api.nvim_set_hl(0, "BlinkCmpMenu", { fg = "NONE", bg = "#18181B" })
     --     vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "NONE", bg = "#27272A" })

@@ -9,7 +9,8 @@ return {
       },
     })
 
-    vim.cmd("SupermavenStop")
+    -- vim.cmd("SupermavenStop")
+    -- vim.cmd("SupermavenStart")
 
     -- Custom commands
     vim.api.nvim_create_user_command("SupermavenEnable", function()
@@ -42,6 +43,4 @@ return {
       vim.cmd("SupermavenDisable")
     end, { desc = "Disable Supermaven" })
   end,
-
-
 }
