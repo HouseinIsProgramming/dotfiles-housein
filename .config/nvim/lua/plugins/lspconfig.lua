@@ -25,7 +25,8 @@ return {
           "vtsls",
           "rust_analyzer",
           "gopls",
-          "bashls"
+          "bashls",
+          "clangd"
         },
       })
       require("mason-tool-installer").setup({
