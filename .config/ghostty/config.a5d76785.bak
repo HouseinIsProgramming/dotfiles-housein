@@ -88,4 +88,3 @@ custom-shader = shaders/blaze-no-trail.glsl
 #
 ###active-shaderblock-start###
 ###active-shaderblock-end###
-keybind = shift+enter=text:\x1b\r
