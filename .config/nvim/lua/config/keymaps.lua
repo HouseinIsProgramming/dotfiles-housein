@@ -49,6 +49,15 @@ vim.keymap.set({ "n", "v" }, "<S-d>", '"dd', { noremap = true })
 vim.keymap.set("i", "<C-f>", "<Right>", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-b>", "<Left>", { noremap = true, silent = true })
 
+-- Delete previous word in insert mode (Ctrl+Backspace)
+-- Note: Most terminals send <C-H> for Ctrl+Backspace
+-- Exit and re-enter insert mode to create an undo breakpoint
+vim.keymap.set("i", "<C-H>", "<C-G>u<C-W>", { noremap = true, silent = true, desc = "Delete previous word" })
+
+-- Delete to start of line in insert mode (Cmd+Backspace on macOS)
+-- Exit and re-enter insert mode to create an undo breakpoint
+vim.keymap.set("i", "<D-BS>", "<C-G>u<C-U>", { noremap = true, silent = true, desc = "Delete to start of line" })
+
 vim.keymap.set("n", "<C-k>", ":")
 
 vim.keymap.set("t", "<C-c>", [[<C-\><C-n>]])

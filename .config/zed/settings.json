@@ -74,7 +74,7 @@
   "theme": {
     "mode": "dark",
     "light": "Gleam Dark",
-    "dark": "Ayu Dark"
+    "dark": "Nordfox - opaque"
   },
   "soft_wrap": "preferred_line_length",
   "preferred_line_length": 100,

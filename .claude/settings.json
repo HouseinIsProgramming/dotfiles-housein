@@ -32,5 +32,6 @@
       "Bash(rm -rf:*)"
     ]
   },
-  "outputStyle": "Explanatory"
+  "outputStyle": "Explanatory",
+  "alwaysThinkingEnabled": true
 }
