@@ -63,3 +63,12 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export LUA_PATH="/Users/housien/.luarocks/share/lua/5.1/?.lua;;"
 export LUA_CPATH="/Users/housien/.luarocks/lib/lua/5.1/?.so;;"
+
+# bun completions
+[ -s "/Users/housien/.bun/_bun" ] && source "/Users/housien/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH=$PATH:$HOME/.local/opt/go/bin
+export PATH="$HOME/go/bin:$PATH"
