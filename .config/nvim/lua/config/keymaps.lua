@@ -5,6 +5,7 @@ vim.keymap.set("n", "<leader>ww", ":w<CR>", { desc = "Save" })
 vim.keymap.set("n", "<leader>wu", "<cmd>lua require('undotree').toggle()<cr>", { desc = "Undo tree" })
 vim.keymap.set("n", "<leader>qq", ":bd<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>qa", ":qa<CR>", { desc = "Quit all" })
+vim.keymap.set("n", "<leader>qo", ":%bd|e#<CR>", { desc = "Quit other buffers" })
 
 vim.keymap.set("n", "<CR>", "<CR><Cmd>cclose<CR>", { noremap = true, silent = true })
 
@@ -20,8 +21,8 @@ vim.keymap.set("n", "vag", "ggVG", { noremap = true, silent = true })
 vim.keymap.set({ "n", "v" }, "<leader>cc", "1z=")
 
 -- Navigate through buffers
-vim.keymap.set("n", "<Tab>", ":bnext<CR>", { silent = false })
-vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { silent = false })
+vim.keymap.set("n", "<leader><C-i>", ":bnext<CR>", { silent = false, desc = "Buffer: Next" })
+vim.keymap.set("n", "<leader><C-o>", ":bprevious<CR>", { silent = false, desc = "Buffer: Previous" })
 
 -- Center buffer when navigating up and down
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
