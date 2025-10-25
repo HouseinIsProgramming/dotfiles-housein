@@ -70,7 +70,6 @@
       "escape": "project_panel::ToggleFocus",
 
       // Other operations
-      ":": "command_palette::Toggle",
       "/": "project_panel::NewSearchInDirectory",
       "ctrl-l ctrl-c": "project_panel::CollapseAllEntries",
       "ctrl-a": "pane::AlternateFile"
@@ -132,7 +131,6 @@
       // Code actions & LSP
       "space l a": "editor::ToggleCodeActions",
       "space l f": "editor::Format",
-      "space r n ": "editor::Rename",
 
       // UI toggles
       "space u i": "editor::ToggleInlayHints",
@@ -173,8 +171,11 @@
   {
     "context": "Editor && (vim_mode == normal || vim_mode == helix_normal)",
     "bindings": {
-      "space o": ["tab_switcher::Toggle", {}],
+      "space f b": ["tab_switcher::Toggle", {}],
+      "space q e": "editor::ReloadFile",
 
+      "space g s": "vim::PushAddSurrounds",
+      "space g d": "vim::PushDeleteSurrounds",
       // LSP bindings
       "g r n": "editor::Rename",
       "g r r": "editor::FindAllReferences",
@@ -210,8 +211,6 @@
   {
     "context": "vim_mode == visual || vim_mode == helix_visual",
     "bindings": {
-      "space g s": "vim::PushAddSurrounds",
-      "space g d": "vim::PushDeleteSurrounds",
       "shift-j": "editor::MoveLineDown",
       "shift-k": "editor::MoveLineUp"
     }
@@ -251,8 +250,27 @@
     }
   },
   {
+    "context": "((vim_mode == helix_normal || vim_mode == helix_select) && !menu)",
     "bindings": {
-      "space q e": "editor::ReloadFile"
+      "space k": null
+    }
+  },
+  {
+    "context": "((vim_mode == helix_normal || vim_mode == helix_select) && !menu)",
+    "bindings": {
+      "space shift-s": null
+    }
+  },
+  {
+    "context": "(Editor && mode == full)",
+    "bindings": {
+      "cmd-r": null
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-shift-r": null
     }
   }
 ]
