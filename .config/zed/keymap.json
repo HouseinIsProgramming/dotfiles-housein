@@ -195,7 +195,7 @@
       "ctrl-l": "editor::ShowCompletions",
       "ctrl-a": "editor::MoveLeft",
       "ctrl-m": "editor::ConfirmCompletion",
-      "ctrl-a ctrl-a": "editor::AcceptEditPrediction",
+      "ctrl-i": "editor::AcceptEditPrediction",
       "ctrl-a ctrl-w": "editor::AcceptPartialEditPrediction",
       "ctrl-s": "editor::ShowSignatureHelp",
       "k j": "vim::SwitchToNormalMode"
@@ -243,6 +243,16 @@
     "bindings": {
       "s": "vim::PushSneak",
       "S": "vim::PushSneakBackward"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-k": "command_palette::Toggle"
+    }
+  },
+  {
+    "bindings": {
+      "space q e": "editor::ReloadFile"
     }
   }
 ]
