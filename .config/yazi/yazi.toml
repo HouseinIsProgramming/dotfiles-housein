@@ -2,6 +2,11 @@
 [mgr]
 show_hidden = true
 
+[preview]
+max_width   = 3840
+max_height  = 2160
+image_quality = 60
+
 [[mgr.prepend_keymap]]
 on   = "!"
 run  = 'shell "$SHELL" --block --confirm'
