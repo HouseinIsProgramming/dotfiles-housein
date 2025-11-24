@@ -25,6 +25,7 @@ alias fdf='cd "$(fzf --preview "bat --style=numbers --color=always {}" | xargs d
 alias ..="j .."
 alias ...="j ../.."
 alias ....="j ../../.."
+alias nx="npx nx"
 
 
 # -----------------------------------------------------
@@ -32,33 +33,33 @@ alias ....="j ../../.."
 # -----------------------------------------------------
 #
 # Gwt - git worktree
-gwt() {
-  if [[ $# -eq 0 ]]; then
-    git worktree list
-  else
-    git worktree "$@"
-  fi
-}
-
-gt() {
-  if [[ $# -eq 0 ]]; then
-    git status
-  elif [[ "$1" == "c" ]]; then
-    shift
-    git commit -m "$@"
-  elif [[ "$1" == "psh" ]]; then
-    shift
-    git push "$@"
-  elif [[ "$1" == "p" ]]; then
-    shift
-    git pull "$@"
-  elif [[ "$1" == "a" ]]; then
-    shift
-    git add "$@"
-  elif [[ "$1" == "sw" ]]; then
-    shift
-    git switch "$@"
-  else
-    git "$@"
-  fi
-}
+# gwt() {
+#   if [[ $# -eq 0 ]]; then
+#     git worktree list
+#   else
+#     git worktree "$@"
+#   fi
+# }
+#
+# gt() {
+#   if [[ $# -eq 0 ]]; then
+#     git status
+#   elif [[ "$1" == "c" ]]; then
+#     shift
+#     git commit -m "$@"
+#   elif [[ "$1" == "psh" ]]; then
+#     shift
+#     git push "$@"
+#   elif [[ "$1" == "p" ]]; then
+#     shift
+#     git pull "$@"
+#   elif [[ "$1" == "a" ]]; then
+#     shift
+#     git add "$@"
+#   elif [[ "$1" == "sw" ]]; then
+#     shift
+#     git switch "$@"
+#   else
+#     git "$@"
+#   fi
+# }
