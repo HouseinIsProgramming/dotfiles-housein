@@ -72,3 +72,6 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH=$PATH:$HOME/.local/opt/go/bin
 export PATH="$HOME/go/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/housien/.antigravity/antigravity/bin:$PATH"
