@@ -1,0 +1,51 @@
+{
+  "GraphQL Query": {
+    "prefix": "gqlq",
+    "body": [
+      "const ${1:QUERY_NAME} = gql`",
+      "  query ${1:QUERY_NAME}($2) {",
+      "    $3",
+      "  }",
+      "`;"
+    ],
+    "description": "GraphQL query template"
+  },
+  "Console Log": {
+    "prefix": "cl",
+    "body": [
+      "console.log($1)$0"
+    ],
+    "description": "Console log"
+  },
+  "Yield All": {
+    "prefix": "yall",
+    "body": [
+      "yield* all($1)$0"
+    ],
+    "description": "Yield all"
+  },
+  "Yield delay all": {
+    "prefix": "ydall",
+    "body": [
+      "yield* delay($1, all($0))"
+    ],
+    "description": "Yield delay all"
+  },
+  "Yield Sequence": {
+    "prefix": "yseq",
+    "body": [
+      "yield* sequence(",
+      "  ${1:0.1},",
+      "  ${2:// animations}",
+      ")$0"
+    ],
+    "description": "Yield sequence"
+  },
+  "Yield WaitUntil": {
+    "prefix": "ywait",
+    "body": [
+      "yield* waitUntil(\"${1}\")$0"
+    ],
+    "description": "Yield waitUntil"
+  }
+}

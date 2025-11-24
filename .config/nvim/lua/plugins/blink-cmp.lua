@@ -52,7 +52,10 @@ vim.api.nvim_create_autocmd({ 'ColorScheme', 'VimEnter' }, {
 
 return { {
   'saghen/blink.cmp',
-  dependencies = { 'rafamadriz/friendly-snippets' },
+  dependencies = {
+    'rafamadriz/friendly-snippets',
+    'L3MON4D3/LuaSnip',
+  },
   version = '1.*',
 
   ---@module 'blink.cmp'
@@ -99,13 +102,6 @@ return { {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
-      providers = {
-        snippets = {
-          should_show_items = function(ctx)
-            return ctx.trigger.initial_kind ~= 'trigger_character'
-          end
-        }
-      }
     },
     fuzzy = { implementation = "prefer_rust_with_warning" }
   },
