@@ -63,10 +63,13 @@
                         ]
                     },
                     {
-                        "description": "Semicolon modifier: '; n' => '=>'",
+                        "description": "Semicolon Modifier: 'semicolon + n' => ':='",
                         "manipulators": [
                             {
-                                "from": { "key_code": "semicolon" },
+                                "from": {
+                                    "key_code": "semicolon",
+                                    "modifiers": { "optional": ["any"] }
+                                },
                                 "to": [
                                     {
                                         "set_variable": {
@@ -94,13 +97,16 @@
                                         "value": 1
                                     }
                                 ],
-                                "from": { "key_code": "n" },
+                                "from": {
+                                    "key_code": "n",
+                                    "modifiers": { "optional": ["any"] }
+                                },
                                 "to": [
-                                    { "key_code": "equal_sign" },
                                     {
-                                        "key_code": "period",
-                                        "modifiers": ["shift"]
-                                    }
+                                        "key_code": "semicolon",
+                                        "modifiers": ["left_shift"]
+                                    },
+                                    { "key_code": "equal_sign" }
                                 ],
                                 "type": "basic"
                             }
