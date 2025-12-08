@@ -3,6 +3,8 @@
 # -----------------------------------------------------
 POSH=agnoster
 
+eval "$(oh-my-posh init zsh --config $HOME/.config/omp-themes/zen.json)"
+
 # -----------------------------------------------------
 # oh-myzsh themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # -----------------------------------------------------
@@ -28,6 +30,8 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 zinit ice wait lucid
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
+
+# zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 zinit ice wait lucid
 zinit light zdharma-continuum/zinit-annex-as-monitor
@@ -105,21 +109,6 @@ function i() {
 export EDITOR="nvim"
 export VISUAL="nvim"
 export GIT_EDITOR="nvim"
-
-# -----------------------------------------------------
-# Prompt
-# -----------------------------------------------------
-# eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
-# eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/pragmatic.transparent.omp.toml)"
-#
-# ~/.zshrc
-
-eval "$(starship init zsh)"
-
-# Shipped Theme
-# eval "$(oh-my-posh init zsh --config /usr/share/oh-my-posh/themes/agnoster.omp.json)"
-
-# shellcheck shell=bash
 
 # =============================================================================
 #
@@ -262,6 +251,20 @@ if [[ -o zle ]]; then
 
     [[ "${+functions[compdef]}" -ne 0 ]] && \compdef __zoxide_z_complete j
 fi
+
+fzf-npm-script() {
+  local script
+  script=$(
+    node -e 'console.log(Object.keys(require("./package.json").scripts || {}).join("\n"))' \
+      2>/dev/null | fzf
+  ) || return
+  LBUFFER+="npm run $script"
+  zle redisplay
+}
+zle -N fzf-npm-script
+
+# Alt+N
+bindkey '^[n' fzf-npm-script
 
 # =============================================================================
 #

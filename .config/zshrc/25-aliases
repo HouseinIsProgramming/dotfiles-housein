@@ -16,8 +16,8 @@ alias nvm-s="source /usr/share/nvm/init-nvm.sh"
 alias cd..="cd .."
 alias cd...="cd ../.."
 alias cd....="cd ../../.."
-alias lg="luajit"
-alias lgt="lazygit"
+alias luj="luajit"
+alias lg="lazygit"
 alias ldkr="lazydocker"
 alias rm="rm -iv"
 alias fdd='cd "$(fd -t d . | fzf --preview "dirname {}")"'
@@ -26,6 +26,7 @@ alias ..="j .."
 alias ...="j ../.."
 alias ....="j ../../.."
 alias nx="npx nx"
+alias fett='open -g "raycast://script-commands/confetti-burst"'
 
 
 # -----------------------------------------------------
