@@ -1,0 +1,132 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "console_title_template": " {{ .Folder }} :: {{if .Root}}Admin{{end}}",
+  "palette": {
+    "main-bg": "#24283b",
+    "terminal-red": "#f7768e",
+    "pistachio-green": "#9ece6a",
+    "terminal-green": "#73daca",
+    "terminal-yellow": "#e0af68",
+    "terminal-blue": "#7aa2f7",
+    "celeste-blue": "#b4f9f8",
+    "light-sky-blue": "#7dcfff",
+    "terminal-white": "#c0caf5",
+    "white-blue": "#a9b1d6",
+    "blue-bell": "#9aa5ce",
+    "pastal-grey": "#cfc9c2",
+    "terminal-magenta": "#bb9af7",
+    "blue-black": "#565f89",
+    "terminal-black": "#414868",
+    "t-background": "p:main-bg"
+  },
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "p:terminal-black",
+          "template": "\n"
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "p:terminal-blue",
+          "properties": {
+            "style": "unique",
+            "maxdepth": 2
+          },
+          "template": "<b>{{ .Path }} </b>"
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "p:terminal-white",
+          "properties": {
+            "display_status": true,
+            "fetch_status": true,
+            "branch_icon": " "
+          },
+          "template": "{{ .UpstreamIcon }}<p:celeste-blue>{{ .HEAD }}</>{{ if .BranchStatus }} <p:terminal-green>{{ if gt .Ahead 0 }}↑{{ .Ahead }}{{ end }}</><p:terminal-red>{{ if gt .Behind 0 }}↓{{ .Behind }}{{ end }}</>{{ end }}{{ if .Working.Changed }} <p:terminal-yellow> {{ .Working.String }}</>{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} <p:terminal-green> {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }} <p:terminal-black> {{ .StashCount }}</>{{ end }}"
+        },
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "p:terminal-red",
+          "template": " "
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "overflow": "hide",
+      "segments": [
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "p:pistachio-green",
+          "template": " {{ .Full }} "
+        },
+        {
+          "type": "php",
+          "style": "plain",
+          "foreground": "p:terminal-blue",
+          "template": " {{ .Full }} "
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:terminal-yellow",
+          "template": " {{ .Full }}"
+        },
+        {
+          "type": "julia",
+          "style": "plain",
+          "foreground": "p:terminal-magenta",
+          "template": " {{ .Full }}"
+        },
+        {
+          "type": "ruby",
+          "style": "plain",
+          "foreground": "p:terminal-red",
+          "template": " {{ .Full}}"
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "p:light-sky-blue",
+          "template": " {{ .Full}}"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "p:pistachio-green",
+          "style": "plain",
+          "template": "$ ",
+          "type": "text"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "secondary_prompt": {
+    "background": "transparent",
+    "foreground": "p:terminal-blue",
+    "template": "# "
+  },
+  "transient_prompt": {
+    "background": "transparent",
+    "foreground": "p:terminal-green",
+    "template": "\n$ "
+  },
+  "final_space": true,
+  "version": 3,
+  "terminal_background": "p:t-background"
+}
