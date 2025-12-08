@@ -16,5 +16,5 @@ abbr pmb="pnpm run build"
 abbr grs="git restore --staged"
 abbr gs="git status"
 
-abbr gcnv="git commit -m --no-verify"
+abbr gcnv="git commit --no-verify -m"
 abbr gc="git commit -m"
