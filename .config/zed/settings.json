@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "cursor_shape": "bar",
   "language_models": {
     "openai_compatible": {
       "Cerebras": {
@@ -293,6 +294,7 @@
       }
     },
     "TypeScript": {
+      "language_servers": ["tsgo"],
       "formatter": {
         "external": {
           "command": "prettier",
