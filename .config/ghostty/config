@@ -3,11 +3,11 @@ font-size = 16
 # font-family = IosevkaTerm Nerd Font Mono
 # font-family = FiraCode Nerd Font
 # font-family = GeistMono Nerd Font
-font-family = CommitMono Nerd Font
+font-family = JetBrainsMono Nerd Font
 #
 
 font-feature =  -calt, -liga, -dliga 
-adjust-cell-height = 25%
+adjust-cell-height = 5%
 
 keybind = cmd+g>x=close_surface
 keybind = cmd+g>r=reload_config
@@ -26,7 +26,7 @@ macos-option-as-alt = left
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 
-custom-shader-animation = true
+# custom-shader-animation = true
 
 window-height = 50
 window-width = 80
@@ -58,9 +58,7 @@ window-decoration = none
 # custom-shader = shaders/drunkard.glsl
 # custom-shader = shaders/fireworks-rockets.glsl
 # custom-shader = shaders/fireworks.glsl
-# custom-shader = shaders/gears-and-belts.glsl
-# custom-shader = shaders/glitchy.glsl
-# custom-shader = shaders/glow-rgbsplit-twitchy.glsl
+# custom-shader = shaders/gears-and-belts.glsl custom-shader = shaders/glitchy.glsl custom-shader = shaders/glow-rgbsplit-twitchy.glsl
 # custom-shader = shaders/gradient-background.glsl
 # custom-shader = shaders/inside-the-matrix.glsl
 # custom-shader = shaders/just-snow.glsl
@@ -79,7 +77,8 @@ window-decoration = none
 # custom-shader = shaders/paperlike-intense.glsl
 # custom-shader = shaders/paperlike-subtle.glsl
 # custom-shader = shaders/cursor-blade.glsl
-custom-shader = shaders/blaze-no-trail.glsl
+# custom-shader = shaders/blaze-no-trail.glsl
+# custom-shader = shaders/cursor_sweep.glsl
 # custom-shader = shaders/manga-slash.glsl
 # custom-shader = shaders/frozen-cursor.glsl
 
