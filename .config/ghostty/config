@@ -1,4 +1,4 @@
-font-size = 16
+font-size = 17
 
 # font-family = IosevkaTerm Nerd Font Mono
 # font-family = FiraCode Nerd Font
@@ -12,7 +12,7 @@ adjust-cell-height = 5%
 keybind = cmd+g>x=close_surface
 keybind = cmd+g>r=reload_config
 
-theme = light:Nightfox, dark:Iceberg Dark
+theme = light:Arthur, dark:Atom
 # theme = Iceberg Dark
 # background = 101013
 
