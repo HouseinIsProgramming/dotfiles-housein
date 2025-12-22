@@ -80,8 +80,8 @@ local function toggle_diagnostics()
   diagnostics_enabled = not diagnostics_enabled
   vim.diagnostic.config({
     virtual_text = diagnostics_enabled, -- Toggle virtual text
-    signs = diagnostics_enabled,        -- Toggle signs in the gutter
-    underline = diagnostics_enabled,    -- Toggle underlining
+    signs = diagnostics_enabled,      -- Toggle signs in the gutter
+    underline = diagnostics_enabled,  -- Toggle underlining
   })
   if diagnostics_enabled then
     print("LSP diagnostics enabled")
@@ -99,7 +99,7 @@ local function toggle_virtual_lines()
   virtual_lines_enabled = not virtual_lines_enabled
   vim.diagnostic.config({
     virtual_text = virtual_lines_enabled and false or {
-      virt_text_pos = "eol_right_align"
+      virt_text_pos = "eol_right_align",
     },
     virtual_lines = virtual_lines_enabled,
     signs = true,
@@ -112,3 +112,8 @@ end
 
 -- Keybinding to toggle virtual lines
 vim.keymap.set("n", "<leader>uv", toggle_virtual_lines, { desc = "Toggle virtual lines for diagnostics" })
+
+-- Toggle lsp inlay hints
+vim.keymap.set("n", "<leader>th", function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end)

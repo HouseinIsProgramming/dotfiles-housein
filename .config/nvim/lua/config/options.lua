@@ -51,3 +51,5 @@ vim.diagnostic.config({
   update_in_insert = false,
   severity_sort = true,
 })
+
+vim.cmd.colorscheme("christmas")

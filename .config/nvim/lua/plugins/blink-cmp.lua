@@ -1,57 +1,62 @@
--- Set up blue Atom-like highlight groups
 vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
-  group = vim.api.nvim_create_augroup("BlinkCmpColors", { clear = true }),
-  callback = function()
-    -- Main menu colors with blue tones
-    vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = "#1e2124", fg = "#c9d1d9" })
-    vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = "#58a6ff", bg = "#1e2124" })
-    vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = "#264f78", fg = "#ffffff" })
+	group = vim.api.nvim_create_augroup("BlinkCmpColors", { clear = true }),
+	callback = function()
+		local function get_hex(group, attr)
+			local hl = vim.api.nvim_get_hl(0, { name = group })
+			if hl[attr] then
+				return string.format("#%06x", hl[attr])
+			end
+			return nil
+		end
 
-    -- Scrollbar with blue accents
-    vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { bg = "#58a6ff" })
-    vim.api.nvim_set_hl(0, "BlinkCmpScrollBarGutter", { bg = "#21262d" })
+		local menu_bg = get_hex("Pmenu", "bg") or "#1e2124"
+		local menu_fg = get_hex("Pmenu", "fg") or "#c9d1d9"
+		local selection_bg = get_hex("PmenuSel", "bg") or "#264f78"
+		local selection_fg = get_hex("PmenuSel", "fg") or "#ffffff"
+		local border_color = get_hex("FloatBorder", "fg") or "#58a6ff"
+		local accent_color = get_hex("Function", "fg") or "#79c0ff"
+		local keyword_color = get_hex("Keyword", "fg") or "#ff7b72"
+		local type_color = get_hex("Type", "fg") or "#ffa657"
+		local string_color = get_hex("String", "fg") or "#a5f3fc"
+		local comment_color = get_hex("Comment", "fg") or "#484f58"
 
-    -- Label styling with blue highlights
-    vim.api.nvim_set_hl(0, "BlinkCmpLabel", { fg = "#c9d1d9", bg = "NONE" })
-    vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = "#58a6ff", bold = true })
-    vim.api.nvim_set_hl(0, "BlinkCmpLabelDetail", { fg = "#7d8590" })
-    vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { fg = "#8b949e" })
-    vim.api.nvim_set_hl(0, "BlinkCmpLabelDeprecated", { fg = "#6e7681", strikethrough = true })
+		vim.api.nvim_set_hl(0, "BlinkCmpMenu", { bg = menu_bg, fg = menu_fg })
+		vim.api.nvim_set_hl(0, "BlinkCmpMenuBorder", { fg = border_color, bg = menu_bg })
+		vim.api.nvim_set_hl(0, "BlinkCmpMenuSelection", { bg = selection_bg, fg = selection_fg })
 
-    -- Kind icons with blue theme (no background to match text)
-    vim.api.nvim_set_hl(0, "BlinkCmpKind", { fg = "#79c0ff" })
+		vim.api.nvim_set_hl(0, "BlinkCmpScrollBarThumb", { bg = accent_color })
+		vim.api.nvim_set_hl(0, "BlinkCmpScrollBarGutter", { bg = menu_bg })
 
-    -- Specific kind highlights with different blue shades
-    vim.api.nvim_set_hl(0, "BlinkCmpKindFunction", { fg = "#d2a8ff" })
-    vim.api.nvim_set_hl(0, "BlinkCmpKindMethod", { fg = "#d2a8ff" })
-    vim.api.nvim_set_hl(0, "BlinkCmpKindVariable", { fg = "#79c0ff" })
-    vim.api.nvim_set_hl(0, "BlinkCmpKindKeyword", { fg = "#ff7b72" })
-    vim.api.nvim_set_hl(0, "BlinkCmpKindText", { fg = "#f0f6fc" })
-    vim.api.nvim_set_hl(0, "BlinkCmpKindSnippet", { fg = "#a5f3fc" })
-    vim.api.nvim_set_hl(0, "BlinkCmpKindClass", { fg = "#ffa657" })
-    vim.api.nvim_set_hl(0, "BlinkCmpKindInterface", { fg = "#ffa657" })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabel", { fg = menu_fg, bg = "NONE" })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelMatch", { fg = accent_color, bold = true })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelDetail", { fg = comment_color })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelDescription", { fg = comment_color })
+		vim.api.nvim_set_hl(0, "BlinkCmpLabelDeprecated", { fg = comment_color, strikethrough = true })
 
-    -- Source name with blue accent
-    vim.api.nvim_set_hl(0, "BlinkCmpSource", { fg = "#58a6ff", italic = true })
+		vim.api.nvim_set_hl(0, "BlinkCmpKind", { fg = accent_color })
 
-    -- Documentation window with blue theme
-    vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = "#1F2124", fg = "#c9d1d9" })
-    vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { fg = "#161b22", bg = "#161b22" })
-    vim.api.nvim_set_hl(0, "BlinkCmpDocSeparator", { fg = "#21262d" })
-    vim.api.nvim_set_hl(0, "BlinkCmpDocCursorLine", { bg = "#264f78" })
+		vim.api.nvim_set_hl(0, "BlinkCmpKindFunction", { fg = accent_color })
+		vim.api.nvim_set_hl(0, "BlinkCmpKindMethod", { fg = accent_color })
+		vim.api.nvim_set_hl(0, "BlinkCmpKindVariable", { fg = menu_fg })
+		vim.api.nvim_set_hl(0, "BlinkCmpKindKeyword", { fg = keyword_color })
+		vim.api.nvim_set_hl(0, "BlinkCmpKindText", { fg = menu_fg })
+		vim.api.nvim_set_hl(0, "BlinkCmpKindSnippet", { fg = string_color })
+		vim.api.nvim_set_hl(0, "BlinkCmpKindClass", { fg = type_color })
+		vim.api.nvim_set_hl(0, "BlinkCmpKindInterface", { fg = type_color })
 
-    -- Signature help with blue theme
-    vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelp", { bg = "#161b22", fg = "#c9d1d9" })
-    vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { fg = "#58a6ff", bg = "#161b22" })
-    vim.api.nvim_set_hl(
-      0,
-      "BlinkCmpSignatureHelpActiveParameter",
-      { fg = "#79c0ff", bold = true, underline = true }
-    )
+		vim.api.nvim_set_hl(0, "BlinkCmpSource", { fg = border_color, italic = true })
 
-    -- Ghost text with subtle blue
-    vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = "#484f58", italic = true })
-  end,
+		vim.api.nvim_set_hl(0, "BlinkCmpDoc", { bg = menu_bg, fg = menu_fg })
+		vim.api.nvim_set_hl(0, "BlinkCmpDocBorder", { fg = border_color, bg = menu_bg })
+		vim.api.nvim_set_hl(0, "BlinkCmpDocSeparator", { fg = border_color })
+		vim.api.nvim_set_hl(0, "BlinkCmpDocCursorLine", { bg = selection_bg })
+
+		vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelp", { bg = menu_bg, fg = menu_fg })
+		vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpBorder", { fg = border_color, bg = menu_bg })
+		vim.api.nvim_set_hl(0, "BlinkCmpSignatureHelpActiveParameter", { fg = accent_color, bold = true, underline = true })
+
+		vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = comment_color, italic = true })
+	end,
 })
 
 return {
