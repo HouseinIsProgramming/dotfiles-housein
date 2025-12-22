@@ -953,14 +953,6 @@
                 {
                     "identifiers": { "is_keyboard": true },
                     "manipulate_caps_lock_led": false
-                },
-                {
-                    "game_pad_xy_stick_deadzone": 0.3,
-                    "identifiers": {
-                        "is_game_pad": true,
-                        "product_id": 8201,
-                        "vendor_id": 1406
-                    }
                 }
             ],
             "name": "Default profile",
