@@ -37,5 +37,8 @@
     "command": "bunx -y ccstatusline@latest",
     "padding": 0
   },
-  "outputStyle": "Explanatory"
+  "outputStyle": "Explanatory",
+  "enabledPlugins": {
+    "lua-lsp@claude-plugins-official": true
+  }
 }
