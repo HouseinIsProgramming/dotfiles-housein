@@ -37,6 +37,5 @@
     "command": "bunx -y ccstatusline@latest",
     "padding": 0
   },
-  "outputStyle": "Explanatory",
-  "alwaysThinkingEnabled": false
+  "outputStyle": "Explanatory"
 }
