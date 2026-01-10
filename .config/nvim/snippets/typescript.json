@@ -47,5 +47,14 @@
       "yield* waitUntil(\"${1}\")$0"
     ],
     "description": "Yield waitUntil"
+  },
+  "Multiline comment": {
+    "prefix": "lcc",
+    "body": [
+      "/**",
+      "* ${0}",
+      "*/"
+    ],
+    "description": "multiline comment"
   }
 }

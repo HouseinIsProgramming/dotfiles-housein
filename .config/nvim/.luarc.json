@@ -1,0 +1,29 @@
+{
+  "runtime.version": "LuaJIT",
+  "runtime.path": [
+    "lua/?.lua",
+    "lua/?/init.lua"
+  ],
+  "diagnostics.globals": [
+    "vim"
+  ],
+  "workspace.checkThirdParty": false,
+  "workspace.library": [
+    "$VIMRUNTIME"
+  ],
+  "diagnostics.undefined-field": "Warning",
+  "diagnostics.undefined-global": "Warning",
+  "diagnostics.missing-fields": "Warning",
+  "diagnostics.missing-parameter": "Warning",
+  "diagnostics.redundant-parameter": "Warning",
+  "diagnostics.cast-local-type": "Warning",
+  "diagnostics.cast-type-mismatch": "Warning",
+  "diagnostics.need-check-nil": "Warning",
+  "diagnostics.unused-local": "Hint",
+  "diagnostics.unused-function": "Hint",
+  "diagnostics.redundant-value": "Warning",
+  "diagnostics.unknown-cast-variable": "Warning",
+  "type.castNumberToInteger": true,
+  "type.weakUnionCheck": false,
+  "type.weakNilCheck": false
+}

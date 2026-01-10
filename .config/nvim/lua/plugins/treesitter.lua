@@ -10,7 +10,7 @@ return {
 			local configs = require("nvim-treesitter.configs")
 
 			configs.setup({
-				ensure_installed = { "lua", "javascript", "html" },
+				ensure_installed = { "lua", "javascript", "html", "gdscript", "godot_resource" },
 				sync_install = false,
 				highlight = { enable = true },
 				indent = { enable = true },

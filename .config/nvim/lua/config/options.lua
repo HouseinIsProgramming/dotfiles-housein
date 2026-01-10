@@ -1,6 +1,6 @@
 -- general
 vim.o.number = true
-vim.o.scrolloff = 8
+vim.o.scrolloff = 16
 vim.o.signcolumn = "yes"
 vim.o.clipboard = "unnamedplus"
 
@@ -18,9 +18,9 @@ vim.cmd(":hi statusline guibg=NONE")
 vim.o.laststatus = 0
 
 -- tab vs spaces
-vim.o.tabstop = 2
-vim.o.shiftwidth = 2
-vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = false
 
 -- folding
 vim.o.foldcolumn = "0"
@@ -42,14 +42,16 @@ vim.o.wildmenu = true
 
 -- Configure LSP diagnostics
 vim.diagnostic.config({
-  virtual_text = {
-    -- current_line = true,
-    virt_text_pos = "eol_right_align",
-  },
-  signs = true,
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
+	virtual_text = {
+		-- current_line = true,
+		virt_text_pos = "eol_right_align",
+	},
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
 })
 
-vim.cmd.colorscheme("christmas")
+---@type MyColors
+local colorscheme = "evergarden-fall"
+vim.cmd.colorscheme(colorscheme)
