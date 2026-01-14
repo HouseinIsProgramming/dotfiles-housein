@@ -1,8 +1,8 @@
 return {
 	name = "autogen-types",
-	dir = vim.fn.stdpath("config"),
+	dir = vim.fn.stdpath("config") .. "/lua/plugins/m-plugins/autogen-types",
+	virtual = true,
 	config = function()
-		-- 1. Notify that the plugin is loading
 		local function generate_color_types()
 			local colors = vim.fn.getcompletion("", "color")
 

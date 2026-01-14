@@ -1,6 +1,7 @@
 return {
 	name = "pair-file",
-	dir = vim.fn.stdpath("config"),
+	dir = vim.fn.stdpath("config") .. "/lua/plugins/m-plugins/pair-file",
+	virtual = true,
 	config = function()
 		local pairs = {
 			c = { "h" },
