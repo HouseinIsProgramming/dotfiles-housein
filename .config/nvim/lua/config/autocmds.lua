@@ -1,3 +1,14 @@
+vim.filetype.add({
+	extension = {
+		fs = "glsl",
+		vs = "glsl",
+		vert = "glsl",
+		frag = "glsl",
+		geom = "glsl",
+		comp = "glsl",
+	},
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("highlight_yank", {}),
 	desc = "Hightlight selection on yank",
