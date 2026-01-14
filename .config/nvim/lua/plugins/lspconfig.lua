@@ -35,6 +35,9 @@ return {
 			-- Enable lua_ls (configured by .luarc.json files)
 			vim.lsp.enable("lua_ls")
 
+			-- Disable ruff LSP (using conform for formatting instead)
+			vim.lsp.enable("ruff", false)
+
 			-- Gleam LSP (nvim 0.11+ API)
 			vim.lsp.config.gleam = {
 				cmd = { "gleam", "lsp" },
@@ -58,6 +61,14 @@ return {
 				root_markers = { "project.godot", ".git" },
 			}
 			vim.lsp.enable("gdscript")
+
+			-- GLSL LSP (glsl_analyzer)
+			vim.lsp.config.glsl_analyzer = {
+				cmd = { "glsl_analyzer" },
+				filetypes = { "glsl", "vert", "frag", "geom", "comp", "tesc", "tese" },
+				root_markers = { ".git" },
+			}
+			vim.lsp.enable("glsl_analyzer")
 
 			-- this is handeled by conform
 			-- vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format() end)
