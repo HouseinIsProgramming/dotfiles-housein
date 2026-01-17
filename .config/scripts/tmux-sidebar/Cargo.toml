@@ -1,0 +1,19 @@
+[package]
+name = "tmux-sidebar"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ratatui = "0.29"
+crossterm = "0.28"
+git2 = "0.19"
+notify = "7.0"
+notify-debouncer-mini = "0.5"
+anyhow = "1.0"
+walkdir = "2.5"
+ignore = "0.4"
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
