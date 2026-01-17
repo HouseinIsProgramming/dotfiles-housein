@@ -77,11 +77,16 @@ pub fn render(frame: &mut Frame, app: &App) {
 }
 
 fn render_copy_menu(frame: &mut Frame, area: Rect) {
-    // Center the popup
-    let popup_width = 30;
-    let popup_height = 6;
-    let x = (area.width.saturating_sub(popup_width)) / 2;
-    let y = (area.height.saturating_sub(popup_height)) / 2;
+    let popup_width = 30u16;
+    let popup_height = 8u16;  // 6 lines + 2 for borders
+
+    // Skip if terminal too small
+    if area.width < popup_width || area.height < popup_height {
+        return;
+    }
+
+    let x = (area.width - popup_width) / 2;
+    let y = (area.height - popup_height) / 2;
     let popup_area = Rect::new(x, y, popup_width, popup_height);
 
     // Clear the area
