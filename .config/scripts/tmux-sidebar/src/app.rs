@@ -122,12 +122,17 @@ impl App {
             .unwrap_or_else(|_| "nvim".to_string());
 
         let path = node.path.to_string_lossy();
+        // Escape single quotes for shell safety
+        let escaped_path = path.replace("'", "'\\''");
 
         if let Some(ref pane) = self.sibling_pane {
             // Send command to sibling pane
-            let _ = std::process::Command::new("tmux")
-                .args(["send-keys", "-t", pane, &format!("{} '{}'", editor, path), "Enter"])
-                .output();
+            if let Err(e) = std::process::Command::new("tmux")
+                .args(["send-keys", "-t", pane, &format!("{} '{}'", editor, escaped_path), "Enter"])
+                .output()
+            {
+                eprintln!("Failed to open file: {}", e);
+            }
         }
     }
 }
