@@ -2,6 +2,12 @@ use std::path::PathBuf;
 use crate::tree::{FileTree, FileNode};
 use crate::git::GitInfo;
 
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum CopyMode {
+    None,
+    Selecting,
+}
+
 pub struct App {
     pub tree: FileTree,
     pub git_info: GitInfo,
@@ -9,6 +15,7 @@ pub struct App {
     pub root_path: PathBuf,
     pub sibling_pane: Option<String>,
     pub should_quit: bool,
+    pub copy_mode: CopyMode,
 }
 
 impl App {
@@ -24,6 +31,7 @@ impl App {
             root_path,
             sibling_pane,
             should_quit: false,
+            copy_mode: CopyMode::None,
         }
     }
 
@@ -134,5 +142,54 @@ impl App {
                 eprintln!("Failed to open file: {}", e);
             }
         }
+    }
+
+    pub fn enter_copy_mode(&mut self) {
+        if self.selected_node().is_some() {
+            self.copy_mode = CopyMode::Selecting;
+        }
+    }
+
+    pub fn exit_copy_mode(&mut self) {
+        self.copy_mode = CopyMode::None;
+    }
+
+    pub fn copy_selection(&mut self, option: u8) {
+        let Some(node) = self.selected_node() else {
+            self.exit_copy_mode();
+            return;
+        };
+
+        let text = match option {
+            1 => node.name.clone(),                                    // File name
+            2 => node.path.parent()                                    // Directory
+                .map(|p| p.to_string_lossy().to_string())
+                .unwrap_or_default(),
+            3 => node.path.to_string_lossy().to_string(),             // Absolute path
+            4 => node.path.strip_prefix(&self.root_path)              // Relative path
+                .map(|p| p.to_string_lossy().to_string())
+                .unwrap_or_else(|_| node.path.to_string_lossy().to_string()),
+            _ => {
+                self.exit_copy_mode();
+                return;
+            }
+        };
+
+        // Copy to clipboard using pbcopy (macOS)
+        if let Err(e) = std::process::Command::new("pbcopy")
+            .stdin(std::process::Stdio::piped())
+            .spawn()
+            .and_then(|mut child| {
+                use std::io::Write;
+                if let Some(stdin) = child.stdin.as_mut() {
+                    stdin.write_all(text.as_bytes())?;
+                }
+                child.wait()
+            })
+        {
+            eprintln!("Failed to copy: {}", e);
+        }
+
+        self.exit_copy_mode();
     }
 }
