@@ -78,6 +78,12 @@ source <(fzf --zsh)
 # Keybinds
 bindkey -e
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+bindkey " " magic-space
+
 bindkey -r ^h
 bindkey -r ^l
 bindkey ^h backward-word

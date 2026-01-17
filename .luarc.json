@@ -11,9 +11,6 @@
         ],
         "checkThirdParty": false
     },
-    "diagnostics": {
-        "globals": ["vim"]
-    },
     "completion": {
         "enable": true,
         "callSnippet": "Both"

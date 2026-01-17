@@ -7,7 +7,7 @@
 # -----------------------------------------------------
 #
 alias c='clear'
-alias cl='claude'
+alias cl='claude --plugin-dir /Users/housien/Documents/Github/Work/ai-stack'
 alias ff='fastfetch'
 alias ll='eza -al --icons=always'
 alias lt='eza -a --tree --level=1 --icons=always'
@@ -25,13 +25,23 @@ alias fdf='cd "$(fzf --preview "bat --style=numbers --color=always {}" | xargs d
 alias ..="j .."
 alias ...="j ../.."
 alias ....="j ../../.."
-alias nx="npx nx"
 alias fett='open -g "raycast://script-commands/confetti-burst"'
 
 
 # -----------------------------------------------------
 # functions as aliases
 # -----------------------------------------------------
+
+# cpr - cd to project root (uses zoxide)
+cpr() {
+  local dir="$PWD"
+  while [[ "$dir" != "/" ]]; do
+    [[ -e "$dir/.git" ]] && { j "$dir"; return 0; }
+    dir="${dir:h}"
+  done
+  echo "No project root found"
+  return 1
+}
 #
 # Gwt - git worktree
 # gwt() {

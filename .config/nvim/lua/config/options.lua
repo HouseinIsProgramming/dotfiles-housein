@@ -20,7 +20,7 @@ vim.o.laststatus = 0
 -- tab vs spaces
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
-vim.o.expandtab = false
+vim.o.expandtab = true
 
 -- folding
 vim.o.foldcolumn = "0"

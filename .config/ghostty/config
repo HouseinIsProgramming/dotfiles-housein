@@ -1,4 +1,4 @@
-font-size = 17
+font-size = 16
 
 # font-family = IosevkaTerm Nerd Font Mono
 # font-family = FiraCode Nerd Font
@@ -12,7 +12,8 @@ adjust-cell-height = 5%
 keybind = cmd+g>x=close_surface
 keybind = cmd+g>r=reload_config
 
-theme = light:Arthur, dark:Atom
+# theme = light:Arthur, dark:Hybrid
+theme = Everforest Dark Hard 
 # theme = Iceberg Dark
 # background = 101013
 
@@ -23,21 +24,14 @@ quit-after-last-window-closed = true
 
 macos-option-as-alt = left
 
+window-padding-color = extend-always
+window-decoration = none
+window-padding-balance = true
+
 keybind = alt+left=unbind
 keybind = alt+right=unbind
 
 # custom-shader-animation = true
-
-window-height = 50
-window-width = 80
-window-position-x = 200	
-window-position-y = 200	
-window-subtitle = false
-
-window-decoration = none
-
-
-
 # Some shaders can be found in this repo, they're usually uploaded to discord
 # https://github.com/hackrmomo/ghostty-shaders
 # custom-shader = shaders/animated-gradient-shader.glsl

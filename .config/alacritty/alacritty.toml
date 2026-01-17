@@ -3,7 +3,7 @@ live_config_reload = true
 import = ["~/.config/alacritty/themes/themes/nordic.toml"]
 
 [window]
-decorations = "Buttonless"
+decorations = "None"
 padding = { x = 6, y = 0 }
 dynamic_padding = true
 

@@ -1,4 +1,14 @@
 [[mgr.prepend_keymap]]
+on = ["c", "r"]
+run = '''shell 'f="$1"; d=$(dirname "$f"); while [ "$d" != "/" ]; do [ -e "$d/.git" ] && { rel="${f#$d/}"; printf "%s" "$rel" | pbcopy; echo "Copied: $rel"; exit; }; d=$(dirname "$d"); done; printf "%s" "$f" | pbcopy; echo "No root found, copied full path"' --confirm'''
+desc = "Copy path from project root"
+
+[[mgr.prepend_keymap]]
+on = ["g", "f"]
+run = '''shell 'open "$PWD"' --confirm'''
+desc = "Open in Finder"
+
+[[mgr.prepend_keymap]]
 on = ["g", "p", "g"]
 run = 'cd ~/Documents/GitHub'
 [[mgr.prepend_keymap]]
