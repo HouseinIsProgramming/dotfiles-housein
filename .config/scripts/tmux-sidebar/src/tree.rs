@@ -1,6 +1,7 @@
 use std::path::{Path, PathBuf};
 use std::fs;
 use std::cmp::Ordering;
+use crate::git::GitInfo;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum GitStatus {
@@ -137,5 +138,16 @@ impl FileTree {
         root.expanded = true;
         root.load_children();
         self.root = root;
+    }
+
+    pub fn apply_git_status(&mut self, git_info: &GitInfo) {
+        Self::apply_git_status_recursive(&mut self.root, git_info);
+    }
+
+    fn apply_git_status_recursive(node: &mut FileNode, git_info: &GitInfo) {
+        node.git_status = git_info.get_status(&node.path);
+        for child in &mut node.children {
+            Self::apply_git_status_recursive(child, git_info);
+        }
     }
 }
