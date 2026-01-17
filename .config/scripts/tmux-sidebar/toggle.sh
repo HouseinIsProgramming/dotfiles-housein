@@ -1,21 +1,27 @@
 #!/bin/bash
-# Toggle tmux-sidebar pane
+set -euo pipefail
 
-MAIN_PANE="$1"
+MAIN_PANE="${1:-}"
 SIDEBAR_MARKER="tmux-sidebar"
 SIDEBAR_BIN="$HOME/.config/scripts/tmux-sidebar/target/release/tmux-sidebar"
 
-# Find existing sidebar pane in current window
-SIDEBAR_PANE=$(tmux list-panes -F '#{pane_id}:#{pane_title}' | grep ":$SIDEBAR_MARKER$" | cut -d: -f1)
+if [[ -z "$MAIN_PANE" ]]; then
+    echo "Usage: toggle.sh <pane_id>" >&2
+    exit 1
+fi
 
-if [ -n "$SIDEBAR_PANE" ]; then
-    # Sidebar exists - kill it
+if [[ ! -x "$SIDEBAR_BIN" ]]; then
+    echo "Binary not found: $SIDEBAR_BIN" >&2
+    exit 1
+fi
+
+# Find existing sidebar pane
+SIDEBAR_PANE=$(tmux list-panes -F '#{pane_id}:#{pane_title}' | grep ":$SIDEBAR_MARKER$" | cut -d: -f1 || true)
+
+if [[ -n "$SIDEBAR_PANE" ]]; then
     tmux kill-pane -t "$SIDEBAR_PANE"
 else
-    # Create sidebar on the right, 25% width
-    tmux split-window -h -l 25% -t "$MAIN_PANE" "$SIDEBAR_BIN $MAIN_PANE"
-    # Mark the new pane
+    tmux split-window -h -l 25% -t "$MAIN_PANE" "$SIDEBAR_BIN" "$MAIN_PANE"
     tmux select-pane -T "$SIDEBAR_MARKER"
-    # Return focus to main pane
     tmux select-pane -t "$MAIN_PANE"
 fi
