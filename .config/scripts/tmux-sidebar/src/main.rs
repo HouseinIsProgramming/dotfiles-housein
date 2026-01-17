@@ -17,7 +17,7 @@ use crossterm::{
 };
 use ratatui::prelude::*;
 
-use app::App;
+use app::{App, CopyMode};
 use watcher::Watcher;
 
 struct CleanupGuard;
@@ -96,9 +96,22 @@ fn main() -> Result<()> {
         if event::poll(Duration::from_millis(100))? {
             if let Event::Key(key) = event::read()? {
                 match (key.code, key.modifiers) {
+                    // Copy mode handling
+                    _ if app.copy_mode == CopyMode::Selecting => {
+                        match key.code {
+                            KeyCode::Char('1') => app.copy_selection(1),
+                            KeyCode::Char('2') => app.copy_selection(2),
+                            KeyCode::Char('3') => app.copy_selection(3),
+                            KeyCode::Char('4') => app.copy_selection(4),
+                            KeyCode::Esc | KeyCode::Char('q') | KeyCode::Char('c') => app.exit_copy_mode(),
+                            _ => {}
+                        }
+                    }
+                    // Normal mode
                     (KeyCode::Char('q'), _) | (KeyCode::Esc, _) => {
                         app.should_quit = true;
                     }
+                    (KeyCode::Char('c'), _) => app.enter_copy_mode(),
                     (KeyCode::Char('j'), _) | (KeyCode::Down, _) => app.move_down(),
                     (KeyCode::Char('k'), _) | (KeyCode::Up, _) => app.move_up(),
                     (KeyCode::Char('l'), _) | (KeyCode::Right, _) | (KeyCode::Enter, _) => {
