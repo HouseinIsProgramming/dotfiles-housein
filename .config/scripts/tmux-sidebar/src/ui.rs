@@ -1,10 +1,11 @@
 use ratatui::{
     Frame,
+    layout::Rect,
     style::{Color, Modifier, Style},
     text::{Line, Span},
-    widgets::{Block, Borders, List, ListItem, ListState},
+    widgets::{Block, Borders, Clear, List, ListItem, ListState, Paragraph},
 };
-use crate::app::App;
+use crate::app::{App, CopyMode};
 use crate::tree::GitStatus;
 
 pub fn render(frame: &mut Frame, app: &App) {
@@ -68,4 +69,38 @@ pub fn render(frame: &mut Frame, app: &App) {
     state.select(Some(app.cursor));
 
     frame.render_stateful_widget(list, area, &mut state);
+
+    // Show copy menu if in copy mode
+    if app.copy_mode == CopyMode::Selecting {
+        render_copy_menu(frame, area);
+    }
+}
+
+fn render_copy_menu(frame: &mut Frame, area: Rect) {
+    // Center the popup
+    let popup_width = 30;
+    let popup_height = 6;
+    let x = (area.width.saturating_sub(popup_width)) / 2;
+    let y = (area.height.saturating_sub(popup_height)) / 2;
+    let popup_area = Rect::new(x, y, popup_width, popup_height);
+
+    // Clear the area
+    frame.render_widget(Clear, popup_area);
+
+    let menu_text = vec![
+        Line::from("Copy:"),
+        Line::from(""),
+        Line::from("  1. File name"),
+        Line::from("  2. Directory"),
+        Line::from("  3. Absolute path"),
+        Line::from("  4. Relative path"),
+    ];
+
+    let menu = Paragraph::new(menu_text)
+        .block(Block::default()
+            .borders(Borders::ALL)
+            .border_style(Style::default().fg(Color::Cyan))
+            .title("Copy"));
+
+    frame.render_widget(menu, popup_area);
 }
