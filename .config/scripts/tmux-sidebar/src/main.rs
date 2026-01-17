@@ -20,6 +20,15 @@ use ratatui::prelude::*;
 use app::App;
 use watcher::Watcher;
 
+struct CleanupGuard;
+
+impl Drop for CleanupGuard {
+    fn drop(&mut self) {
+        let _ = disable_raw_mode();
+        let _ = execute!(io::stdout(), LeaveAlternateScreen);
+    }
+}
+
 fn get_sibling_pane_pwd(sibling_pane: &str) -> Option<PathBuf> {
     let output = std::process::Command::new("tmux")
         .args(["display-message", "-p", "-t", sibling_pane, "#{pane_current_path}"])
@@ -49,6 +58,7 @@ fn main() -> Result<()> {
     enable_raw_mode()?;
     let mut stdout = io::stdout();
     execute!(stdout, EnterAlternateScreen)?;
+    let _cleanup = CleanupGuard; // Will run cleanup on drop (including panic)
     let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
 
@@ -114,10 +124,6 @@ fn main() -> Result<()> {
             break;
         }
     }
-
-    // Restore terminal
-    disable_raw_mode()?;
-    execute!(terminal.backend_mut(), LeaveAlternateScreen)?;
 
     Ok(())
 }
