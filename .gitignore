@@ -2,3 +2,4 @@
 !/Library/Application Support/Cursor/User/
 /Library/Application Support/Cursor/User/*Storage*
 !/.config/yazi/.toml$
+.config/scripts/src/

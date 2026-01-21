@@ -47,8 +47,7 @@ zinit ice wait lucid
 zinit light zsh-users/zsh-syntax-highlighting
 zinit ice wait lucid
 zinit light zsh-users/zsh-completions
-zinit ice wait lucid
-zinit light Aloxaf/fzf-tab
+
 zinit ice wait lucid
 zinit light olets/zsh-abbr
 zinit ice wait lucid
@@ -63,9 +62,17 @@ zinit load wfxr/forgit
 
 # Load zsh-tmux with Zinit
 
-# load zsh-completions
-zinit ice wait lucid
-autoload -Uz compinit && compinit
+# compinit must run before fzf-tab
+# Use cached .zcompdump for speed (regenerate once daily)
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+# fzf-tab must load after compinit (synchronously)
+zinit light Aloxaf/fzf-tab
 
 # Set-up oh-my-zsh
 #
@@ -88,6 +95,7 @@ bindkey -r ^h
 bindkey -r ^l
 bindkey ^h backward-word
 bindkey ^l forward-word
+bindkey '^j' forward-word  # accept one word from autosuggestion
 
 # zsh history
 ## History
