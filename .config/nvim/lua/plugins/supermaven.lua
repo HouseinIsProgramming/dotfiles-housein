@@ -1,5 +1,6 @@
 return {
   "supermaven-inc/supermaven-nvim",
+  cond = not vim.g.is_vscode,
   config = function()
     require("supermaven-nvim").setup({
       keymaps = {

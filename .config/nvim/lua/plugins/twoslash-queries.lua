@@ -1,5 +1,6 @@
 return {
 	"marilari88/twoslash-queries.nvim",
+	cond = not vim.g.is_vscode,
 	config = function()
 		require("twoslash-queries").setup({
 			multi_line = true,

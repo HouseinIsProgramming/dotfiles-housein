@@ -1,5 +1,6 @@
 return {
 	"karb94/neoscroll.nvim",
+	cond = not vim.g.is_vscode,
 	config = function()
 		require("neoscroll").setup({
 			mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },

@@ -1,6 +1,7 @@
 ---@diagnostic disable: undefined-field, need-check-nil
 return {
 	"lewis6991/gitsigns.nvim",
+	cond = not vim.g.is_vscode,
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"nvim-telescope/telescope.nvim",

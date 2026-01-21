@@ -1,3 +1,9 @@
+-- Disable netrw in VSCode (it opens when VSCode passes directory path)
+if vim.g.is_vscode then
+	vim.g.loaded_netrw = 1
+	vim.g.loaded_netrwPlugin = 1
+end
+
 -- general
 vim.o.number = true
 vim.o.scrolloff = 16

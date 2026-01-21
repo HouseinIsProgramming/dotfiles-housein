@@ -1,5 +1,6 @@
 return {
 	name = "autogen-types",
+	cond = not vim.g.is_vscode,
 	dir = vim.fn.stdpath("config") .. "/lua/plugins/m-plugins/autogen-types",
 	virtual = true,
 	config = function()

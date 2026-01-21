@@ -1,5 +1,6 @@
 return {
 	"coder/claudecode.nvim",
+	cond = not vim.g.is_vscode,
 	opts = {
 		terminal = {
 			provider = "none",

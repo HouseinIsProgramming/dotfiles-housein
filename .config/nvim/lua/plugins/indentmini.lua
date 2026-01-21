@@ -1,5 +1,6 @@
 return {
   "nvimdev/indentmini.nvim",
+  cond = not vim.g.is_vscode,
   event = "BufEnter",
   config = function()
     require("indentmini").setup()

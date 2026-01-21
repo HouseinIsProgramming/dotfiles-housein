@@ -1,5 +1,6 @@
 return {
 	"SmiteshP/nvim-navic",
+	cond = not vim.g.is_vscode,
 	lazy = true,
 	-- enabled = false,
 	opts = {

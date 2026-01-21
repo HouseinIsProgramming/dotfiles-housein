@@ -1,5 +1,6 @@
 return {
 	name = "curr-path",
+	cond = not vim.g.is_vscode,
 	dir = vim.fn.stdpath("config") .. "/lua/plugins/m-plugins/curr-path",
 	virtual = true,
 	config = function()

@@ -1,5 +1,6 @@
 return {
   "stevearc/oil.nvim",
+  cond = not vim.g.is_vscode,
   ---@module 'oil'
   opts = {},
   -- Optional dependencies

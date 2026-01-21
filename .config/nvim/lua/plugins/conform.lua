@@ -1,5 +1,6 @@
 return {
   "stevearc/conform.nvim",
+  cond = not vim.g.is_vscode,
   opts = {},
   config = function()
     require("conform").setup({

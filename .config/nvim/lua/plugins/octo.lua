@@ -1,5 +1,6 @@
 return {
 	"pwntester/octo.nvim",
+	cond = not vim.g.is_vscode,
 	cmd = "Octo",
 	opts = {
 		-- or "fzf-lua" or "snacks" or "default"

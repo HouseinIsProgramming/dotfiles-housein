@@ -1,5 +1,6 @@
 return {
 	name = "pr-review",
+	cond = not vim.g.is_vscode,
 	dir = vim.fn.stdpath("config") .. "/lua/plugins/m-plugins/pr-review",
 	virtual = true,
 	cmd = "PRReview",

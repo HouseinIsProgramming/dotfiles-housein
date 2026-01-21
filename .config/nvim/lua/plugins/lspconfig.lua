@@ -2,6 +2,7 @@
 return {
 	{
 		"neovim/nvim-lspconfig",
+		cond = not vim.g.is_vscode,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",

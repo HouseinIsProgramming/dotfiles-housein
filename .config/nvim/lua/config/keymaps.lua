@@ -67,16 +67,18 @@ vim.keymap.set("n", "<leader>tn", "<Cmd>tabNext<CR>", {
 	noremap = true,
 })
 
-vim.keymap.set({ "v" }, "J", function()
-	require("mini.move").move_selection("down")
-	vim.cmd("normal! =gv") -- Re-select then reindent
-end, { silent = true, desc = "Move selection down and reindent" })
+if not vim.g.is_vscode then
+	vim.keymap.set({ "v" }, "J", function()
+		require("mini.move").move_selection("down")
+		vim.cmd("normal! =gv") -- Re-select then reindent
+	end, { silent = true, desc = "Move selection down and reindent" })
 
--- Map Shift+K to move selected lines UP and then reindent
-vim.keymap.set({ "v" }, "K", function()
-	require("mini.move").move_selection("up")
-	vim.cmd("normal! =gv") -- Re-select then reindent
-end, { silent = true, desc = "Move selection up and reindent" })
+	-- Map Shift+K to move selected lines UP and then reindent
+	vim.keymap.set({ "v" }, "K", function()
+		require("mini.move").move_selection("up")
+		vim.cmd("normal! =gv") -- Re-select then reindent
+	end, { silent = true, desc = "Move selection up and reindent" })
+end
 
 -- Function to toggle LSP diagnostics
 local diagnostics_enabled = true
@@ -121,3 +123,27 @@ vim.keymap.set("n", "<leader>uv", toggle_virtual_lines, { desc = "Toggle virtual
 vim.keymap.set("n", "<leader>uh", function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
+
+-- VSCode Neovim keymaps
+if vim.g.is_vscode then
+	local vscode = require("vscode")
+
+	-- File actions
+	vim.keymap.set("n", "<leader>qe", function() vscode.call("workbench.action.files.revert") end)
+
+	-- File navigation
+	vim.keymap.set("n", "<leader>ff", function() vscode.call("workbench.action.quickOpen") end)
+	vim.keymap.set("n", "<leader>fg", function() vscode.call("workbench.action.findInFiles") end)
+	vim.keymap.set("n", "<leader>e", function() vscode.call("workbench.view.explorer") end)
+
+	-- LSP actions (mapped to VSCode)
+	vim.keymap.set("n", "gd", function() vscode.call("editor.action.revealDefinition") end)
+	vim.keymap.set("n", "gr", function() vscode.call("editor.action.goToReferences") end)
+	vim.keymap.set("n", "K", function() vscode.call("editor.action.showHover") end)
+	vim.keymap.set("n", "<leader>ca", function() vscode.call("editor.action.quickFix") end)
+	vim.keymap.set("n", "<leader>rn", function() vscode.call("editor.action.rename") end)
+
+	-- Window management
+	vim.keymap.set("n", "<C-h>", function() vscode.call("workbench.action.focusLeftGroup") end)
+	vim.keymap.set("n", "<C-l>", function() vscode.call("workbench.action.focusRightGroup") end)
+end

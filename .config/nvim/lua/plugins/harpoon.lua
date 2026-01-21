@@ -1,5 +1,6 @@
 return {
   "ThePrimeagen/harpoon",
+  cond = not vim.g.is_vscode,
 
   config = function()
     require("harpoon").setup({

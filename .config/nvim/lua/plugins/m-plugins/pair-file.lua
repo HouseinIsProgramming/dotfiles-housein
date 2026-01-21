@@ -1,5 +1,6 @@
 return {
 	name = "pair-file",
+	cond = not vim.g.is_vscode,
 	dir = vim.fn.stdpath("config") .. "/lua/plugins/m-plugins/pair-file",
 	virtual = true,
 	config = function()

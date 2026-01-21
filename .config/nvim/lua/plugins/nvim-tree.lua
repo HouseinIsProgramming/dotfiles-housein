@@ -1,5 +1,6 @@
 return {
 	"nvim-tree/nvim-tree.lua",
+	cond = not vim.g.is_vscode,
 	enabled = false,
 	version = "*",
 	lazy = false,

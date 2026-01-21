@@ -1,5 +1,6 @@
 return {
 	"jiaoshijie/undotree",
+	cond = not vim.g.is_vscode,
 	---@module 'undotree.collector'
 	---@type UndoTreeCollector.Opts
 	opts = {

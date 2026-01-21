@@ -1,5 +1,6 @@
 return {
 	"gisketch/triforce.nvim",
+	cond = not vim.g.is_vscode,
 	dependencies = { "nvzone/volt" },
 	config = function()
 		require("triforce").setup({

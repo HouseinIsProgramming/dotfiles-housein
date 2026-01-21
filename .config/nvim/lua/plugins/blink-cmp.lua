@@ -62,6 +62,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 return {
   {
     "saghen/blink.cmp",
+    cond = not vim.g.is_vscode,
     dependencies = {
       "rafamadriz/friendly-snippets",
       "L3MON4D3/LuaSnip",
