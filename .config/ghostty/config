@@ -2,12 +2,13 @@ font-size = 16
 
 # font-family = IosevkaTerm Nerd Font Mono
 # font-family = FiraCode Nerd Font
+font-family = CommitMono Nerd Font
 # font-family = GeistMono Nerd Font
-font-family = JetBrainsMono Nerd Font
+# font-family = JetBrainsMono Nerd Font
 #
 
 font-feature =  -calt, -liga, -dliga 
-adjust-cell-height = 5%
+adjust-cell-height = 15%
 
 keybind = cmd+g>x=close_surface
 keybind = cmd+g>r=reload_config
