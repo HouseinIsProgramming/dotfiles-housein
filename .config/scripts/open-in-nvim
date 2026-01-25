@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Full paths (hints kitten has minimal PATH)
+NVIM=/opt/homebrew/bin/nvim
+FD=/opt/homebrew/bin/fd
+FZF=/opt/homebrew/bin/fzf
+TMUX_BIN=/opt/homebrew/bin/tmux
+
+# Debug log
+exec >> /tmp/open-in-nvim.log 2>&1
+echo "=== $(date) ==="
+echo "Input: $1"
+
+input="$1"
+
+# Extract filename and line number
+if [[ "$input" =~ :([0-9]+)$ ]]; then
+  line="${BASH_REMATCH[1]}"
+  filename="${input%:*}"
+else
+  line="1"
+  filename="$input"
+fi
+
+echo "Filename: $filename, Line: $line"
+
+# Check if tmux is running
+if ! $TMUX_BIN list-sessions &>/dev/null; then
+  echo "No tmux running - can't open"
+  exit 1
+fi
+
+# Get current pane's working directory (crucial for relative paths!)
+pane_path=$($TMUX_BIN display-message -p '#{pane_current_path}')
+echo "Pane current path: $pane_path"
+
+# If file exists at the exact path, open it directly
+if [ -f "$filename" ]; then
+  echo "File exists (absolute), opening: $filename +$line"
+  $TMUX_BIN new-window -n "nvim" "$NVIM +$line '$filename'"
+  exit 0
+fi
+
+# Check if file exists relative to pane's current directory
+if [ -f "$pane_path/$filename" ]; then
+  echo "File exists (relative), opening: $pane_path/$filename +$line"
+  $TMUX_BIN new-window -n "nvim" "$NVIM +$line '$pane_path/$filename'"
+  exit 0
+fi
+
+# Also try without leading slash (e.g., /apps/... -> apps/...)
+filename_no_slash="${filename#/}"
+if [ -f "$pane_path/$filename_no_slash" ]; then
+  echo "File exists (relative no slash), opening: $pane_path/$filename_no_slash +$line"
+  $TMUX_BIN new-window -n "nvim" "$NVIM +$line '$pane_path/$filename_no_slash'"
+  exit 0
+fi
+
+# File doesn't exist at exact path - build smart search query
+# Use last 3 path components for better matching
+IFS='/' read -ra parts <<< "$filename"
+num_parts=${#parts[@]}
+
+if [ $num_parts -le 3 ]; then
+  searchquery="$filename"
+else
+  searchquery="${parts[-3]}/${parts[-2]}/${parts[-1]}"
+fi
+searchquery="${searchquery#/}"
+
+echo "Search query (last 3 components): $searchquery"
+
+tmpscript=$(mktemp)
+cat > "$tmpscript" << EOF
+#!/bin/bash
+cd "$pane_path"
+selected=\$($FD --type f | $FZF --query="$searchquery" --select-1 --exit-0)
+if [ -n "\$selected" ]; then
+  $NVIM +$line "\$selected"
+else
+  echo "No file selected"
+  sleep 1
+fi
+rm -f "$tmpscript"
+EOF
+chmod +x "$tmpscript"
+
+$TMUX_BIN new-window -c "$pane_path" -n "open-file" "$tmpscript"
+echo "Launched fzf in tmux window at $pane_path"
+echo "Done"

@@ -1,3 +1,6 @@
+-- Abbreviations
+vim.cmd.cabbr({ args = { "<expr>", "%%", "expand('%:p:h')" } })
+
 vim.filetype.add({
 	extension = {
 		fs = "glsl",

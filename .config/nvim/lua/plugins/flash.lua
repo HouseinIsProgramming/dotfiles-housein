@@ -1,7 +1,14 @@
 return {
 	"folke/flash.nvim",
 	event = "VeryLazy",
-	opts = {},
+	opts = {
+		highlight = {
+			backdrop = true,
+			groups = {
+				label = "IncSearch",
+			},
+		},
+	},
 	keys = {
 		{
 			"s",

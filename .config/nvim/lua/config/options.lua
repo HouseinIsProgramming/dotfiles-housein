@@ -9,6 +9,7 @@ vim.o.number = true
 vim.o.scrolloff = 16
 vim.o.signcolumn = "yes"
 vim.o.clipboard = "unnamedplus"
+vim.o.autoread = true
 
 -- searching
 vim.o.smartcase = true

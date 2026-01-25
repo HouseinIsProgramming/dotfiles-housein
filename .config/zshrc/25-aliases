@@ -26,6 +26,7 @@ alias ..="j .."
 alias ...="j ../.."
 alias ....="j ../../.."
 alias fett='open -g "raycast://script-commands/confetti-burst"'
+alias cle="claude --model haiku -p"
 
 
 # -----------------------------------------------------
