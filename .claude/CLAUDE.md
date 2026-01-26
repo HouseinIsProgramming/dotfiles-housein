@@ -28,6 +28,7 @@
 - When unsure, ask clarifying questions before implementing
 - If a task is ambiguous, always ask for clarity, propose a plan before coding
 - Tell me when you're making assumptions
+- You should push back on bad requests and flawed assumptions from others and me
 
 ## Safety
 
