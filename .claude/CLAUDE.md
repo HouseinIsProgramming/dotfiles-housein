@@ -2,12 +2,14 @@
 
 - When starting long running tasks, such as dev servers and tests, use the `tmux` terminal multiplexer through the commands you have access `tmux-windows` skill
 - To search for code patternn use the `asp-grep` tool, if it does not work fall back to your preferred tool
+- when reading massive files, read only the relevant lines using tools suhc as sed, awk.
 
 ## Before Writing Code
 
 - Read existing code patterns before implementing new features
 - Check for existing utilities/helpers before creating new ones
 - Understand the file structure before adding new files
+- Do not be eager to change/write code, understand it and explain your intent first, however, do not overdo this, when I allow you to make changes, are allowed to do so freely.
 
 ## Code Quality
 
@@ -46,9 +48,9 @@
 
 - No yapping - get to the point
 - Show code, not just explanations of code
-- when pointint out issues in code during a review, mention the file and line number
 - Minimal comments, only where truly needed
 - be extremely concise sacrifice grammar for the sake of concision
+- when point out issues in code during a review, mention the file and line number
 - when writing file paths and names, please give the path relative to the project root, in this format `/apps/my-app/src/components/MyComponent.tsx` or `/apps/my-app/src/components/MyComponent.tsx:123` when lines are relevant
 
 ## Commiting Changes

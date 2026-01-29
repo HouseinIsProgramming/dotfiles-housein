@@ -1005,12 +1005,11 @@
       "Bash(touch:*)",
       "Bash(mcp:*)",
       "Bash(tmux:*)",
-      "WebFetch",
       "WebSearch",
       "mcp__context7__get-library-docs",
       "mcp__context7__resolve-library-id",
       "mcp__context7",
-      "mcp__plugin_serena_serena"
+      "Bash(npm run fix-lint:*)"
     ],
     "deny": [],
     "ask": [
@@ -1313,8 +1312,25 @@
       "Bash(pbcopy:*)",
       "Bash(osascript:*)",
       "Bash(open -a:*)"
-    ]
+    ],
+    "defaultMode": "default"
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "pr-review-toolkit@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "ast-grep@ast-grep-marketplace": true,
+    "commit-commands@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "nigel@ai-stack": false,
+    "core-maintainer@ai-stack": true
+  },
+  "outputStyle": "Explanatory",
   "hooks": {
     "PreToolUse": [
       {
@@ -1322,7 +1338,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "uv run ~/.claude/hooks/block_dangerous.ts"
+            "command": "bun ~/.claude/hooks/block_dangerous.ts"
           }
         ]
       },
@@ -1331,33 +1347,10 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun run ~/.claude/hooks/block-git-push.ts"
+            "command": "bun ~/.claude/hooks/block-git-push.ts"
           }
         ]
       }
     ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bunx -y ccstatusline@latest",
-    "padding": 0
-  },
-  "enabledPlugins": {
-    "lua-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
-    "clangd-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true,
-    "pr-review-toolkit@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "ast-grep@ast-grep-marketplace": true,
-    "plugin-dev@claude-plugins-official": true,
-    "vendurebot@ai-stack": true,
-    "nigel@ai-stack": true,
-    "sherlock@ai-stack": true,
-    "commit-commands@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true
-  },
-  "outputStyle": "Explanatory"
+  }
 }
