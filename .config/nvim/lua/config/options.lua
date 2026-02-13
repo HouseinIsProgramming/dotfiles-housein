@@ -30,11 +30,36 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 
 -- folding
+local function custom_foldexpr()
+	local lnum = vim.v.lnum
+	local line = vim.fn.getline(lnum)
+
+	-- Separator pattern: ========== something ==========
+	if line:match("^==========.*==========$") then
+		return ">1"
+	end
+
+	-- Try treesitter folding first
+	local ok, ts_fold = pcall(vim.treesitter.foldexpr)
+	if ok and ts_fold and ts_fold ~= "0" and ts_fold ~= "" then
+		return ts_fold
+	end
+
+	-- Fallback to indent-based
+	local indent = vim.fn.indent(lnum)
+	local sw = vim.bo.shiftwidth > 0 and vim.bo.shiftwidth or vim.o.shiftwidth
+	if sw == 0 then sw = 4 end
+	return math.floor(indent / sw)
+end
+
+_G.CustomFoldExpr = custom_foldexpr
+
 vim.o.foldcolumn = "0"
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.o.foldmethod = "indent"
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.CustomFoldExpr()"
 
 vim.o.undofile = true
 
