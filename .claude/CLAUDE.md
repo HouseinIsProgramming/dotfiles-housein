@@ -3,6 +3,7 @@
 - When starting long running tasks, such as dev servers and tests, use the `tmux` terminal multiplexer through the commands you have access `tmux-windows` skill
 - To search for code patternn use the `asp-grep` tool, if it does not work fall back to your preferred tool
 - when reading massive files, read only the relevant lines using tools suhc as sed, awk.
+- Do not start dev servers, assume i have them running already
 
 ## Before Writing Code
 

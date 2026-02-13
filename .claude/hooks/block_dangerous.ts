@@ -1,20 +1,26 @@
 #!/usr/bin/env bun
 
+import { resolve, normalize } from "path";
+
 interface ToolInput {
   tool_name: string;
   tool_input: {
     file_path?: string;
     command?: string;
   };
+  cwd?: string;
 }
 
-function isCredentialFileAccess(toolName: string, toolInput: ToolInput["tool_input"]): boolean {
+function isCredentialFileAccess(
+  toolName: string,
+  toolInput: ToolInput["tool_input"],
+): boolean {
   // Check file-based tools (Read, Write, Edit)
   if (["Read", "Write", "Edit"].includes(toolName)) {
     const filePath = (toolInput.file_path || "").toLowerCase();
 
     // Block .env files (but allow .env.sample, .env.example)
-    if (/\.env(?!\.sample|\.example)/.test(filePath)) {
+    if (/\.env(?!\.sample|\.example|rc)/.test(filePath)) {
       return true;
     }
 
@@ -53,16 +59,81 @@ function isCredentialFileAccess(toolName: string, toolInput: ToolInput["tool_inp
   return false;
 }
 
+function isPipedConfirmationToRm(command: string): boolean {
+  const normalized = command.toLowerCase();
+
+  // Block piping confirmation into rm (bypasses rm -i alias)
+  const patterns = [
+    /\b(echo|yes|printf)\s+.*\|\s*rm\b/, // echo y | rm, yes | rm
+    /\b(echo|yes|printf)\s+.*\|\s*xargs\s+rm/, // echo y | xargs rm
+    /\brm\b.*<\s*<.*EOF/i, // rm with heredoc
+    /\brm\b.*<<<\s*["']?y/i, // rm <<< "y"
+  ];
+
+  return patterns.some((p) => p.test(normalized));
+}
+
+function isRmOutsideProject(
+  command: string,
+  cwd: string,
+): { outside: boolean; target?: string } {
+  // Match rm commands with -r or -f flags
+  const rmMatch = command.match(/\brm\s+((?:-[rRfFiIvV]+\s+)*)(.*)/);
+  if (!rmMatch) return { outside: false };
+
+  const flags = rmMatch[1] || "";
+  const hasRecursiveOrForce = /(-r|-R|-f|-rf|-fr|-Rf|-fR)/i.test(flags);
+  if (!hasRecursiveOrForce) return { outside: false };
+
+  // Extract targets (split by space, filter out flags)
+  const targetsStr = rmMatch[2].trim();
+  if (!targetsStr) return { outside: false };
+
+  // Simple split - doesn't handle quoted paths perfectly but covers most cases
+  const targets = targetsStr.split(/\s+/).filter((t) => !t.startsWith("-"));
+
+  const homeDir = process.env.HOME || process.env.USERPROFILE || "";
+
+  for (const target of targets) {
+    let resolvedPath: string;
+
+    // Expand ~ to home directory
+    const expandedTarget = target.replace(/^~/, homeDir);
+
+    // Resolve to absolute path
+    if (expandedTarget.startsWith("/")) {
+      resolvedPath = normalize(expandedTarget);
+    } else {
+      resolvedPath = resolve(cwd, expandedTarget);
+    }
+
+    // Normalize both paths for comparison
+    const normalizedCwd = normalize(cwd);
+    const normalizedTarget = normalize(resolvedPath);
+
+    // Check if target is outside project directory
+    if (
+      !normalizedTarget.startsWith(normalizedCwd + "/") &&
+      normalizedTarget !== normalizedCwd
+    ) {
+      return { outside: true, target: normalizedTarget };
+    }
+  }
+
+  return { outside: false };
+}
+
 function isDangerousCommand(command: string): boolean {
   // Normalize command (lowercase, collapse whitespace)
   const normalized = command.toLowerCase().trim().replace(/\s+/g, " ");
 
-  // Dangerous rm patterns
+  // Dangerous rm patterns - always block these regardless of cwd
   const rmPatterns = [
-    /\brm\s+-[rf]*[fr][rf]*\s+\//, // rm -rf /, rm -fr /, etc.
-    /\brm\s+-[rf]*[fr][rf]*\s+\*/, // rm -rf *, rm -fr *, etc.
-    /\brm\s+-[rf]*[fr][rf]*\s+~/, // rm -rf ~
-    /\brm\s+-[rf]*[fr][rf]*\s+\$HOME/, // rm -rf $HOME
+    /\brm\s+-[rf]*[fr][rf]*\s+\/\s*$/, // rm -rf / (root only)
+    /\brm\s+-[rf]*[fr][rf]*\s+\/\*/, // rm -rf /*
+    /\brm\s+-[rf]*[fr][rf]*\s+~\s*$/, // rm -rf ~ (home only)
+    /\brm\s+-[rf]*[fr][rf]*\s+~\/\*/, // rm -rf ~/*
+    /\brm\s+-[rf]*[fr][rf]*\s+\$HOME\s*$/, // rm -rf $HOME
   ];
   for (const pattern of rmPatterns) {
     if (pattern.test(normalized)) {
@@ -142,12 +213,37 @@ async function main() {
   // Check dangerous bash commands
   if (toolName === "Bash") {
     const command = toolInput.command || "";
+    const cwd = inputData.cwd || process.cwd();
+
+    // Check for piped confirmation to rm (bypasses rm -i alias)
+    if (isPipedConfirmationToRm(command)) {
+      console.error(
+        `BLOCKED: Piping confirmation to rm bypasses interactive mode.\n` +
+          `Command: ${command}\n` +
+          `Your rm is aliased to rm -i for safety. Run manually if needed.`,
+      );
+      process.exit(2);
+    }
+
+    // Check for rm commands targeting files outside project
+    const rmCheck = isRmOutsideProject(command, cwd);
+    if (rmCheck.outside) {
+      console.error(
+        `BLOCKED: rm with -r/-f flags targeting path outside project directory.\n` +
+          `Command: ${command}\n` +
+          `Target: ${rmCheck.target}\n` +
+          `Project: ${cwd}\n` +
+          `Run this command manually if you really need to delete files outside the project.`,
+      );
+      process.exit(2);
+    }
+
     if (isDangerousCommand(command)) {
       console.error(
         `BLOCKED: This command requires manual execution.\n` +
-        `Command: ${command}\n` +
-        `STOP trying to execute this command. Instead, tell the user to run this command themselves.\n` +
-        `WAIT for the user's input after this point. Do NOT automatically execute any workarounds for this command being blocked.`
+          `Command: ${command}\n` +
+          `STOP trying to execute this command. Instead, tell the user to run this command themselves.\n` +
+          `WAIT for the user's input after this point. Do NOT automatically execute any workarounds for this command being blocked.`,
       );
       process.exit(2);
     }
