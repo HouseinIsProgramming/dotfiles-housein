@@ -106,14 +106,6 @@ return {
 						})
 					end, opts)
 
-					-- Attach navic if the server supports document symbols
-					if client:supports_method("textDocument/documentSymbol") then
-						local navic_ok, navic = pcall(require, "nvim-navic")
-						if navic_ok then
-							navic.attach(client, args.buf)
-						end
-					end
-
 					-- Let conform handle formatting with lsp_format = "fallback"
 					-- No need to disable LSP formatting capabilities
 
