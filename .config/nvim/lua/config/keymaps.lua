@@ -8,6 +8,40 @@ vim.keymap.set("n", "<leader>qo", ":%bd|e#<CR>", { desc = "Quit other buffers" }
 
 vim.keymap.set("n", "<CR>", "<CR><Cmd>cclose<CR>", { noremap = true, silent = true })
 
+-- Quickfix list
+vim.keymap.set("n", "<leader>xx", function()
+	local qf_exists = false
+	for _, win in pairs(vim.fn.getwininfo()) do
+		if win.quickfix == 1 then
+			qf_exists = true
+			break
+		end
+	end
+	if qf_exists then
+		vim.cmd("cclose")
+	else
+		vim.cmd("copen")
+	end
+end, { desc = "Quickfix: Toggle" })
+vim.keymap.set("n", "<leader>xn", "<Cmd>cnext<CR>zz", { desc = "Quickfix: Next" })
+vim.keymap.set("n", "<leader>xp", "<Cmd>cprev<CR>zz", { desc = "Quickfix: Previous" })
+vim.keymap.set("n", "<leader>gm", ":Gitsigns change_base ", { desc = "Gitsigns: Change base" })
+vim.keymap.set("n", "<leader>xg", function()
+	local files = vim.fn.systemlist("gh pr diff --name-only")
+	if vim.v.shell_error ~= 0 then
+		vim.notify("No PR found or gh error", vim.log.levels.WARN)
+		return
+	end
+	local qf_list = {}
+	for _, file in ipairs(files) do
+		if file ~= "" then
+			table.insert(qf_list, { filename = file, lnum = 1 })
+		end
+	end
+	vim.fn.setqflist(qf_list)
+	vim.cmd("copen")
+end, { desc = "Quickfix: PR changed files" })
+
 -- Little one from Primeagen to mass replace string in a file
 vim.keymap.set("n", "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { silent = false })
 
@@ -24,8 +58,7 @@ vim.keymap.set("n", "vag", "ggVG", { noremap = true, silent = true })
 vim.keymap.set({ "n", "v" }, "<leader>cc", "1z=")
 
 -- Navigate through buffers
-vim.keymap.set("n", "<leader><C-i>", ":bnext<CR>", { silent = false, desc = "Buffer: Next" })
-vim.keymap.set("n", "<leader><C-o>", ":bprevious<CR>", { silent = false, desc = "Buffer: Previous" })
+vim.keymap.set("n", "<leader><Tab>", "<C-^>", { desc = "Buffer: Alternate" })
 
 -- Center buffer when progressing through search results
 vim.keymap.set("n", "n", "nzzzv")
@@ -58,27 +91,40 @@ vim.keymap.set("i", "<C-H>", "<C-G>u<C-W>", { noremap = true, silent = true, des
 -- Exit and re-enter insert mode to create an undo breakpoint
 vim.keymap.set("i", "<D-BS>", "<C-G>u<C-U>", { noremap = true, silent = true, desc = "Delete to start of line" })
 
+-- Cmd+S to save, Cmd+W to close buffer (requires terminal passthrough)
+vim.keymap.set("n", "<D-s>", "<Cmd>w<CR>", { desc = "Save" })
+vim.keymap.set("i", "<D-s>", "<Cmd>w<CR>", { desc = "Save" })
+vim.keymap.set("n", "<D-w>", "<Cmd>bd<CR>", { desc = "Close buffer" })
+
 vim.keymap.set("n", "<C-k>", ":")
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<C-a>", "<C-a>", { noremap = true, desc = "Pass Ctrl-A to terminal (tmux prefix)" })
+
+-- Window navigation from terminal mode
+vim.keymap.set("t", "<C-w>h", "<C-\\><C-n><C-w>h", { desc = "Window: left" })
+vim.keymap.set("t", "<C-w>j", "<C-\\><C-n><C-w>j", { desc = "Window: down" })
+vim.keymap.set("t", "<C-w>k", "<C-\\><C-n><C-w>k", { desc = "Window: up" })
+vim.keymap.set("t", "<C-w>l", "<C-\\><C-n><C-w>l", { desc = "Window: right" })
+vim.keymap.set("t", "<C-w><C-w>", "<C-\\><C-n><C-w><C-w>", { desc = "Window: next" })
 
 vim.keymap.set("n", "<leader>tn", "<Cmd>tabNext<CR>", {
 	desc = "Next tab",
 	noremap = true,
 })
 
-if not vim.g.is_vscode then
-	vim.keymap.set({ "v" }, "J", function()
-		require("mini.move").move_selection("down")
-		vim.cmd("normal! =gv") -- Re-select then reindent
-	end, { silent = true, desc = "Move selection down and reindent" })
-
-	-- Map Shift+K to move selected lines UP and then reindent
-	vim.keymap.set({ "v" }, "K", function()
-		require("mini.move").move_selection("up")
-		vim.cmd("normal! =gv") -- Re-select then reindent
-	end, { silent = true, desc = "Move selection up and reindent" })
-end
+-- if not vim.g.is_vscode then
+-- 	vim.keymap.set({ "v" }, "J", function()
+-- 		require("mini.move").move_selection("down")
+-- 		vim.cmd("normal! =gv") -- Re-select then reindent
+-- 	end, { silent = true, desc = "Move selection down and reindent" })
+--
+-- 	-- Map Shift+K to move selected lines UP and then reindent
+-- 	vim.keymap.set({ "v" }, "K", function()
+-- 		require("mini.move").move_selection("up")
+-- 		vim.cmd("normal! =gv") -- Re-select then reindent
+-- 	end, { silent = true, desc = "Move selection up and reindent" })
+-- end
 
 -- Function to toggle LSP diagnostics
 local diagnostics_enabled = true
@@ -128,22 +174,128 @@ end)
 if vim.g.is_vscode then
 	local vscode = require("vscode")
 
+	-- Use VSCode's undo/redo (prevents file mutation issue)
+	vim.keymap.set("n", "u", function()
+		vscode.call("undo")
+	end)
+	vim.keymap.set("n", "<C-r>", function()
+		vscode.call("redo")
+	end)
+
 	-- File actions
-	vim.keymap.set("n", "<leader>qe", function() vscode.call("workbench.action.files.revert") end)
+	vim.keymap.set("n", "<leader>qe", function()
+		vscode.call("workbench.action.files.revert")
+	end)
 
 	-- File navigation
-	vim.keymap.set("n", "<leader>ff", function() vscode.call("workbench.action.quickOpen") end)
-	vim.keymap.set("n", "<leader>fg", function() vscode.call("workbench.action.findInFiles") end)
-	vim.keymap.set("n", "<leader>e", function() vscode.call("workbench.view.explorer") end)
+	vim.keymap.set("n", "<leader>ff", function()
+		vscode.call("workbench.action.quickOpen")
+	end)
+	vim.keymap.set("n", "<leader>fg", function()
+		vscode.call("workbench.action.findInFiles")
+	end)
+	vim.keymap.set("n", "<leader>e", function()
+		vscode.call("workbench.view.explorer")
+	end)
 
 	-- LSP actions (mapped to VSCode)
-	vim.keymap.set("n", "gd", function() vscode.call("editor.action.revealDefinition") end)
-	vim.keymap.set("n", "gr", function() vscode.call("editor.action.goToReferences") end)
-	vim.keymap.set("n", "K", function() vscode.call("editor.action.showHover") end)
-	vim.keymap.set("n", "<leader>ca", function() vscode.call("editor.action.quickFix") end)
-	vim.keymap.set("n", "<leader>rn", function() vscode.call("editor.action.rename") end)
+	-- Test: C-g should show hover (visible feedback)
+	vim.keymap.set("i", "<C-g>", function()
+		vscode.notify("editor.action.showHover")
+	end)
+	vim.keymap.set({ "n", "i" }, "<C-s>", function()
+		vscode.notify("editor.action.triggerParameterHints")
+	end)
+	vim.keymap.set("n", "gd", function()
+		vscode.call("editor.action.revealDefinition")
+	end)
+	vim.keymap.set("n", "gr", function()
+		vscode.call("editor.action.goToReferences")
+	end)
+	vim.keymap.set("n", "K", function()
+		vscode.call("editor.action.showHover")
+	end)
+	vim.keymap.set("n", "<leader>ca", function()
+		vscode.call("editor.action.quickFix")
+	end)
+	vim.keymap.set("n", "gra", function()
+		vscode.call("editor.action.quickFix")
+	end)
+	vim.keymap.set("n", "<leader>ls", function()
+		vscode.call("editor.action.sourceAction")
+	end)
+	vim.keymap.set("n", "<leader>rn", function()
+		vscode.call("editor.action.rename")
+	end)
 
 	-- Window management
-	vim.keymap.set("n", "<C-h>", function() vscode.call("workbench.action.focusLeftGroup") end)
-	vim.keymap.set("n", "<C-l>", function() vscode.call("workbench.action.focusRightGroup") end)
+	vim.keymap.set("n", "<C-h>", function()
+		vscode.call("workbench.action.focusLeftGroup")
+	end)
+	vim.keymap.set("n", "<C-l>", function()
+		vscode.call("workbench.action.focusRightGroup")
+	end)
+
+	-- Save/quit
+	vim.keymap.set("n", "<leader>qw", function()
+		vscode.call("workbench.action.files.save")
+	end)
+	vim.keymap.set("n", "<leader>qq", function()
+		vscode.call("workbench.action.closeActiveEditor")
+	end)
+	vim.keymap.set("n", "<leader>qa", function()
+		vscode.call("workbench.action.closeAllEditors")
+	end)
+	vim.keymap.set("n", "<leader>qo", function()
+		vscode.call("workbench.action.closeOtherEditors")
+	end)
+
+	-- Format
+	vim.keymap.set("n", "<leader>lf", function()
+		vscode.call("editor.action.formatDocument")
+	end)
+
+	-- Pickers
+	vim.keymap.set("n", "<leader>fb", function()
+		vscode.call("workbench.action.showAllEditors")
+	end)
+	vim.keymap.set("n", "<leader>fo", function()
+		vscode.call("workbench.action.openRecent")
+	end)
+	vim.keymap.set("n", "<leader>fs", function()
+		vscode.call("workbench.action.gotoSymbol")
+	end)
+	vim.keymap.set("n", "<leader>fS", function()
+		vscode.call("workbench.action.showAllSymbols")
+	end)
+	vim.keymap.set("n", "<leader>fd", function()
+		vscode.call("workbench.actions.view.problems")
+	end)
+	vim.keymap.set("n", "<leader>gs", function()
+		vscode.call("workbench.view.scm")
+	end)
+
+	-- Harpoon
+	vim.keymap.set("n", "<leader>m", function()
+		vscode.call("vscode-harpoon.addEditor")
+	end)
+	vim.keymap.set("n", "<leader>h", function()
+		vscode.call("vscode-harpoon.editorQuickPick")
+	end)
+	for i = 1, 9 do
+		vim.keymap.set("n", "<leader>" .. i, function()
+			vscode.call("vscode-harpoon.gotoEditor" .. i)
+		end)
+	end
+
+	-- Git hunks
+	vim.keymap.set("n", "]h", function()
+		vscode.call("workbench.action.editor.nextChange")
+	end)
+	vim.keymap.set("n", "[h", function()
+		vscode.call("workbench.action.editor.previousChange")
+	end)
+	vim.keymap.set("n", "do", function()
+		vscode.call("editor.action.dirtydiff.next")
+	end)
 end
