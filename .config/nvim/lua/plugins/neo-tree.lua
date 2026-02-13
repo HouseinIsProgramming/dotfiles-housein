@@ -1,6 +1,7 @@
+-- Disabled in favor of git-panel
 return {
 	"nvim-neo-tree/neo-tree.nvim",
-	cond = not vim.g.is_vscode,
+	cond = false, -- disabled: using git-panel instead
 	branch = "v3.x",
 	lazy = false,
 	dependencies = {
