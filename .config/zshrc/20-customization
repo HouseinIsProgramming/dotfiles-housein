@@ -97,6 +97,13 @@ bindkey ^h backward-word
 bindkey ^l forward-word
 bindkey '^j' forward-word  # accept one word from autosuggestion
 
+# Copy current command line to clipboard
+copy-line-to-clipboard() {
+  print -rn -- "$BUFFER" | pbcopy
+}
+zle -N copy-line-to-clipboard
+bindkey '^x^l' copy-line-to-clipboard
+
 # zsh history
 ## History
 HISTSIZE=5000

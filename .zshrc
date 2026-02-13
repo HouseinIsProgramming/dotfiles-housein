@@ -57,7 +57,6 @@ fi
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 source "$HOME/.cargo/env"
 export PATH="$HOME/.local/bin:$PATH"
-. "/Users/housien/.deno/env"
 
 
 # BEGIN opam configuration
@@ -98,3 +97,4 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+eval "$(direnv hook zsh)"

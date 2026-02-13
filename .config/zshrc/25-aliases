@@ -7,7 +7,7 @@
 # -----------------------------------------------------
 #
 alias c='clear'
-alias cl='claude --plugin-dir /Users/housien/Documents/Github/Work/ai-stack'
+alias cl='claude'
 alias ff='fastfetch'
 alias ll='eza -al --icons=always'
 alias lt='eza -a --tree --level=1 --icons=always'
@@ -27,7 +27,9 @@ alias ...="j ../.."
 alias ....="j ../../.."
 alias fett='open -g "raycast://script-commands/confetti-burst"'
 alias cle="claude --model haiku -p"
-
+alias hl="arch -x86_64 /usr/local/bin/hl"
+alias sherlock="/Users/housien/.claude/skills/sherlock/sherlock"
+alias pico='cd "/Users/housien/Library/Application Support/pico-8/carts"'
 
 # -----------------------------------------------------
 # functions as aliases
