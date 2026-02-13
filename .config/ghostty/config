@@ -1,4 +1,4 @@
-font-size = 16
+font-size = 15
 
 # font-family = IosevkaTerm Nerd Font Mono
 # font-family = FiraCode Nerd Font
@@ -12,6 +12,10 @@ adjust-cell-height = 15%
 
 keybind = cmd+g>x=close_surface
 keybind = cmd+g>r=reload_config
+keybind = super+s=unbind
+keybind = super+d=unbind
+keybind = super+t=unbind
+keybind = super+w=unbind
 
 # theme = light:Arthur, dark:Hybrid
 theme = Everforest Dark Hard 
