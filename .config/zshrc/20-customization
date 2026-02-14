@@ -34,14 +34,6 @@ autoload -Uz _zinit
 # zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 zinit ice wait lucid
-zinit light zdharma-continuum/zinit-annex-as-monitor
-zinit ice wait lucid
-zinit light zdharma-continuum/zinit-annex-bin-gem-node
-zinit ice wait lucid
-zinit light zdharma-continuum/zinit-annex-patch-dl
-zinit ice wait lucid
-zinit light zdharma-continuum/zinit-annex-rust
-zinit ice wait lucid
 zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid
 zinit light zsh-users/zsh-syntax-highlighting
@@ -49,16 +41,21 @@ zinit ice wait lucid
 zinit light zsh-users/zsh-completions
 
 zinit ice wait lucid
-zinit light olets/zsh-abbr
+zinit light zdharma-continuum/zinit-annex-as-monitor
+zinit ice wait lucid
+zinit light zdharma-continuum/zinit-annex-bin-gem-node
+zinit ice wait lucid
+zinit light zdharma-continuum/zinit-annex-patch-dl
+zinit ice wait lucid
+zinit light zdharma-continuum/zinit-annex-rust
+
 zinit ice wait lucid
 zinit light joknarf/redo
 zinit ice wait lucid
 zinit light joknarf/seedee
 zinit ice wait lucid
 zinit light lukechilds/zsh-nvm
-zinit ice wait lucid
-zinit light lukechilds/zsh-nvm
-zinit load wfxr/forgit
+# zinit load wfxr/forgit
 
 # Load zsh-tmux with Zinit
 
@@ -89,7 +86,8 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
-bindkey " " magic-space
+# abbrev-alias must load after bindkey -e (which resets all keybinds)
+zinit light momo-lab/zsh-abbrev-alias
 
 bindkey -r ^h
 bindkey -r ^l

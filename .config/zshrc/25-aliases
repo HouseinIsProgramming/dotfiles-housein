@@ -7,7 +7,6 @@
 # -----------------------------------------------------
 #
 alias c='clear'
-alias cl='claude'
 alias ff='fastfetch'
 alias ll='eza -al --icons=always'
 alias lt='eza -a --tree --level=1 --icons=always'
@@ -16,7 +15,6 @@ alias nvm-s="source /usr/share/nvm/init-nvm.sh"
 alias cd..="cd .."
 alias cd...="cd ../.."
 alias cd....="cd ../../.."
-alias luj="luajit"
 alias lg="lazygit"
 alias ldkr="lazydocker"
 alias rm="rm -iv"
@@ -26,10 +24,43 @@ alias ..="j .."
 alias ...="j ../.."
 alias ....="j ../../.."
 alias fett='open -g "raycast://script-commands/confetti-burst"'
-alias cle="claude --model haiku -p"
-alias hl="arch -x86_64 /usr/local/bin/hl"
 alias sherlock="/Users/housien/.claude/skills/sherlock/sherlock"
 alias pico='cd "/Users/housien/Library/Application Support/pico-8/carts"'
+
+# -----------------------------------------------------
+# Abbreviations (expand on space/enter, visible in history)
+# -----------------------------------------------------
+abbrev-alias lt="eza -a --tree --icons=always --level="
+abbrev-alias pwdc="pwd|pbcopy && pwd"
+abbrev-alias ta="tmux a"
+abbrev-alias cl="claude"
+abbrev-alias cle="claude --model haiku -p"
+abbrev-alias luj="luajit"
+abbrev-alias hl="arch -x86_64 /usr/local/bin/hl"
+abbrev-alias npv="npm run dev"
+abbrev-alias npd="npm run build"
+abbrev-alias nps="npm run start"
+abbrev-alias npw="npm run watch"
+abbrev-alias pm="pnpm"
+abbrev-alias pmd="pnpm dlx"
+abbrev-alias pmr="pnpm run"
+abbrev-alias pmv="pnpm run dev"
+abbrev-alias pmb="pnpm run build"
+abbrev-alias grs="git restore --staged"
+abbrev-alias gs="git status"
+abbrev-alias gss="git status -s"
+abbrev-alias gcnv="git commit --no-verify -m"
+abbrev-alias gc="git commit -m"
+abbrev-alias gp="git push"
+abbrev-alias gl="git pull"
+abbrev-alias gd="git diff"
+abbrev-alias gds="git diff --staged"
+abbrev-alias gsw="git switch"
+abbrev-alias ga="git add"
+abbrev-alias glo="git log --oneline"
+abbrev-alias dk="docker"
+abbrev-alias dkc="docker compose"
+
 
 # -----------------------------------------------------
 # functions as aliases
