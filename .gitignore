@@ -3,3 +3,7 @@
 /Library/Application Support/Cursor/User/*Storage*
 !/.config/yazi/.toml$
 .config/scripts/src/
+.claude/skills/sherlock/logs
+.claude/skills/sherlock/sherlock
+.claude/skills
+.codex/skills
