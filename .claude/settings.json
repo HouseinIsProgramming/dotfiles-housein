@@ -1039,6 +1039,7 @@
       "Bash(git branch -M:*)",
       "Bash(git tag -d:*)",
       "Bash(git tag -f:*)",
+      "Bash(git rm:*)",
       "Bash(git clean:*)",
       "Bash(git gc:*)",
       "Bash(git prune:*)",
