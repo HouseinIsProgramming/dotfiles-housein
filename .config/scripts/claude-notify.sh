@@ -29,8 +29,16 @@ cmd_add() {
   win_index=$(tmux display-message -p -t "$pane" '#{window_index}' 2>/dev/null) || exit 0
   session_name=$(tmux display-message -p -t "$pane" '#{session_name}' 2>/dev/null) || exit 0
 
-  local label
-  label=$(echo "$session_name" | cut -c1-3 | tr '[:upper:]' '[:lower:]')
+  # Label: first 3 chars + optional -N suffix from session name
+  local base suffix label
+  if [[ "$session_name" =~ -([0-9]+)$ ]]; then
+    suffix="-${BASH_REMATCH[1]}"
+    base="${session_name%-${BASH_REMATCH[1]}}"
+  else
+    suffix=""
+    base="$session_name"
+  fi
+  label=$(echo "$base" | cut -c1-3 | tr '[:upper:]' '[:lower:]')${suffix}
 
   osascript -e "display notification \"Session '$session_name' needs attention\" with title \"Claude\"" &>/dev/null &
 
@@ -72,12 +80,18 @@ cmd_rebuild() {
   ensure_state
   local built=""
 
-  while IFS= read -r entry; do
-    local label window
-    label=$(echo "$entry" | jq -r '.label')
-    window=$(echo "$entry" | jq -r '.window')
-    built+="#[bg=colour3,fg=black,bold] ${label} #[default] "
-  done < <(jq -c '.[]' "$STATE_FILE")
+  # Group by label, count occurrences
+  while IFS= read -r group; do
+    [[ -z "$group" ]] && continue
+    local label count
+    label=$(echo "$group" | jq -r '.label')
+    count=$(echo "$group" | jq -r '.count')
+    if [[ "$count" -gt 1 ]]; then
+      built+="#[bg=colour3,fg=black,bold] ${count} ${label} #[default] "
+    else
+      built+="#[bg=colour3,fg=black,bold] ${label} #[default] "
+    fi
+  done < <(jq -c 'group_by(.label) | .[] | {label: .[0].label, count: length}' "$STATE_FILE")
 
   tmux set -g @claude_notify "$built" 2>/dev/null || true
   tmux refresh-client -S 2>/dev/null || true
