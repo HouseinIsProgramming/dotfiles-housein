@@ -24,20 +24,20 @@ cmd_add() {
   cwd=$(echo "$input" | jq -r '.cwd // empty')
   [[ -z "$cwd" ]] && exit 0
 
-  # Label: first 3 chars of basename, lowercase
-  local label
-  label=$(basename "$cwd" | cut -c1-3 | tr '[:upper:]' '[:lower:]')
-
-  # Get window index and name from TMUX_PANE
+  # Get window/session info from TMUX_PANE
   local pane="${TMUX_PANE:-}"
   [[ -z "$pane" ]] && exit 0
 
-  local win_index win_name
+  local win_index session_name
   win_index=$(tmux display-message -p -t "$pane" '#{window_index}' 2>/dev/null) || exit 0
-  win_name=$(tmux display-message -p -t "$pane" '#{window_name}' 2>/dev/null) || exit 0
+  session_name=$(tmux display-message -p -t "$pane" '#{session_name}' 2>/dev/null) || exit 0
+
+  # Label: session name (truncated to 3 chars lowercase for badge)
+  local label
+  label=$(echo "$session_name" | cut -c1-3 | tr '[:upper:]' '[:lower:]')
 
   # macOS toast notification
-  osascript -e "display notification \"$win_name needs attention\" with title \"Claude\"" &>/dev/null &
+  osascript -e "display notification \"Session '$session_name' needs attention\" with title \"Claude\"" &>/dev/null &
 
   # Skip if this window already has a notification
   local existing
