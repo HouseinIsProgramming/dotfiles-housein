@@ -40,12 +40,11 @@ cmd_add() {
   fi
   label=$(echo "$base" | cut -c1-3 | tr '[:upper:]' '[:lower:]')${suffix}
 
-  # Skip notification if the notifying pane is already focused and Ghostty is frontmost
-  local active_pane active_window active_session
-  active_session=$(tmux display-message -p '#{session_name}' 2>/dev/null) || active_session=""
-  active_window=$(tmux display-message -p '#{window_index}' 2>/dev/null) || active_window=""
-  active_pane=$(tmux display-message -p '#{pane_id}' 2>/dev/null) || active_pane=""
-  if [[ "$active_session" == "$session_name" && "$active_window" == "$win_index" && "$active_pane" == "$pane" ]]; then
+  # Skip if user is already viewing this session+window and Ghostty is focused
+  local client_session client_window
+  client_session=$(tmux list-clients -F '#{session_name}' 2>/dev/null | head -1) || client_session=""
+  client_window=$(tmux list-clients -F '#{window_index}' 2>/dev/null | head -1) || client_window=""
+  if [[ "$client_session" == "$session_name" && "$client_window" == "$win_index" ]]; then
     local frontapp
     frontapp=$(osascript -e 'tell application "System Events" to get name of first application process whose frontmost is true' 2>/dev/null) || frontapp=""
     [[ "${frontapp,,}" == "ghostty" ]] && exit 0
