@@ -40,9 +40,23 @@ cmd_add() {
   fi
   label=$(echo "$base" | cut -c1-3 | tr '[:upper:]' '[:lower:]')${suffix}
 
-  local win_name
-  win_name=$(tmux display-message -p -t "$pane" '#{window_name}' 2>/dev/null) || win_name="$win_index"
-  osascript -e "tell application \"Hammerspoon\" to execute lua code \"showClaudeNotify('$session_name', '$win_name')\"" &>/dev/null &
+  # Skip notification if the notifying pane is already focused and Ghostty is frontmost
+  local active_pane active_window active_session
+  active_session=$(tmux display-message -p '#{session_name}' 2>/dev/null) || active_session=""
+  active_window=$(tmux display-message -p '#{window_index}' 2>/dev/null) || active_window=""
+  active_pane=$(tmux display-message -p '#{pane_id}' 2>/dev/null) || active_pane=""
+  if [[ "$active_session" == "$session_name" && "$active_window" == "$win_index" && "$active_pane" == "$pane" ]]; then
+    local frontapp
+    frontapp=$(osascript -e 'tell application "System Events" to get name of first application process whose frontmost is true' 2>/dev/null) || frontapp=""
+    [[ "${frontapp,,}" == "ghostty" ]] && exit 0
+  fi
+
+  local pane_title
+  pane_title=$(tmux display-message -p -t "$pane" '#{pane_title}' 2>/dev/null) || pane_title="$win_index"
+  # Escape single quotes for AppleScript/Lua
+  pane_title="${pane_title//\'/\\\'}"
+  local session_display="${session_name//\'/\\\'}"
+  osascript -e "tell application \"Hammerspoon\" to execute lua code \"showClaudeNotify('$session_display', '$pane_title')\"" &>/dev/null &
 
   # Skip if this session+window already has a notification
   local existing
