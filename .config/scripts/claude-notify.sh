@@ -40,7 +40,9 @@ cmd_add() {
   fi
   label=$(echo "$base" | cut -c1-3 | tr '[:upper:]' '[:lower:]')${suffix}
 
-  hs -c "hs.alert.show('Claude: $session_name', 3)" &>/dev/null &
+  local win_name
+  win_name=$(tmux display-message -p -t "$pane" '#{window_name}' 2>/dev/null) || win_name="$win_index"
+  osascript -e "tell application \"Hammerspoon\" to execute lua code \"showClaudeNotify('$session_name', '$win_name')\"" &>/dev/null &
 
   # Skip if this session+window already has a notification
   local existing
