@@ -40,13 +40,7 @@ cmd_add() {
   fi
   label=$(echo "$base" | cut -c1-3 | tr '[:upper:]' '[:lower:]')${suffix}
 
-  local url
-  url=$(python3 -c "
-import urllib.parse, json
-args = json.dumps({'title': 'Claude', 'message': 'Session $session_name needs attention'})
-print('raycast://extensions/maxnyby/raycast-notification/index?arguments=' + urllib.parse.quote(args))
-")
-  open -g "$url" &>/dev/null &
+  hs -c "hs.alert.show('Claude: $session_name', 3)" &>/dev/null &
 
   # Skip if this session+window already has a notification
   local existing
