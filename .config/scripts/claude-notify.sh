@@ -76,7 +76,7 @@ cmd_rebuild() {
     local label window
     label=$(echo "$entry" | jq -r '.label')
     window=$(echo "$entry" | jq -r '.window')
-    built+="#[bg=colour3,fg=colour3,bold] ${label} #[default]"
+    built+="#[bg=colour3,fg=black,bold] ${label} #[default]"
   done < <(jq -c '.[]' "$STATE_FILE")
 
   tmux set -g @claude_notify "$built" 2>/dev/null || true
