@@ -77,7 +77,7 @@ cmd_click_first() {
   first_window=$(jq -r '.[0].window // empty' "$STATE_FILE")
   [[ -z "$first_session" || -z "$first_window" ]] && exit 0
 
-  tmux switch-client -t "${first_session}:${first_window}" 2>/dev/null || true
+  tmux switch-client -t "=${first_session}:${first_window}" 2>/dev/null || true
 }
 
 cmd_rebuild() {
