@@ -42,15 +42,16 @@ cmd_add() {
 
   osascript -e "display notification \"Session '$session_name' needs attention\" with title \"Claude\"" &>/dev/null &
 
-  # Skip if this window already has a notification
+  # Skip if this session+window already has a notification
   local existing
-  existing=$(jq -r --arg w "$win_index" '[.[] | select(.window == $w)] | length' "$STATE_FILE")
+  existing=$(jq -r --arg s "$session_name" --arg w "$win_index" \
+    '[.[] | select(.session == $s and .window == $w)] | length' "$STATE_FILE")
   [[ "$existing" -gt 0 ]] && exit 0
 
   local ts
   ts=$(date +%s)
-  jq --arg l "$label" --arg w "$win_index" --arg p "$pane" --arg t "$ts" \
-    '. += [{"label": $l, "window": $w, "pane": $p, "ts": ($t | tonumber)}]' \
+  jq --arg l "$label" --arg w "$win_index" --arg s "$session_name" --arg p "$pane" --arg t "$ts" \
+    '. += [{"label": $l, "window": $w, "session": $s, "pane": $p, "ts": ($t | tonumber)}]' \
     "$STATE_FILE" > "${STATE_FILE}.tmp" && mv "${STATE_FILE}.tmp" "$STATE_FILE"
 
   cmd_rebuild
@@ -58,10 +59,12 @@ cmd_add() {
 
 cmd_dismiss() {
   ensure_state
-  local win_index="${1:-}"
-  [[ -z "$win_index" ]] && exit 0
+  local session_name="${1:-}"
+  local win_index="${2:-}"
+  [[ -z "$session_name" || -z "$win_index" ]] && exit 0
 
-  jq --arg w "$win_index" '[.[] | select(.window != $w)]' \
+  jq --arg s "$session_name" --arg w "$win_index" \
+    '[.[] | select(.session != $s or .window != $w)]' \
     "$STATE_FILE" > "${STATE_FILE}.tmp" && mv "${STATE_FILE}.tmp" "$STATE_FILE"
 
   cmd_rebuild
@@ -69,11 +72,12 @@ cmd_dismiss() {
 
 cmd_click_first() {
   ensure_state
-  local first_window
+  local first_session first_window
+  first_session=$(jq -r '.[0].session // empty' "$STATE_FILE")
   first_window=$(jq -r '.[0].window // empty' "$STATE_FILE")
-  [[ -z "$first_window" ]] && exit 0
+  [[ -z "$first_session" || -z "$first_window" ]] && exit 0
 
-  tmux select-window -t ":${first_window}" 2>/dev/null || true
+  tmux switch-client -t "${first_session}:${first_window}" 2>/dev/null || true
 }
 
 cmd_rebuild() {
@@ -99,7 +103,7 @@ cmd_rebuild() {
 
 case "${1:-}" in
   add)         cmd_add ;;
-  dismiss)     cmd_dismiss "${2:-}" ;;
+  dismiss)     cmd_dismiss "${2:-}" "${3:-}" ;;
   click-first) cmd_click_first ;;
   rebuild)     cmd_rebuild ;;
   *)           echo "Usage: $0 {add|dismiss|click-first|rebuild}" >&2; exit 1 ;;
