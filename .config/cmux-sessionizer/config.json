@@ -1,0 +1,9 @@
+{
+  "search_paths": [
+    { "path": "~/Documents/Github", "min_depth": 1, "max_depth": 2 }
+  ],
+  "extra_paths": [
+    "~/dotfiles-housein",
+    "~/.openclaw/workspace"
+  ]
+}

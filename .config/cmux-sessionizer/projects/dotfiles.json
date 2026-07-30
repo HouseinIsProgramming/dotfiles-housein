@@ -1,0 +1,12 @@
+{
+  "dir": "~/dotfiles-housein",
+  "name": "dotfiles",
+  "layout": {
+    "direction": "horizontal",
+    "split": 0.6,
+    "children": [
+      { "pane": { "surfaces": [{ "type": "terminal", "command": "nvim" }] } },
+      { "pane": { "surfaces": [{ "type": "terminal" }] } }
+    ]
+  }
+}
