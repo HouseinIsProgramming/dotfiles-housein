@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+HOST=87.129.159.10
+IFACE=utun100
+URL=https://infisical.feddersen.io/
+
+echo "Selecting Exit Node..."
+netbird networks select "Exit Node"
+sleep 1
+netbird networks select "Exit Node"
+
+# Verify via networks list (netbird status "Networks:" field is bugged)
+if ! netbird networks list | grep -q 'Status: Selected'; then
+  echo "ERROR: Exit Node not selected. Try 'netbird down && netbird up' then rerun."
+  exit 1
+fi
+echo "Exit Node selected."
+
+echo "Adding host route (needs sudo)..."
+sudo route -n delete -host "$HOST" 2>/dev/null || true
+sudo route -n add -host "$HOST" -interface "$IFACE"
+
+echo "Testing connectivity..."
+if curl -sI --max-time 8 "$URL" | head -1 | grep -q 200; then
+  echo "OK — infisical reachable."
+else
+  echo "FAILED — still can't reach infisical."
+  echo "Debug: route -n get $HOST"
+  route -n get "$HOST" | grep interface
+  exit 1
+fi
