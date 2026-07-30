@@ -17,7 +17,7 @@ alias cd...="cd ../.."
 alias cd....="cd ../../.."
 alias lg="lazygit"
 alias ldkr="lazydocker"
-alias rm="rm -iv"
+alias rm="rm -v"
 alias fdd='cd "$(fd -t d . | fzf --preview "dirname {}")"'
 alias fdf='cd "$(fzf --preview "bat --style=numbers --color=always {}" | xargs dirname)"'
 alias ..="j .."
@@ -26,6 +26,10 @@ alias ....="j ../../.."
 alias fett='open -g "raycast://script-commands/confetti-burst"'
 alias sherlock="/Users/housien/.claude/skills/sherlock/sherlock"
 alias pico='cd "/Users/housien/Library/Application Support/pico-8/carts"'
+alias sshosts='grep "^Host " ~/.ssh/config'
+alias claudemd='nvim ~/.claude/claude.md'
+alias claude="CLAUDE_CODE_NO_FLICKER=1 claude"
+alias remind="remindctl show upcoming"
 
 # -----------------------------------------------------
 # Abbreviations (expand on space/enter, visible in history)
@@ -34,6 +38,7 @@ abbrev-alias lt="eza -a --tree --icons=always --level="
 abbrev-alias pwdc="pwd|pbcopy && pwd"
 abbrev-alias ta="tmux a"
 abbrev-alias cl="claude"
+abbrev-alias cld="claude --dangerously-skip-permissions"
 abbrev-alias cle="claude --model haiku -p"
 abbrev-alias luj="luajit"
 abbrev-alias hl="arch -x86_64 /usr/local/bin/hl"
