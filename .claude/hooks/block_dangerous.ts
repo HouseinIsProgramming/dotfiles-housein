@@ -179,16 +179,6 @@ function isDangerousCommand(command: string): boolean {
     }
   }
 
-  // Block git push operations (user should do these manually)
-  const gitPushPatterns = [
-    /git\s+push\b/, // any git push
-  ];
-  for (const pattern of gitPushPatterns) {
-    if (pattern.test(normalized)) {
-      return true;
-    }
-  }
-
   // Block gh repo create (user should do this manually)
   if (/gh\s+repo\s+create\b/.test(normalized)) {
     return true;

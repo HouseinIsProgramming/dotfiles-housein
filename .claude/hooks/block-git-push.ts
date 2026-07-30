@@ -58,13 +58,15 @@ if (data.tool_name !== "Bash") {
 const command = data.tool_input?.command ?? "";
 
 if (isGitPush(command)) {
-  console.error(
-    `BLOCKED: git push is not allowed.\n` +
-    `Command: ${command}\n\n` +
-    `All commits stay local. Push manually when ready.\n` +
-    `DO NOT attempt workarounds or ask to push.`
-  );
-  process.exit(2);
+  const result = {
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      permissionDecision: "ask",
+      permissionDecisionReason: `git push detected: ${command}`,
+    },
+  };
+  console.log(JSON.stringify(result));
+  process.exit(0);
 }
 
 process.exit(0);
