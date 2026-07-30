@@ -1,1 +1,7 @@
 .sonarlint
+
+**/.claude/settings.local.json
+
+# Local dogfood/QA run artifacts (see the `dogfood` skill).
+dogfood-output/
+dogfood-output-*/
