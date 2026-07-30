@@ -1,4 +1,4 @@
-font-size = 15
+font-size = 14
 
 # font-family = IosevkaTerm Nerd Font Mono
 # font-family = FiraCode Nerd Font
@@ -18,7 +18,7 @@ keybind = super+t=unbind
 keybind = super+w=unbind
 
 # theme = light:Arthur, dark:Hybrid
-theme = Everforest Dark Hard 
+theme = light:Challenger Deep,dark:Everforest Dark Hard
 # theme = Iceberg Dark
 # background = 101013
 
