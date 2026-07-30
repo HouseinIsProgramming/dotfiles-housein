@@ -19,15 +19,25 @@ def main():
     if tool_name == "Bash":
         command = tool_input.get("command", "")
         if is_dangerous_command(command):
-            print(
-                f"BLOCKED: This command requires manual execution.\n"
-                f"Command: {command}\n"
-                f"STOP trying to execute this command. "
-                f"Instead, tell the user to run this command themselves.\n"
-                f"WAIT for the user's input after this point. "
-                f"Do NOT automatically execute any workarounds for this command being blocked.",
-                file=sys.stderr,
-            )
+            if re.search(r"\brm\b", command.lower()):
+                print(
+                    f"BLOCKED: `rm` is not allowed. Use `rip` instead.\n"
+                    f"  rip <file>     — delete a file (recoverable)\n"
+                    f"  rip <dir>/     — delete a directory (recoverable)\n"
+                    f"  rip -u         — undo last deletion\n"
+                    f"Re-run your command using `rip`.",
+                    file=sys.stderr,
+                )
+            else:
+                print(
+                    f"BLOCKED: This command requires manual execution.\n"
+                    f"Command: {command}\n"
+                    f"STOP trying to execute this command. "
+                    f"Instead, tell the user to run this command themselves.\n"
+                    f"WAIT for the user's input after this point. "
+                    f"Do NOT automatically execute any workarounds for this command being blocked.",
+                    file=sys.stderr,
+                )
             sys.exit(2)
 
     # Allow the operation
@@ -80,16 +90,9 @@ def is_dangerous_command(command):
     # Normalize command (lowercase, collapse whitespace)
     normalized = re.sub(r"\s+", " ", command.lower().strip())
 
-    # Dangerous rm patterns
-    rm_patterns = [
-        r"\brm\s+-[rf]*[fr][rf]*\s+/",  # rm -rf /, rm -fr /, etc.
-        r"\brm\s+-[rf]*[fr][rf]*\s+\*",  # rm -rf *, rm -fr *, etc.
-        r"\brm\s+-[rf]*[fr][rf]*\s+~",  # rm -rf ~
-        r"\brm\s+-[rf]*[fr][rf]*\s+\$HOME",  # rm -rf $HOME
-    ]
-    for pattern in rm_patterns:
-        if re.search(pattern, normalized):
-            return True
+    # Block all rm usage — use rip instead (but allow git rm)
+    if re.search(r"\brm\b", normalized) and not re.search(r"\bgit\s+rm\b", normalized):
+        return True
 
     # Dangerous git operations
     git_patterns = [
