@@ -7,3 +7,12 @@
 .claude/skills/sherlock/sherlock
 .claude/skills
 .codex/skills
+
+.DS_Store
+.config/karabiner/automatic_backups/
+
+# codex runtime state — only AGENTS.md, config.toml and rules/ are config
+.codex/*
+!.codex/AGENTS.md
+!.codex/config.toml
+!.codex/rules/
