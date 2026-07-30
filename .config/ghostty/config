@@ -87,3 +87,8 @@ keybind = alt+right=unbind
 ###active-shaderblock-start###
 ###active-shaderblock-end###
 keybind = shift+enter=text:\x1b\r
+
+# Keyboard scrolling
+keybind = ctrl+shift+u=scroll_page_up
+keybind = ctrl+shift+d=scroll_page_down
+keybind = ctrl+shift+g=scroll_to_bottom
