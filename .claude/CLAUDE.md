@@ -1,64 +1,66 @@
-## MCP Tools and Tools
+I'm a Vendure core maintainer. If something doesn't exist in Vendure, say so — I can build it. Flag improvements to Vendure core when you spot them.
 
-- When starting long running tasks, such as dev servers and tests, use the `tmux` terminal multiplexer through the commands you have access `tmux-windows` skill
-- To search for code patternn use the `asp-grep` tool, if it does not work fall back to your preferred tool
-- when reading massive files, read only the relevant lines using tools suhc as sed, awk.
-- Do not start dev servers, assume i have them running already
+## Never
 
-## Before Writing Code
+- `rm` — delete with `rip` (`rip file`, `rip dir/`, `rip -u` to undo). No deletions without my explicit confirmation.
+- `git add .` or `git add *` — add files by name. Never force-push main/master. Never `--amend`.
+- `psql` or `docker exec … psql` — use `/sherlock` (read-only SQL/Redis).
+- Hand-rolled `curl` against a Vendure GraphQL endpoint — use `/arnold`.
+- Playwright, puppeteer, or Chrome DevTools MCP for verification — use the `agent-browser` skill (headless) or `cmux-browser` (headed).
+- Long-running commands (tests, builds, lints, codegen) through plain Bash — use `hawk`.
+- Test credentials in the repo, in commits, or in PR descriptions.
 
-- Read existing code patterns before implementing new features
-- Check for existing utilities/helpers before creating new ones
-- Understand the file structure before adding new files
-- Do not be eager to change/write code, understand it and explain your intent first, however, do not overdo this, when I allow you to make changes, are allowed to do so freely.
+## Tools
 
-## Code Quality
+- Long-running commands: `hawk start <name> -- <command>` with `run_in_background: true`; read results with `hawk output <name>`.
+- Dev servers: check `lsof -i :<port>` before starting one. Use `portless` for named local URLs, not raw ports.
+- Large files: `sed`/`awk` the relevant line range instead of a full Read.
+- Browser automation: `agent-browser` for anything headless. Anything headed (logins, OAuth, flows I should watch) — use the `cmux-browser` skill, which opens a visible pane in my cmux workspace. On `js_error` from cmux-browser waits/snapshots, verify with `get url`/`get text` before treating it as a failure.
+- Test creds: when I give you a test user, write it to `~/.claude/notes/<ticket>-creds.txt` before using it, then read from that file in later turns instead of asking me again.
 
-- Handle errors explicitly, never silently fail
-- Add types (TypeScript) but let typescript infer types, add explicit types only when necessary
+## Git
 
-## Git Workflow
+- Commit early and often, in logical atomic commits as you go.
+- Conventional commit titles. Title only — no body, no emojis, no watermarks.
+- PRs start as draft until ready for review. Describe what changed and why in plain terms.
 
-- Write clear, conventional commit messages
-- Keep commits atomic (one logical change per commit)
-- Never force push to main/master
-- Do not make pushes to remote branches automatically, keep them local
-- always make logical commits as you go
+## Code
 
-## Communication
+- Let TypeScript infer. Explicit types only where inference fails or the signature is public API.
 
-- Be concise, skip unnecessary preamble
-- When unsure, ask clarifying questions before implementing
-- If a task is ambiguous, always ask for clarity, propose a plan before coding
-- Tell me when you're making assumptions
-- You should push back on bad requests and flawed assumptions from others and me
+## Voice
 
-## Safety
+Plain technical English — no metaphors, no filler, no preamble. Short sentences, one idea each.
 
-- Always verify file paths before destructive operations
-- Run tests after making changes
-- Don't delete files without explicit confirmation
+Push back on bad requests and flawed assumptions, including mine.
 
-## Complex Tasks
+### Length
 
-- Use sequential-thinking for architectural decisions
-- Break large tasks into phases, confirm each before proceeding
-- always make logical commits as you go
+**Default: under 6 lines.** Answer, then stop.
 
-## Response Style
+- Result first. Never restate my request, the plan, or work I can already see in your tool calls.
+- Give the conclusion and the evidence pointer (`file:line`), not the reasoning that got you there. If I want the derivation I'll ask.
+- Don't pre-answer questions I didn't ask. No "what this means", no "why this matters", no anticipated follow-ups.
+- One finding = one line: claim + `file:line`. Not a paragraph, not a subsection.
+- Asking permission is one line at the end, not a section building the case for it.
 
-- No yapping - get to the point
-- Show code, not just explanations of code
-- Minimal comments, only where truly needed
-- be extremely concise sacrifice grammar for the sake of concision
-- when point out issues in code during a review, mention the file and line number
-- when writing file paths and names, please give the path relative to the project root, in this format `/apps/my-app/src/components/MyComponent.tsx` or `/apps/my-app/src/components/MyComponent.tsx:123` when lines are relevant
+Go past 6 lines only when I ask for an explanation, or when a real decision needs its options laid out. Then: one thing at a time, each option its own subsection with its own consequences, close with a recommendation. Never compare options inside a paragraph.
 
-## Commiting Changes
+### Corrections
 
-- Never force push to main/master
-- only add files by name to commit, never use `git add .` or `git add *`
-- when commiting, always use conventioanl commit messages, do not use emojies, do not use descriptions, only titles.
-- When you are committing code, ALWAYS create logical commits and do a single, final push afterwards in case it is asked by the user
-- do not ammend commits
-- do not include claude watermarks in commits
+One line, no post-mortem: "Wrong — it's actually X." Then continue.
+
+Don't explain how you got it wrong, don't grade your own confidence, don't tally past mistakes. If the error changed nothing for me, don't mention it at all.
+
+### Reporting code work
+
+Only: files changed, behaviour changed, what you ran to verify, remaining risks. Nothing else. If nothing's risky, say nothing about risk.
+
+### Blocked
+
+The blocker and the one next concrete action. Two lines. Don't argue the blocker at length.
+
+## Formatting
+
+- Paths relative to project root: `/apps/web/src/Foo.tsx`, or `/apps/web/src/Foo.tsx:123` when the line matters. Always cite `file:line` in reviews.
+- Screenshots: every verification flow screenshots each state it verifies. End any turn that produced screenshots with a one-line summary of what they show, then every path taken that turn, one per line — bare absolute paths, no backticks, no bullets, no links. Only a bare path on its own line renders as a clickable `[image]`.
