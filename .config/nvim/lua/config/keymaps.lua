@@ -96,16 +96,21 @@ vim.keymap.set("n", "<D-s>", "<Cmd>w<CR>", { desc = "Save" })
 vim.keymap.set("i", "<D-s>", "<Cmd>w<CR>", { desc = "Save" })
 vim.keymap.set("n", "<D-w>", "<Cmd>bd<CR>", { desc = "Close buffer" })
 
-vim.keymap.set("n", "<C-k>", ":")
-
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("t", "<C-a>", "<C-a>", { noremap = true, desc = "Pass Ctrl-A to terminal (tmux prefix)" })
 
--- Window navigation from terminal mode
-vim.keymap.set("t", "<C-w>h", "<C-\\><C-n><C-w>h", { desc = "Window: left" })
-vim.keymap.set("t", "<C-w>j", "<C-\\><C-n><C-w>j", { desc = "Window: down" })
-vim.keymap.set("t", "<C-w>k", "<C-\\><C-n><C-w>k", { desc = "Window: up" })
-vim.keymap.set("t", "<C-w>l", "<C-\\><C-n><C-w>l", { desc = "Window: right" })
+-- Command line on ctrl+k (muscle memory) — window-up stays on <C-w>k
+vim.keymap.set("n", "<C-k>", ":")
+vim.keymap.set("n", "<leader>k", ":", { desc = "Command line" })
+
+-- cmux-style window navigation: ctrl+hjl from anywhere (normal + terminal mode)
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Window: left" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Window: down" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Window: right" })
+vim.keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Window: left" })
+vim.keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Window: down" })
+vim.keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Window: up" })
+vim.keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Window: right" })
 vim.keymap.set("t", "<C-w><C-w>", "<C-\\><C-n><C-w><C-w>", { desc = "Window: next" })
 
 vim.keymap.set("n", "<leader>tn", "<Cmd>tabNext<CR>", {
