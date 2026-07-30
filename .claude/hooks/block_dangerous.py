@@ -125,14 +125,6 @@ def is_dangerous_command(command):
         if re.search(pattern, normalized):
             return True
 
-    # Block git push operations (user should do these manually)
-    git_push_patterns = [
-        r"git\s+push\b",  # any git push
-    ]
-    for pattern in git_push_patterns:
-        if re.search(pattern, normalized):
-            return True
-
     # Block gh repo create (user should do this manually)
     if re.search(r"gh\s+repo\s+create\b", normalized):
         return True
