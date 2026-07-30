@@ -60,3 +60,5 @@ autocmd("BufWinEnter", {
 		end
 	end,
 })
+
+vim.filetype.add({ filename = { ["tsconfig.json"] = "jsonc", ["cmux.json"] = "jsonc" } })
