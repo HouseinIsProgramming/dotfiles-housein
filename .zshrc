@@ -99,3 +99,14 @@ case ":$PATH:" in
 esac
 # pnpm end
 eval "$(direnv hook zsh)"
+
+# arnold CLI
+export PATH="/Users/housien/.claude/skills/arnold:$PATH"
+export PATH=$PATH:$HOME/.maestro/bin
+
+# hledger
+export LEDGER_FILE="/Users/housien/Documents/GitHub/Claude/finances/finances.journal"
+export PATH="$HOME/go/bin:$PATH"
+
+# OpenClaw Completion
+source "/Users/housien/.openclaw/completions/openclaw.zsh"
