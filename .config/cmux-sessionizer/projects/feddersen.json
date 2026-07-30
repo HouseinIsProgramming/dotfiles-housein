@@ -1,0 +1,19 @@
+{
+  "dir": "~/Documents/GitHub/Work/feddersen-monorepo",
+  "name": "feddersen",
+  "layout": {
+    "direction": "horizontal",
+    "split": 0.6,
+    "children": [
+      { "pane": { "surfaces": [{ "type": "terminal", "command": "nvim" }] } },
+      {
+        "direction": "vertical",
+        "split": 0.6,
+        "children": [
+          { "pane": { "surfaces": [{ "type": "terminal", "command": "pnpm compose-up:co && pnpm vendure-dev:co" }] } },
+          { "pane": { "surfaces": [{ "type": "terminal" }] } }
+        ]
+      }
+    ]
+  }
+}
