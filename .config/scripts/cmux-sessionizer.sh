@@ -10,6 +10,9 @@ CONFIG_FILE="$CONFIG_DIR/config.json"
 PROJECTS_DIR="$CONFIG_DIR/projects"
 export CMUX_QUIET=1
 
+# External pickers (Hammerspoon, Raycast) run with a minimal PATH
+PATH="$PATH:/opt/homebrew/bin:/Applications/cmux.app/Contents/Resources/bin"
+
 die() {
     echo "cmux-sessionizer: $*" >&2
     exit 1
@@ -43,6 +46,26 @@ candidates() {
         [[ -n "$dir" ]] && expand_path "$dir"
     done
 }
+
+# --list: emit "name<TAB>path" for external pickers (Hammerspoon, Raycast)
+if [[ "${1:-}" == "--list" ]]; then
+    {
+        # project-configured dirs first so their custom names win the dedupe
+        for f in "$PROJECTS_DIR"/*.json; do
+            [[ -e "$f" ]] || continue
+            dir="$(jq -r '.dir // empty' "$f")"
+            [[ -n "$dir" ]] || continue
+            dir="$(expand_path "$dir")"
+            [[ -d "$dir" ]] || continue
+            dir="$(cd "$dir" && pwd -P)"
+            printf '%s\t%s\n' "$(jq -r --arg fb "$(basename "$dir" | tr . _)" '.name // $fb' "$f")" "$dir"
+        done
+        while IFS= read -r dir; do
+            [[ -d "$dir" ]] && printf '%s\t%s\n' "$(basename "$dir" | tr . _)" "$dir"
+        done < <(candidates)
+    } | awk -F'\t' '!seen[$2]++'
+    exit 0
+fi
 
 # --- pick a directory ---
 if [[ $# -ge 1 ]]; then
