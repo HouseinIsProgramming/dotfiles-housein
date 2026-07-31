@@ -101,7 +101,9 @@ if [[ ! -s $_zcompdump.zwc || $_zcompdump -nt $_zcompdump.zwc ]]; then
 fi
 unset _zcompdump
 
-zinit light Aloxaf/fzf-tab                                   # must follow compinit
+# Must follow compinit. Deferred — verified to still register its widget and
+# bind Tab; only the first few ms after the prompt fall back to plain completion.
+zinit ice wait lucid; zinit light Aloxaf/fzf-tab
 
 # ---------------------------------------------------------------------------
 # Cached tool initialisation
