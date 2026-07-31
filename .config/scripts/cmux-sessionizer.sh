@@ -10,8 +10,12 @@ CONFIG_FILE="$CONFIG_DIR/config.json"
 PROJECTS_DIR="$CONFIG_DIR/projects"
 export CMUX_QUIET=1
 
-# External pickers (Hammerspoon, Raycast) run with a minimal PATH
+# External pickers (Hammerspoon, Raycast) run with a minimal PATH and
+# outside cmux, so they need the socket password (automation.socketControlMode=password)
 PATH="$PATH:/opt/homebrew/bin:/Applications/cmux.app/Contents/Resources/bin"
+if [[ -z "${CMUX_SOCKET_PASSWORD:-}" && -r "$HOME/.config/cmux/sessionizer-socket-password" ]]; then
+    export CMUX_SOCKET_PASSWORD="$(<"$HOME/.config/cmux/sessionizer-socket-password")"
+fi
 
 die() {
     echo "cmux-sessionizer: $*" >&2
