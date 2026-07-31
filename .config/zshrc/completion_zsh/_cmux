@@ -1,0 +1,89 @@
+#compdef cmux
+
+# Completion for the cmux CLI. Command names are parsed from `cmux --help`
+# at first use (cached per shell session) so this stays current across
+# cmux updates. Ref completion queries the running app over its socket.
+
+_cmux_commands() {
+  if (( ! ${+_cmux_commands_cache} )); then
+    typeset -ga _cmux_commands_cache
+    _cmux_commands_cache=(${(f)"$(cmux --help 2>/dev/null \
+      | awk '/^Commands:/{f=1;next} /^[A-Z]/{if(f)f=0} f' \
+      | grep -oE '^  [a-z][a-z0-9-]+( \| [a-z][a-z0-9-]+)*' \
+      | tr '|' '\n' | tr -d ' ' | sort -u)"})
+  fi
+  _describe -t commands 'cmux command' _cmux_commands_cache
+}
+
+_cmux_workspace_refs() {
+  local -a refs
+  refs=(${(f)"$(CMUX_QUIET=1 cmux workspace list 2>/dev/null \
+    | grep -oE 'workspace:[0-9]+')"})
+  # compadd, not _describe: refs contain a colon, which _describe reads as a
+  # completion/description separator.
+  compadd -a refs
+}
+
+_cmux_surface_refs() {
+  local -a refs
+  refs=(${(f)"$(CMUX_QUIET=1 cmux list-pane-surfaces 2>/dev/null \
+    | grep -oE 'surface:[0-9]+')"})
+  compadd -a refs
+}
+
+_cmux() {
+  local curcontext="$curcontext" state
+  local -a global_opts
+  global_opts=(
+    '--json[JSON output]'
+    '--id-format[ref output format]:format:(refs uuids both)'
+    '--password[socket password]:password:'
+    '--workspace[target workspace]:workspace:_cmux_workspace_refs'
+    '--surface[target surface]:surface:_cmux_surface_refs'
+    '--window[target window]:window:'
+    '--pane[target pane]:pane:'
+    '--focus[focus target]:bool:(true false)'
+    '--no-focus[do not focus]'
+  )
+
+  _arguments -C \
+    $global_opts \
+    '1:command:_cmux_commands' \
+    '*::arg:->args' && return
+
+  case $state in
+    args)
+      case $words[1] in
+        open|new-workspace)
+          _arguments $global_opts '*:path:_files -/'
+          ;;
+        docs)
+          _values 'topic' settings shortcuts api browser agents dock sidebars
+          ;;
+        settings)
+          _values 'target' open path docs cmux-json
+          ;;
+        config)
+          _values 'action' doctor check validate path paths docs reload
+          ;;
+        auth)
+          _values 'action' status login logout
+          ;;
+        workspace)
+          _values 'action' list select create status
+          ;;
+        right-sidebar)
+          _values 'mode' toggle show hide focus set mode files find vault sessions feed dock
+          ;;
+        browser)
+          _arguments $global_opts '*:browser arg:'
+          ;;
+        *)
+          _arguments $global_opts '*:arg:_files'
+          ;;
+      esac
+      ;;
+  esac
+}
+
+_cmux "$@"
