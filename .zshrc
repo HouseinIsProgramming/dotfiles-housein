@@ -1,3 +1,20 @@
+# ---------------------------------------------------------------------------
+# Minimal mode
+# ---------------------------------------------------------------------------
+# Shells launched by a cmux action (see ~/.config/cmux/cmux.json) exist only to
+# run one TUI and exit, so they set ZSH_MINIMAL=1 and skip everything below:
+# no plugins, no completion, no prompt. Costs ~10ms instead of ~100ms.
+# Only PATH is needed, and that is set in ~/.zshenv and ~/.zprofile.
+if [[ -n ${ZSH_MINIMAL:-} ]]; then
+    path=(
+        $HOME/.local/bin
+        $HOME/.cargo/bin
+        $HOME/dotfiles-housein/.config/scripts
+        $path
+    )
+    return
+fi
+
 # powerlevel10k instant prompt. Draws the prompt before the rest of this file
 # runs, so the shell looks ready immediately. Anything that writes to the
 # terminal or reads input must go ABOVE this block.
