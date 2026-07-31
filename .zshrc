@@ -32,6 +32,7 @@ fi
 path=(
     $HOME/.local/bin
     $HOME/.cargo/bin
+    $HOME/.atuin/bin
     $HOME/go/bin
     $HOME/.local/opt/go/bin
     $BUN_INSTALL/bin
