@@ -88,8 +88,16 @@ else
 fi
 # Compile the dump in the background; a compiled dump loads far faster and this
 # is what keeps a missing/stale dump from costing ~280ms on the next shell.
+# zcompile writes .zwc read-only, so build a temp file and move it into place —
+# overwriting directly fails, and the move also makes concurrent shells safe.
 if [[ ! -s $_zcompdump.zwc || $_zcompdump -nt $_zcompdump.zwc ]]; then
-    { zcompile -R $_zcompdump } &!
+    {
+        # zcompile appends .zwc unless the name already ends in it, so name the
+        # temp file accordingly or the move below finds nothing.
+        _t=$_zcompdump.$$.zwc
+        zcompile -R $_t $_zcompdump 2>/dev/null && command mv -f $_t $_zcompdump.zwc 2>/dev/null
+        [[ -e $_t ]] && command rm -f $_t
+    } &!
 fi
 unset _zcompdump
 
