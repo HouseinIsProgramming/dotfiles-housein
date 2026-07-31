@@ -101,15 +101,6 @@ bindkey ^h backward-word
 bindkey ^l forward-word
 bindkey '^j' forward-word  # accept one word from autosuggestion
 
-# cmux sessionizer inline in the current shell — instant, no new tab.
-# (ctrl+space f still works from non-shell surfaces)
-cmux-sessionizer-widget() {
-  cmux-sessionizer.sh </dev/tty
-  zle reset-prompt
-}
-zle -N cmux-sessionizer-widget
-bindkey '^f' cmux-sessionizer-widget
-
 # Copy current command line to clipboard
 copy-line-to-clipboard() {
   print -rn -- "$BUFFER" | pbcopy
