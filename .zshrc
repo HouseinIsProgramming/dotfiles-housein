@@ -1,3 +1,10 @@
+# powerlevel10k instant prompt. Draws the prompt before the rest of this file
+# runs, so the shell looks ready immediately. Anything that writes to the
+# terminal or reads input must go ABOVE this block.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #            _
 #    _______| |__  _ __ ___
 #   |_  / __| '_ \| '__/ __|
@@ -68,6 +75,8 @@ fi
 source "$ZINIT_HOME/zinit.zsh"
 autoload -Uz _zinit
 
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
 # Deferred: none of these are needed before the first prompt.
 zinit ice wait lucid; zinit light zsh-users/zsh-autosuggestions
 zinit ice wait lucid; zinit light zsh-users/zsh-syntax-highlighting
@@ -122,15 +131,14 @@ cached_eval() {
     source $cache
 }
 
-# Prompt. The light/dark choice is baked into the cache name so switching
-# appearance picks up the other cache instead of re-running `defaults read`.
-if [[ -n ${_omp_dark::=$(defaults read -g AppleInterfaceStyle 2>/dev/null)} ]]; then
-    _omp_variant=zen
+# Prompt: powerlevel10k. The light/dark choice mirrors the old oh-my-posh
+# behaviour and is read by ~/.p10k.zsh.
+if [[ -n $(defaults read -g AppleInterfaceStyle 2>/dev/null) ]]; then
+    _ZEN_VARIANT=zen
 else
-    _omp_variant=zen-light
+    _ZEN_VARIANT=zen-light
 fi
-cached_eval "omp-$_omp_variant" oh-my-posh init zsh --config "$HOME/.config/omp-themes/$_omp_variant.json"
-unset _omp_dark _omp_variant
+[[ -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] && source ${ZDOTDIR:-$HOME}/.p10k.zsh
 
 cached_eval fzf    fzf --zsh
 cached_eval atuin  atuin init zsh
@@ -265,3 +273,7 @@ cpr() {
 # Local overrides, kept last so they win
 # ---------------------------------------------------------------------------
 [[ -f ~/.zshrc_custom ]] && source ~/.zshrc_custom
+
+# Leave a clean exit status: the prompt shows an error indicator for a non-zero
+# status, and a false test on the last line would flag every fresh shell.
+true
