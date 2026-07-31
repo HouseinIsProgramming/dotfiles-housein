@@ -51,23 +51,57 @@ candidates() {
     done
 }
 
-# --list: emit "name<TAB>path" for external pickers (Hammerspoon, Raycast)
+# Emit "title<TAB>has_custom<TAB>cwd<TAB>ws_id<TAB>win_id" for every open workspace
+open_workspaces() {
+    local wins win
+    wins="$(cmux list-windows --json 2>/dev/null | jq -r '.[].id')" || return 0
+    while IFS= read -r win; do
+        [[ -n "$win" ]] || continue
+        cmux workspace list --json --id-format both --window "$win" 2>/dev/null |
+            jq -r --arg w "$win" '.workspaces[] | [(.custom_title // ""), (.has_custom_title|tostring), (.current_directory // ""), .id, $w] | @tsv'
+    done <<<"$wins"
+}
+
+# --list: emit "name<TAB>path<TAB>ws_id<TAB>win_id" for external pickers
+# (Hammerspoon, Raycast). ws_id/win_id are set when a matching workspace is
+# already open, so pickers can switch with a single --select call.
 if [[ "${1:-}" == "--list" ]]; then
     {
-        # project-configured dirs first so their custom names win the dedupe
-        for f in "$PROJECTS_DIR"/*.json; do
-            [[ -e "$f" ]] || continue
-            dir="$(jq -r '.dir // empty' "$f")"
-            [[ -n "$dir" ]] || continue
-            dir="$(expand_path "$dir")"
-            [[ -d "$dir" ]] || continue
-            dir="$(cd "$dir" && pwd -P)"
-            printf '%s\t%s\n' "$(jq -r --arg fb "$(basename "$dir" | tr . _)" '.name // $fb' "$f")" "$dir"
-        done
-        while IFS= read -r dir; do
-            [[ -d "$dir" ]] && printf '%s\t%s\n' "$(basename "$dir" | tr . _)" "$dir"
-        done < <(candidates)
-    } | awk -F'\t' '!seen[$2]++'
+        open_workspaces | sed 's/^/WS\t/'
+        {
+            # project-configured dirs first so their custom names win the dedupe
+            for f in "$PROJECTS_DIR"/*.json; do
+                [[ -e "$f" ]] || continue
+                dir="$(jq -r '.dir // empty' "$f")"
+                [[ -n "$dir" ]] || continue
+                dir="$(expand_path "$dir")"
+                [[ -d "$dir" ]] || continue
+                dir="$(cd "$dir" && pwd -P)"
+                printf '%s\t%s\n' "$(jq -r --arg fb "$(basename "$dir" | tr . _)" '.name // $fb' "$f")" "$dir"
+            done
+            while IFS= read -r dir; do
+                [[ -d "$dir" ]] && printf '%s\t%s\n' "$(basename "$dir" | tr . _)" "$dir"
+            done < <(candidates)
+        } | awk -F'\t' '!seen[$2]++' | sed 's/^/DIR\t/'
+    } | awk -F'\t' '
+        $1 == "WS" {
+            if ($3 == "true") byTitle[$2] = $5 "\t" $6
+            else if ($4 != "") byCwd[$4] = $5 "\t" $6
+            next
+        }
+        $1 == "DIR" {
+            ws = (($2 in byTitle) ? byTitle[$2] : (($3 in byCwd) ? byCwd[$3] : "\t"))
+            print $2 "\t" $3 "\t" ws
+        }'
+    exit 0
+fi
+
+# --select <ws-id> [win-id]: fast path for pickers when the workspace is open
+if [[ "${1:-}" == "--select" ]]; then
+    [[ -n "${2:-}" ]] || die "--select needs a workspace id"
+    cmux workspace select "$2" >/dev/null &
+    [[ -n "${3:-}" ]] && cmux focus-window --window "$3" >/dev/null &
+    wait
     exit 0
 fi
 
@@ -102,14 +136,14 @@ if [[ -n "$project_file" ]]; then
     name="$(jq -r --arg fallback "$name" '.name // $fallback' "$project_file")"
 fi
 
-# --- make sure cmux is up ---
-if ! cmux ping >/dev/null 2>&1; then
+# --- make sure cmux is up (list-windows doubles as the liveness probe) ---
+if ! wins="$(cmux list-windows --json 2>/dev/null)"; then
     open -a cmux || die "cannot launch cmux"
     for _ in $(seq 1 50); do
-        cmux ping >/dev/null 2>&1 && break
+        wins="$(cmux list-windows --json 2>/dev/null)" && break
         sleep 0.2
     done
-    cmux ping >/dev/null 2>&1 || die "cmux socket not responding"
+    [[ -n "${wins:-}" ]] || die "cmux socket not responding"
 fi
 
 # --- switch to an existing workspace if one matches ---
@@ -122,11 +156,12 @@ while IFS= read -r win; do
             or ((.has_custom_title | not) and .current_directory == $d)
         )][0].id // empty')"
     if [[ -n "$ws_id" ]]; then
-        cmux focus-window --window "$win" >/dev/null
-        cmux workspace select "$ws_id" >/dev/null
+        cmux workspace select "$ws_id" >/dev/null &
+        cmux focus-window --window "$win" >/dev/null &
+        wait
         exit 0
     fi
-done < <(cmux list-windows --json | jq -r '.[].id')
+done < <(jq -r '.[].id' <<<"$wins")
 
 # --- create a new workspace ---
 args=(workspace create --name "$name" --cwd "$selected" --focus true)
