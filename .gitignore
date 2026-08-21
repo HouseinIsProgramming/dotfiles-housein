@@ -3,9 +3,10 @@
 /Library/Application Support/Cursor/User/*Storage*
 !/.config/yazi/.toml$
 .config/scripts/src/
-.claude/skills/sherlock/logs
-.claude/skills/sherlock/sherlock
-.claude/skills
+# skills are tracked; these hold large compiled binaries or a nested git repo
+.claude/skills/sherlock/
+.claude/skills/arnold/
+.claude/skills/shortcuts-generator/
 .codex/skills
 
 .DS_Store

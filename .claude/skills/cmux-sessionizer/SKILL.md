@@ -24,7 +24,7 @@ All keys optional except `dir`. `~` is expanded.
 
 ```json
 {
-  "dir": "~/Documents/GitHub/Work/feddersen-monorepo",
+  "dir": "~/Developer/Work/feddersen-monorepo",
   "name": "feddersen",
   "description": "sidebar subtitle",
   "command": "pnpm dev",

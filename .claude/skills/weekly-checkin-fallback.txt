@@ -1,0 +1,156 @@
+WEEKLY CHECK-IN NOTE — MANUAL RECREATION STEPS
+================================================
+
+If the .shortcut files fail to import, recreate the shortcuts manually
+in the Shortcuts app by following these steps exactly.
+
+Both shortcuts are identical except Step 2 (marked with [NEXT ONLY]).
+
+
+SHORTCUT: "Weekly Check-in Note"
+(For "Next Weekly Check-in Note", also do the [NEXT ONLY] step.)
+
+Step 1: Date
+  Action: Date
+  → Produces: Current Date
+
+Step 2 [NEXT ONLY]: Adjust Date
+  Action: Adjust Date
+  Date: Current Date (from Step 1)
+  Add: 7 days
+  → Produces: Adjusted Date (the "anchor")
+
+  (For "Weekly Check-in Note", the anchor IS the Current Date from Step 1.)
+
+Step 3: Set Variable
+  Action: Set Variable
+  Variable Name: monday
+  Input: anchor date (Current Date or Adjusted Date)
+
+Step 4: Format Date
+  Action: Format Date
+  Date: anchor date
+  Date Format: Custom → EEEE
+  → Produces: day name (e.g. "Wednesday")
+
+Step 5: If day = "Tuesday"
+  Action: If
+  Input: Formatted Date (from Step 4)
+  Condition: equals "Tuesday"
+
+  Step 5a: Adjust Date
+    Date: anchor date
+    Subtract: 1 day
+
+  Step 5b: Set Variable
+    Variable Name: monday
+    Input: Adjusted Date (from 5a)
+
+  End If
+
+Step 6: If day = "Wednesday"
+  Same as Step 5, but: equals "Wednesday", subtract 2 days
+
+Step 7: If day = "Thursday"
+  Same as Step 5, but: equals "Thursday", subtract 3 days
+
+Step 8: If day = "Friday"
+  Same as Step 5, but: equals "Friday", subtract 4 days
+
+Step 9: If day = "Saturday"
+  Same as Step 5, but: equals "Saturday", subtract 5 days
+
+Step 10: If day = "Sunday"
+  Same as Step 5, but: equals "Sunday", subtract 6 days
+
+Step 11: Get Variable
+  Action: Get Variable
+  Variable: monday
+  → Produces: the Monday date
+
+Step 12: Adjust Date
+  Action: Adjust Date
+  Date: monday (from Step 11)
+  Add: 6 days
+  → Produces: Sunday date
+
+Step 13: Format Date
+  Action: Format Date
+  Date: monday (from Step 11)
+  Date Format: Custom → d MMM
+  → Produces: e.g. "18 May"
+
+Step 14: Format Date
+  Action: Format Date
+  Date: Sunday (from Step 12)
+  Date Format: Custom → d MMM yyyy
+  → Produces: e.g. "24 May 2026"
+
+Step 15: Format Date
+  Action: Format Date
+  Date: anchor date
+  Date Format: Custom → w
+  → Produces: week number, e.g. "21"
+
+Step 16: Text
+  Action: Text
+  Content: Weekly Check-in — [Step 13]–[Step 14] — CW[Step 15]
+  (Use the magic variable tokens for the three formatted dates.)
+  → Produces: e.g. "Weekly Check-in — 18 May–24 May 2026 — CW21"
+
+Step 17: Text
+  Action: Text
+  Content:
+    [Step 16]
+    (blank line)
+    ## Weight
+    (blank line)
+    ## Hunger
+    (blank line)
+    ## Well-being
+    (blank line)
+    ## Cardio / steps
+    (blank line)
+    ## Wins
+    (blank line)
+    ## Problems to fix next week
+    (blank line)
+    ## Plan for next week
+
+  First line is the title magic variable from Step 16.
+  → Produces: full note body
+
+Step 18: Find Notes
+  Action: Find Notes
+  Filter: Name is [Step 16]  (exact match to the title text)
+  Limit: 1 result
+
+Step 19: If (note found)
+  Action: If
+  Input: Notes (from Step 18)
+  Condition: Has Any Value
+
+  Step 19a: Show Note
+    Action: Show Note
+    Input: Notes (from Step 18)
+
+Step 20: Otherwise
+
+  Step 20a: Create Note
+    Action: Create Note
+    Body: Text (from Step 17)
+    Show Compose Sheet: OFF
+
+  Step 20b: Show Note
+    Action: Show Note
+    Input: Note (from Step 20a)
+
+Step 21: End If
+
+
+NOTES:
+- The "—" characters are em dashes (Option+Shift+- on Mac).
+- The "–" between dates is an en dash (Option+- on Mac).
+- "Name" in the Find Notes filter = the note's first line / title.
+- If "Name" doesn't match, try "Title" as the filter property.
+- Day names must match your device language (English by default).

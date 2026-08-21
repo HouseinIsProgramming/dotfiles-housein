@@ -1,0 +1,6 @@
+interface:
+  display_name: "Vendure UI"
+  short_description: "Compose consistent Vendure interfaces"
+  default_prompt: "Use $vendure-ui to build or review this interface with Vendure components."
+policy:
+  allow_implicit_invocation: true
