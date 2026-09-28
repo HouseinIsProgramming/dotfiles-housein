@@ -1,2 +1,0 @@
-prefix_rule(pattern=["hawk", "start"], decision="allow")
-prefix_rule(pattern=["hawk", "output"], decision="allow")

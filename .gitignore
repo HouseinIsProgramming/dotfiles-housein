@@ -1,18 +1,8 @@
-/Library/Application Support/Cursor/*
-!/Library/Application Support/Cursor/User/
-/Library/Application Support/Cursor/User/*Storage*
-!/.config/yazi/.toml$
-.config/scripts/src/
-.claude/skills/sherlock/logs
-.claude/skills/sherlock/sherlock
-.claude/skills
-.codex/skills
-
 .DS_Store
-.config/karabiner/automatic_backups/
 
-# codex runtime state — only AGENTS.md, config.toml and rules/ are config
-.codex/*
-!.codex/AGENTS.md
-!.codex/config.toml
-!.codex/rules/
+# karabiner writes backups next to its config
+karabiner/.config/karabiner/automatic_backups/
+
+# scripts build output
+scripts/.config/scripts/src/
+

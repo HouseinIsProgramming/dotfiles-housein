@@ -1,1 +1,0 @@
-/Users/housien/dotfiles-housein/.claude/CLAUDE.md
