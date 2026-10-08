@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# fzf picker: `herdr-jump workspace` or `herdr-jump tab` (tabs of the focused workspace).
+set -uo pipefail
+case ${1:-} in
+workspace)
+    herdr-workspace-remember
+    pick=$(herdr workspace list | jq -r '.result.workspaces[] | select(.focused|not) | "\(.workspace_id)\t\(.number) \(.label)"' |
+        fzf --reverse --header jump-to-workspace --with-nth 2.. --delimiter '\t') || exit 0
+    herdr workspace focus "${pick%%$'\t'*}" >/dev/null
+    ;;
+tab)
+    # Label each tab with its workspace and the title its pane set (Claude sets
+    # the session name via the terminal title); fall back to the tab label.
+    pick=$(jq -rn --argjson ws "$(herdr workspace list)" --argjson tabs "$(herdr tab list)" --argjson panes "$(herdr pane list)" '
+        def pad($w): . + (if $w > length then " " * ($w - length) else "" end);
+        ($ws.result.workspaces | map({(.workspace_id): .label}) | add) as $wsname |
+        ($panes.result.panes | group_by(.tab_id) | map({(.[0].tab_id): (map(select(.agent)) + . | map(.terminal_title_stripped // "" | select(. != "")) | first // "")}) | add // {}) as $title |
+        [$tabs.result.tabs[] | {id: .tab_id, ws: $wsname[.workspace_id], n: (.number | tostring),
+                               title: (($title[.tab_id] // "") as $t | if $t == "" then .label else $t end)}] as $rows |
+        ($rows | map(.ws | length) | max) as $wsw |
+        ($rows | map(.n | length) | max) as $nw |
+        $rows[] | "\(.id)\t\(.ws | pad($wsw))  \(.n | pad($nw))  \(.title)"' |
+        fzf --reverse --header jump-to-tab --with-nth 2.. --delimiter '\t') || exit 0
+    herdr tab focus "${pick%%$'\t'*}" >/dev/null
+    ;;
+last-tab)
+    last=$(herdr tab list | jq -r '.result.tabs[-1].tab_id')
+    [[ -n $last ]] && herdr tab focus "$last" >/dev/null
+    ;;
+*) echo "usage: herdr-jump <workspace|tab|last-tab>" >&2; exit 1 ;;
+esac

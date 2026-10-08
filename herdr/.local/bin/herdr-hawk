@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Focus the "hawk" tab in the current workspace, creating it with `hawk -w` if missing.
+set -uo pipefail
+ws=${HERDR_ACTIVE_WORKSPACE_ID:-$(herdr workspace list | jq -r '.result.workspaces[] | select(.focused) | .workspace_id')}
+tab=$(herdr tab list | jq -r --arg ws "$ws" '.result.tabs[] | select(.workspace_id == $ws and .label == "hawk") | .tab_id' | head -1)
+if [[ -n $tab ]]; then
+    herdr tab focus "$tab" >/dev/null
+else
+    pane=$(herdr tab create --workspace "$ws" --label hawk --cwd "${HERDR_ACTIVE_PANE_CWD:-$PWD}" --focus | jq -r '.result.root_pane.pane_id')
+    [[ -n $pane ]] && herdr pane run "$pane" hawk -w >/dev/null
+fi

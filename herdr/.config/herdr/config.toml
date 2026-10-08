@@ -1,5 +1,4 @@
 onboarding = false
-
 # Mirrors the Omarchy tmux config in config/tmux/tmux.conf
 # tmux session -> herdr workspace, tmux window -> herdr tab, tmux pane -> herdr pane
 
@@ -8,9 +7,14 @@ onboarding = false
 name = "terminal"
 
 [theme.custom]
-# The active tab is drawn as panel_bg text on an accent background, so panel_bg
-# has to be dark for it to read - same colors as status-left's "#[fg=black,bg=blue]"
-panel_bg = "black"
+# Everforest Dark Hard (Ghostty's theme on the Mac). Its ANSI "black" is a light
+# grey-green, so panel_bg = "black" from Omarchy washes out; use hex instead.
+# The active tab is drawn as panel_bg text on an accent background.
+panel_bg = "#1e2326"
+sidebar_bg = "#1e2326"
+active_row_bg = "#374145"
+selection_bg = "#414b50"
+accent = "#a7c080"
 
 [terminal]
 # Matches -c "#{pane_current_path}" on every split, window, and session
@@ -28,49 +32,117 @@ detach = "prefix+d"
 copy_mode = "prefix+["
 
 # Panes
-split_horizontal = ["prefix+h", "alt+enter"]
-split_vertical = ["prefix+v", "alt+shift+enter"]
-close_pane = ["prefix+x", "alt+esc"]
+split_horizontal = ["prefix+h", "cmd+enter"]
+split_vertical = ["prefix+v", "cmd+shift+enter"]
+close_pane = ["prefix+x", "cmd+esc"]
 zoom = "prefix+z"
 last_pane = "prefix+;"
 
-focus_pane_left = "ctrl+alt+left"
-focus_pane_down = "ctrl+alt+down"
-focus_pane_up = "ctrl+alt+up"
-focus_pane_right = "ctrl+alt+right"
+focus_pane_left = ["ctrl+cmd+left", "cmd+h"]
+focus_pane_down = ["ctrl+cmd+down", "cmd+j"]
+focus_pane_up = ["ctrl+cmd+up", "cmd+k"]
+focus_pane_right = ["ctrl+cmd+right", "cmd+l"]
 
 resize_mode = ["prefix+ctrl+left", "prefix+ctrl+down", "prefix+ctrl+up", "prefix+ctrl+right"]
 
 # Like resize-pane on C-M-S-arrows
-resize_pane_left = "ctrl+alt+shift+left"
-resize_pane_down = "ctrl+alt+shift+down"
-resize_pane_up = "ctrl+alt+shift+up"
-resize_pane_right = "ctrl+alt+shift+right"
+resize_pane_left = ["ctrl+cmd+shift+left", "ctrl+cmd+h"]
+resize_pane_down = ["ctrl+cmd+shift+down", "ctrl+cmd+j"]
+resize_pane_up = ["ctrl+cmd+shift+up", "ctrl+cmd+k"]
+resize_pane_right = ["ctrl+cmd+shift+right", "ctrl+cmd+l"]
 
 # No tmux equivalent; herdr's default prefix+shift+p is taken by previous session
 rename_pane = "prefix+shift+o"
+
+# Vim-style swaps (mirrors alt+shift+hjkl in tmux and SUPER+SHIFT+hjkl in Hyprland)
+# On the Mac every direct alt binding is cmd instead; Ghostty forwards cmd via
+# the kitty keyboard protocol (its own defaults are cleared).
+swap_pane_left = "cmd+shift+h"
+swap_pane_down = "cmd+shift+j"
+swap_pane_up = "cmd+shift+k"
+swap_pane_right = "cmd+shift+l"
+
+# Defaults moved off prefix+g / prefix+e so the tmux-era lazygit and last-tab
+# bindings below can have them
+goto = "prefix+ctrl+g"
+edit_scrollback = "prefix+shift+e"
+
+# prefix+o (default) is taken by thumbs pick-open below
+open_notification_target = "prefix+m"
 
 # Windows -> tabs
 new_tab = "prefix+c"
 rename_tab = "prefix+r"
 close_tab = "prefix+k"
-switch_tab = ["prefix+1..9", "alt+1..9"]
-previous_tab = ["prefix+p", "alt+left"]
-next_tab = ["prefix+n", "alt+right"]
+# cmd+1..9 arrives as alt+1..9: Ghostty rewrites it (direct cmd+digit never reached herdr)
+switch_tab = ["prefix+1..9", "alt+1..9", "cmd+1..9"]
+previous_tab = ["prefix+p", "cmd+left"]
+next_tab = ["prefix+n", "cmd+right"]
 
 # Like swap-window -t -1/+1 on M-S-Left/Right
-move_tab_previous = "alt+shift+left"
-move_tab_next = "alt+shift+right"
+move_tab_previous = "cmd+shift+left"
+move_tab_next = "cmd+shift+right"
 
 # Sessions -> workspaces
 new_workspace = "prefix+shift+c"
 rename_workspace = "prefix+shift+r"
 close_workspace = "prefix+shift+k"
-previous_workspace = ["prefix+shift+p", "alt+up"]
-next_workspace = ["prefix+shift+n", "alt+down"]
+previous_workspace = ["prefix+shift+p", "cmd+up"]
+next_workspace = ["prefix+shift+n", "cmd+down"]
+
+# Ported tmux popups and jumps. Scripts live in ~/.local/bin.
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "cd \"$(git -C \"${HERDR_ACTIVE_PANE_CWD:-.}\" rev-parse --show-toplevel 2>/dev/null || echo \"${HERDR_ACTIVE_PANE_CWD:-.}\")\" && lazygit"
+description = "Open lazygit at repo root"
+width = "90%"
+height = "90%"
+
+[[keys.command]]
+key = "prefix+f"
+type = "popup"
+command = "$HOME/.local/bin/herdr-sessionizer"
+description = "Find project workspace"
+width = "70%"
+height = "60%"
+
+[[keys.command]]
+key = "prefix+ctrl+e"
+type = "popup"
+command = "$HOME/.local/bin/herdr-jump workspace"
+description = "Jump to workspace"
+width = "60%"
+height = "50%"
+
+[[keys.command]]
+key = "prefix+ctrl+f"
+type = "popup"
+command = "$HOME/.local/bin/herdr-jump tab"
+description = "Jump to tab"
+width = "60%"
+height = "50%"
+
+[[keys.command]]
+key = "prefix+e"
+type = "shell"
+command = "$HOME/.local/bin/herdr-jump last-tab"
+description = "Go to last tab"
+
+[[keys.command]]
+key = "prefix+backtick"
+type = "shell"
+command = "$HOME/.local/bin/herdr-workspace-last"
+description = "Switch to last workspace"
+
+[[keys.command]]
+key = "prefix+ctrl+w"
+type = "shell"
+command = "$HOME/.local/bin/herdr-hawk"
+description = "Watch hawk tasks"
 
 [ui]
-accent = "blue"
+accent = "#a7c080"
 
 # tmux drew single-line dividers between adjacent panes and no outer frame
 pane_gaps = false
@@ -88,10 +160,47 @@ prompt_new_tab_name = false
 # set -g mouse on
 mouse_capture = true
 
+# Default 3 felt too slow
+mouse_scroll_lines = 10
+
 # status-right had the zoom flag followed by #h
-tab_bar_right = [{ type = "zoom" }, { type = "hostname" }]
+# Focused pane's title (Claude's session name) instead of the hostname
+tab_bar_right = [
+  { type = "zoom" },
+  { type = "command", command = "herdr pane current | jq -r '.result.pane.terminal_title_stripped // empty'", interval_seconds = 2 },
+]
 
 # set -g set-titles on / set -g set-titles-string '#h:#W', where tmux's #W was
 # the basename of the pane cwd. This is what Hyprland shows in the group bar,
 # and it resolves on the server so remote sessions name the remote host.
 window_title = "{hostname}: {workspace}"
+
+show_agent_labels_on_pane_borders = true
+
+# Claude sets its session name as the terminal title; show that instead of the machine name
+[ui.sidebar.agents]
+rows = [["state_icon", "workspace", "tab"], ["agent"]]
+
+[ui.sidebar.agents.rows_by_agent]
+claude = [["state_icon", "workspace", "tab"], ["terminal_title_stripped"]]
+[ui.toast]
+delivery = "system"
+
+# sd2k.thumbs — hint-pick URLs, paths, SHAs on screen
+[[keys.command]]
+key = "prefix+space"
+type = "plugin_action"
+command = "sd2k.thumbs.pick"
+description = "pick text (copy)"
+
+[[keys.command]]
+key = "prefix+cmd+space"
+type = "plugin_action"
+command = "sd2k.thumbs.pick-multi"
+description = "pick several (copy)"
+
+[[keys.command]]
+key = "prefix+o"
+type = "plugin_action"
+command = "sd2k.thumbs.pick-open"
+description = "pick text (open)"

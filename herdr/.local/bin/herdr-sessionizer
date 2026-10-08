@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Pick a project directory and focus (or create) a herdr workspace for it.
+# Herdr port of tmux-sessionizer. Runnable directly as `herdr-sessionizer [path]`.
+set -uo pipefail
+
+ROOTS=("$HOME/Developer")
+EXTRAS=("$HOME/.config")
+
+list_candidates() {
+    local root
+    for root in "${ROOTS[@]}"; do
+        [[ -d $root ]] || continue
+        find "$root" -mindepth 1 -maxdepth 1 -type d ! -name '.*'
+        # BSD find has no -printf; strip the /.git instead
+        find "$root" -mindepth 2 -maxdepth 2 -name .git 2>/dev/null | sed 's|/\.git$||'
+    done
+    printf '%s\n' "${EXTRAS[@]}"
+}
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(list_candidates | sort -u | sed "s|^$HOME/|~/|" |
+        fzf --margin 5% --prompt='project> ' --height=100%)
+    selected=${selected/#\~\//$HOME/}
+fi
+[[ -n ${selected:-} ]] || exit 0
+
+name=$(basename "$selected" | tr .: __)
+herdr-workspace-remember
+existing=$(herdr workspace list | jq -r --arg n "$name" '.result.workspaces[] | select(.label == $n) | .workspace_id' | head -1)
+if [[ -n $existing ]]; then
+    herdr workspace focus "$existing" >/dev/null
+else
+    herdr workspace create --cwd "$selected" --label "$name" --focus >/dev/null
+fi

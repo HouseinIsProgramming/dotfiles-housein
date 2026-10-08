@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Focus the previously focused workspace (herdr port of `switch-client -l`).
+set -uo pipefail
+STATE=$HOME/.local/state/herdr/last-workspace
+herdr-workspace-remember
+read -r cur prev < "$STATE" 2>/dev/null || exit 0
+[[ -n ${prev:-} && $prev != "$cur" ]] || exit 0
+herdr workspace list | jq -e --arg p "$prev" '.result.workspaces[] | select(.workspace_id == $p)' >/dev/null || exit 0
+herdr workspace focus "$prev" >/dev/null && printf '%s %s\n' "$prev" "$cur" > "$STATE"

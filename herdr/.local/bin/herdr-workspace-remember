@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Record the focused workspace as "current" and demote the old one to "previous".
+# Called before any scripted switch; herdr-workspace-last also self-heals from it.
+set -uo pipefail
+STATE=$HOME/.local/state/herdr/last-workspace
+cur=$(herdr workspace list | jq -r '.result.workspaces[] | select(.focused) | .workspace_id')
+[[ -n $cur ]] || exit 0
+prev_cur=""; [[ -f $STATE ]] && read -r prev_cur _ < "$STATE"
+if [[ $prev_cur != "$cur" ]]; then
+    printf '%s %s\n' "$cur" "$prev_cur" > "$STATE"
+fi
