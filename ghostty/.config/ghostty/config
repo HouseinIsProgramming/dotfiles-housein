@@ -1,4 +1,4 @@
-font-size = 14
+font-size = 13
 
 # font-family = IosevkaTerm Nerd Font Mono
 # font-family = FiraCode Nerd Font
@@ -10,15 +10,31 @@ font-family = CommitMono Nerd Font
 font-feature =  -calt, -liga, -dliga 
 adjust-cell-height = 15%
 
+# Ghostty only hosts herdr: drop every default binding (tabs, splits, new
+# windows) so keys reach herdr, then add back the few Ghostty still owns.
+keybind = clear
+keybind = cmd+c=copy_to_clipboard
+keybind = cmd+v=paste_from_clipboard
+keybind = cmd+q=quit
+keybind = cmd+equal=increase_font_size:1
+keybind = cmd+minus=decrease_font_size:1
+keybind = cmd+zero=reset_font_size
+keybind = cmd+ctrl+f=toggle_fullscreen
 keybind = cmd+g>x=close_surface
 keybind = cmd+g>r=reload_config
-keybind = super+s=unbind
-keybind = super+d=unbind
-keybind = super+t=unbind
-keybind = super+w=unbind
+# cmd+1..9 -> alt+1..9 (herdr switch_tab); ESC+digit is how a terminal sends alt+digit
+keybind = cmd+1=text:\x1b1
+keybind = cmd+2=text:\x1b2
+keybind = cmd+3=text:\x1b3
+keybind = cmd+4=text:\x1b4
+keybind = cmd+5=text:\x1b5
+keybind = cmd+6=text:\x1b6
+keybind = cmd+7=text:\x1b7
+keybind = cmd+8=text:\x1b8
+keybind = cmd+9=text:\x1b9
 
 # theme = light:Arthur, dark:Hybrid
-theme = light:Challenger Deep,dark:Everforest Dark Hard
+theme = Everforest Dark Hard
 # theme = Iceberg Dark
 # background = 101013
 
@@ -32,9 +48,6 @@ macos-option-as-alt = left
 window-padding-color = extend-always
 window-decoration = none
 window-padding-balance = true
-
-keybind = alt+left=unbind
-keybind = alt+right=unbind
 
 # custom-shader-animation = true
 # Some shaders can be found in this repo, they're usually uploaded to discord
@@ -86,9 +99,3 @@ keybind = alt+right=unbind
 #
 ###active-shaderblock-start###
 ###active-shaderblock-end###
-keybind = shift+enter=text:\x1b\r
-
-# Keyboard scrolling
-keybind = ctrl+shift+u=scroll_page_up
-keybind = ctrl+shift+d=scroll_page_down
-keybind = ctrl+shift+g=scroll_to_bottom
