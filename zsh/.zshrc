@@ -1,13 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-# Disabled: using oh-my-posh instead of p10k
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
-
-# Add deno completions to search path
-if [[ ":$FPATH:" != *":/Users/housien/.zsh/completions:"* ]]; then export FPATH="/Users/housien/.zsh/completions:$FPATH"; fi
 #            _
 #    _______| |__  _ __ ___
 #   |_  / __| '_ \| '__/ __|
@@ -26,6 +16,11 @@ if [[ ":$FPATH:" != *":/Users/housien/.zsh/completions:"* ]]; then export FPATH=
 # with copies of files from ~/.config/zshrc
 # -----------------------------------------------------
 
+if [[ -f "/opt/homebrew/bin/brew" ]] then
+  # Before the modules, so they can find brew-installed tools
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # -----------------------------------------------------
 # Load modular configarion
 # -----------------------------------------------------
@@ -37,16 +32,6 @@ for f in ~/.config/zshrc/*; do
     fi
 done
 
-if [[ -f "/opt/homebrew/bin/brew" ]] then
-  # If you're using macOS, you'll want this enabled
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# export NVM_LAZY_LOAD=true
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # -----------------------------------------------------
 # Load single customization file (if exists)
 # -----------------------------------------------------
@@ -55,44 +40,13 @@ if [ -f ~/.zshrc_custom ]; then
     source ~/.zshrc_custom
 fi
 
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-source "$HOME/.cargo/env"
 export PATH="$HOME/.local/bin:$PATH"
-
-
-# BEGIN opam configuration
-# This is useful if you're using opam as it adds:
-#   - the correct directories to the PATH
-#   - auto-completion for the opam binary
-# This section can be safely removed at any time if needed.
-[[ ! -r '/Users/housien/.opam/opam-init/init.zsh' ]] || source '/Users/housien/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
-# END opam configuration
-
-export LUA_PATH="/Users/housien/.luarocks/share/lua/5.1/?.lua;;"
-export LUA_CPATH="/Users/housien/.luarocks/lib/lua/5.1/?.so;;"
-
-# bun completions
-[ -s "/Users/housien/.bun/_bun" ] && source "/Users/housien/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH=$PATH:$HOME/.local/opt/go/bin
 export PATH="$HOME/go/bin:$PATH"
-
-# Added by Antigravity
-export PATH="/Users/housien/.antigravity/antigravity/bin:$PATH"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-. "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
 
-
 # pnpm
-export PNPM_HOME="/Users/housien/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -100,13 +54,8 @@ esac
 # pnpm end
 eval "$(direnv hook zsh)"
 
+# Node version per project (.nvmrc)
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
+
 # arnold CLI
-export PATH="/Users/housien/.claude/skills/arnold:$PATH"
-export PATH=$PATH:$HOME/.maestro/bin
-
-# hledger
-export LEDGER_FILE="/Users/housien/Documents/GitHub/Claude/finances/finances.journal"
-export PATH="$HOME/go/bin:$PATH"
-
-# OpenClaw Completion
-source "/Users/housien/.openclaw/completions/openclaw.zsh"
+export PATH="/Users/housein/.claude/skills/arnold:$PATH"

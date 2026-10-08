@@ -11,7 +11,6 @@ alias ff='fastfetch'
 alias ll='eza -al --icons=always'
 alias lt='eza -a --tree --level=1 --icons=always'
 alias v='nvim'
-alias nvm-s="source /usr/share/nvm/init-nvm.sh"
 alias cd..="cd .."
 alias cd...="cd ../.."
 alias cd....="cd ../../.."
@@ -24,12 +23,12 @@ alias ..="j .."
 alias ...="j ../.."
 alias ....="j ../../.."
 alias fett='open -g "raycast://script-commands/confetti-burst"'
-alias sherlock="/Users/housien/.claude/skills/sherlock/sherlock"
-alias pico='cd "/Users/housien/Library/Application Support/pico-8/carts"'
 alias sshosts='grep "^Host " ~/.ssh/config'
-alias claudemd='nvim ~/.claude/claude.md'
+alias claudemd='nvim ~/.claude/CLAUDE.md'
 alias claude="CLAUDE_CODE_NO_FLICKER=1 claude"
 alias remind="remindctl show upcoming"
+alias nbup='netbird up && netbird status -d | grep -E "Management|Nameservers|Peers count"'
+alias nbdown='netbird down'
 
 # -----------------------------------------------------
 # Abbreviations (expand on space/enter, visible in history)
@@ -41,7 +40,6 @@ abbrev-alias cl="claude"
 abbrev-alias cld="claude --dangerously-skip-permissions"
 abbrev-alias cle="claude --model haiku -p"
 abbrev-alias luj="luajit"
-abbrev-alias hl="arch -x86_64 /usr/local/bin/hl"
 abbrev-alias npv="npm run dev"
 abbrev-alias npd="npm run build"
 abbrev-alias nps="npm run start"
@@ -71,8 +69,8 @@ abbrev-alias dkc="docker compose"
 # functions as aliases
 # -----------------------------------------------------
 
-# cpr - cd to project root (uses zoxide)
-cpr() {
+# cdr - cd to git project root (via zoxide, so it's recorded)
+cdr() {
   local dir="$PWD"
   while [[ "$dir" != "/" ]]; do
     [[ -e "$dir/.git" ]] && { j "$dir"; return 0; }

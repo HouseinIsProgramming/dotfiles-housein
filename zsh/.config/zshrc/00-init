@@ -5,12 +5,14 @@
 # -----------------------------------------------------
 # Exports
 # -----------------------------------------------------
-export EDITOR="zed --wait"
-export VISUAL="zed --wait"
-export PATH=$PATH:~/.cargo/bin/
-export PATH=$PATH:/Applications/WebStorm.app/Contents/MacOS
+export EDITOR="nvim"
+export VISUAL="nvim"
+# fc (and Ctrl-X Ctrl-E via edit-command-line) open nvim
+export FCEDIT="nvim"
+# Ctrl-D never exits the shell (still deletes the char under the cursor)
+setopt ignore_eof
 fpath=($HOME/.config/zshrc/completion_zsh $fpath)
-export PATH=$PATH:/Users/housien/dotfiles-housein/.config/scripts
+export PATH=$PATH:$HOME/.config/scripts
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"

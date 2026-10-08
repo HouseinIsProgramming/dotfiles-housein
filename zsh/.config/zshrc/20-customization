@@ -55,12 +55,9 @@ zinit light zdharma-continuum/zinit-annex-patch-dl
 zinit ice wait lucid
 zinit light zdharma-continuum/zinit-annex-rust
 
-zinit ice wait lucid
+# No turbo: their init runs `$(\cd ...)`, which fires zinit's chpwd scheduler and recurses
 zinit light joknarf/redo
-zinit ice wait lucid
 zinit light joknarf/seedee
-zinit ice wait lucid
-zinit light lukechilds/zsh-nvm
 # zinit load wfxr/forgit
 
 # Load zsh-tmux with Zinit
@@ -296,5 +293,5 @@ bindkey '^[n' fzf-npm-script
 # To initialize zoxide, add this to your shell configuration file (usually ~/.zshrc):
 #
 eval "$(zoxide init zsh)"
-source ~/.nx-completion/nx-completion.plugin.zsh
+[[ -f ~/.nx-completion/nx-completion.plugin.zsh ]] && source ~/.nx-completion/nx-completion.plugin.zsh
 
