@@ -41,6 +41,8 @@ killall Dock || true
 # Fastest key repeat the Keyboard settings sliders allow; takes effect after logging out
 defaults write -g InitialKeyRepeat -int 15
 defaults write -g KeyRepeat -int 2
+# fn does nothing on its own (default opens the emoji picker)
+defaults write com.apple.HIToolbox AppleFnUsageType -int 0
 
 step "herdr plugins"
 herdr plugin install sd2k/herdr-thumbs --yes || true
