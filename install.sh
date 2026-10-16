@@ -5,6 +5,7 @@ set -euo pipefail
 
 REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 step() { printf '\n==> %s\n' "$*"; }
+export PATH="$HOME/.local/bin:$HOME/.bun/bin:$PATH"
 
 step "Homebrew"
 if ! command -v brew >/dev/null; then
