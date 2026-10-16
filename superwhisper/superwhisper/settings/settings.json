@@ -1,0 +1,24 @@
+{
+  "favoriteModelIDs" : [
+    "seg-v1",
+    "vad-v2",
+    "speakerkit-coreml",
+    "emb-v1",
+    "s1-vocab-v2-160MB",
+    "s1-mini",
+    "cohere-transcribe-q4"
+  ],
+  "modeKeys" : [
+    "pro"
+  ],
+  "replacements" : [
+    {
+      "id" : "FDEDA020-CC80-4771-A717-D0C9550C5690",
+      "original" : "super whisper",
+      "with" : "Superwhisper"
+    }
+  ],
+  "vocabulary" : [
+    "Superwhisper"
+  ]
+}
