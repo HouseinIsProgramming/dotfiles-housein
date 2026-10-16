@@ -59,3 +59,4 @@ eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 
 # arnold CLI
 export PATH="/Users/housein/.claude/skills/arnold:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
