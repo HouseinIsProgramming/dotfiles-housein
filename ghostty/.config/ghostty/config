@@ -23,6 +23,8 @@ keybind = cmd+minus=decrease_font_size:1
 keybind = cmd+zero=reset_font_size
 # keybind = clear drops this macOS default; ctrl+u deletes to the start of the line
 keybind = cmd+backspace=text:\x15
+# ctrl+w deletes the previous word
+keybind = ctrl+backspace=text:\x17
 keybind = cmd+ctrl+f=toggle_fullscreen
 keybind = cmd+g>x=close_surface
 keybind = cmd+g>r=reload_config
