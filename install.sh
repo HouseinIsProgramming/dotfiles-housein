@@ -12,20 +12,22 @@ if ! command -v brew >/dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
-brew bundle --file="$REPO/Brewfile"
+brew bundle --file="$REPO/Brewfile" || echo "  some Brewfile entries failed; see above. Continuing."
 
 step "Tools installed outside Homebrew"
-command -v claude >/dev/null || curl -fsSL https://claude.ai/install.sh | bash
-command -v herdr >/dev/null || curl -fsSL https://herdr.dev/install.sh | sh
-command -v hawk >/dev/null || curl -fsSL https://raw.githubusercontent.com/HouseinIsProgramming/hawk-tui/main/install.sh | bash
-command -v sherlock >/dev/null || curl -fsSL https://raw.githubusercontent.com/michaelbromley/sherlock/main/install.sh | bash
-[ -x ~/.bun/bin/northflank ] || bun add -g @northflank/cli
+command -v claude >/dev/null || curl -fsSL https://claude.ai/install.sh | bash || true
+command -v herdr >/dev/null || curl -fsSL https://herdr.dev/install.sh | sh || true
+command -v hawk >/dev/null || curl -fsSL https://raw.githubusercontent.com/HouseinIsProgramming/hawk-tui/main/install.sh | bash || true
+command -v sherlock >/dev/null || curl -fsSL https://raw.githubusercontent.com/michaelbromley/sherlock/main/install.sh | bash || true
+[ -x ~/.bun/bin/northflank ] || bun add -g @northflank/cli || true
 
 step "Linking dotfiles"
 # Apps that rewrite their config get a folded directory symlink (see README).
 mkdir -p ~/.config/gh ~/.config/herdr ~/.config/raycast ~/.local/bin ~/superwhisper
 cd "$REPO"
-stow zsh zprofile git nvim ghostty prompt karabiner herdr raycast atuin linearmouse gh superwhisper
+for pkg in zsh zprofile git nvim ghostty prompt karabiner herdr raycast atuin linearmouse gh superwhisper; do
+  stow "$pkg" || echo "  NOT LINKED: $pkg (move the conflicting file above aside, then: stow $pkg)"
+done
 
 step "herdr plugins"
 herdr plugin install sd2k/thumbs || true
