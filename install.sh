@@ -29,6 +29,19 @@ for pkg in zsh zprofile git nvim ghostty prompt karabiner herdr raycast atuin li
   stow "$pkg" || echo "  NOT LINKED: $pkg (move the conflicting file above aside, then: stow $pkg)"
 done
 
+step "macOS settings"
+# Empty Dock on the right that hides itself
+defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock persistent-others -array
+defaults write com.apple.dock recent-apps -array
+defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock orientation -string right
+defaults write com.apple.dock autohide -bool true
+killall Dock || true
+# Fastest key repeat the Keyboard settings sliders allow; takes effect after logging out
+defaults write -g InitialKeyRepeat -int 15
+defaults write -g KeyRepeat -int 2
+
 step "herdr plugins"
 herdr plugin install sd2k/thumbs || true
 
