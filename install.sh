@@ -43,7 +43,7 @@ defaults write -g InitialKeyRepeat -int 15
 defaults write -g KeyRepeat -int 2
 
 step "herdr plugins"
-herdr plugin install sd2k/thumbs || true
+herdr plugin install sd2k/herdr-thumbs --yes || true
 
 step "Done"
 cat <<'EOF'
