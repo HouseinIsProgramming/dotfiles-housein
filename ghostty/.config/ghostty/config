@@ -9,7 +9,7 @@ font-family = CommitMono Nerd Font
 
 font-feature = -calt
 font-feature = -liga
-font-feature = -dliga
+font-feature = -dlig
 adjust-cell-height = 15%
 
 # Ghostty only hosts herdr: drop every default binding (tabs, splits, new
