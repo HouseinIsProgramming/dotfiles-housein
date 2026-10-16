@@ -15,6 +15,8 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew bundle --file="$REPO/Brewfile" || echo "  some Brewfile entries failed; see above. Continuing."
 
 step "Tools installed outside Homebrew"
+# fnm switches Node on every cd and prompts when no default version exists
+fnm list | grep -q default || { fnm install --lts && fnm default lts-latest; } || true
 command -v claude >/dev/null || curl -fsSL https://claude.ai/install.sh | bash || true
 command -v herdr >/dev/null || curl -fsSL https://herdr.dev/install.sh | sh || true
 command -v hawk >/dev/null || curl -fsSL https://raw.githubusercontent.com/HouseinIsProgramming/hawk-tui/main/install.sh | bash || true
