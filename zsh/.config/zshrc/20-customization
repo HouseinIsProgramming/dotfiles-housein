@@ -58,6 +58,28 @@ zinit light zdharma-continuum/zinit-annex-rust
 # No turbo: their init runs `$(\cd ...)`, which fires zinit's chpwd scheduler and recurses
 zinit light joknarf/redo
 zinit light joknarf/seedee
+# seedee's cdpush rewrites ~/.cd_history through one shared .tmp file. Parallel shells
+# (agents) append into each other's .tmp and double the history; it reached 166 GB.
+# Same behaviour, but a per-process tmp file and only the newest 1000 dirs.
+function cdpush {
+  typeset cdhf=${CDHISTFILE:-~/.cd_history} tmp
+  case "$1" in
+    --) shift; cdhist "$@"; return $?;;
+    -)  cdhist "$@"; return $?;;
+    +)  shift; cdsub 1 . "$@"; return $?;;
+    ++) shift; cdsub 4 . "$@"; return $?;;
+  esac
+  [ "$_cdpr" ] && {
+    [ "$_cdpr" = 1 ] && printf "cd %q" "$1"
+    [ "$_cdpr" = 2 ] && printf "$1"
+    [ "$_cdpr" != 3 ] && return 0
+  }
+  \cd "$@" || return $?
+  tmp="$cdhf.$$.tmp"
+  { printf "%s\n" "$PWD"; \grep -Fxv -- "$PWD" "$cdhf" 2>/dev/null | head -n 999; } >"$tmp" &&
+    \mv "$tmp" "$cdhf"
+  return 0
+}
 # zinit load wfxr/forgit
 
 # Load zsh-tmux with Zinit
